@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c381655b-1232-4061-9b88-d3ea45dec3b6" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="221e70e6-8bdc-4962-9657-a9f8d92abe0b" />
+  </component>
+  <component name="ProjectId" id="1YD7SZa8F8Gf4zB0oKk114wbmuo" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
+    <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="RunManager" selected="Gradle.Robot2020_EAC [clean build]">
+    <configuration default="true" type="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Robot2020_EAC [clean build deploy]" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+            <option value="build" />
+            <option value="deploy" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="Robot2020_EAC [clean build]" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file enabled="true" id="idea.log" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Gradle.Robot2020_EAC [clean build]" />
+      <item itemvalue="Gradle.Robot2020_EAC [clean build deploy]" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c381655b-1232-4061-9b88-d3ea45dec3b6" name="Default Changelist" comment="" />
+      <created>1582465311348</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582465311348</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="204" y="111" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582482659521">
+      <screen x="0" y="23" width="1600" height="839" />
+    </state>
+    <state x="204" y="111" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1600.839@0.23.1600.839" timestamp="1582482659521" />
+    <state x="563" y="138" key="#com.intellij.ide.util.MemberChooser" timestamp="1582557464944">
+      <screen x="0" y="23" width="1600" height="839" />
+    </state>
+    <state x="563" y="138" key="#com.intellij.ide.util.MemberChooser/0.23.1600.839@0.23.1600.839" timestamp="1582557464944" />
+    <state x="1091" y="295" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1582508696968">
+      <screen x="0" y="23" width="1600" height="839" />
+    </state>
+    <state x="1091" y="295" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1600.839@0.23.1600.839" timestamp="1582508696968" />
+    <state width="1358" height="204" key="GridCell.Tab.0.bottom" timestamp="1582582719375">
+      <screen x="0" y="23" width="1600" height="839" />
+    </state>
+    <state width="1358" height="204" key="GridCell.Tab.0.bottom/0.23.1600.839@0.23.1600.839" timestamp="1582582719375" />
+    <state width="1358" height="204" key="GridCell.Tab.0.bottom/0.23.1600.840@0.23.1600.840" timestamp="1582489064791" />
+    <state width="1358" height="204" key="GridCell.Tab.0.center" timestamp="1582582719375">
+      <screen x="0" y="23" width="1600" height="839" />
+    </state>
+    <state width="1358" height="204" key="GridCell.Tab.0.center/0.23.1600.839@0.23.1600.839" timestamp="1582582719375" />
+    <state width="1358" height="204" key="GridCell.Tab.0.center/0.23.1600.840@0.23.1600.840" timestamp="1582489064790" />
+    <state width="1358" height="204" key="GridCell.Tab.0.left" timestamp="1582582719374">
+      <screen x="0" y="23" width="1600" height="839" />
+    </state>
+    <state width="1358" height="204" key="GridCell.Tab.0.left/0.23.1600.839@0.23.1600.839" timestamp="1582582719374" />
+    <state width="1358" height="204" key="GridCell.Tab.0.left/0.23.1600.840@0.23.1600.840" timestamp="1582489064789" />
+    <state width="1358" height="204" key="GridCell.Tab.0.right" timestamp="1582582719375">
+      <screen x="0" y="23" width="1600" height="839" />
+    </state>
+    <state width="1358" height="204" key="GridCell.Tab.0.right/0.23.1600.839@0.23.1600.839" timestamp="1582582719375" />
+    <state width="1358" height="204" key="GridCell.Tab.0.right/0.23.1600.840@0.23.1600.840" timestamp="1582489064790" />
+    <state x="415" y="186" width="670" height="676" key="search.everywhere.popup" timestamp="1582511577352">
+      <screen x="0" y="23" width="1600" height="839" />
+    </state>
+    <state x="415" y="186" width="670" height="676" key="search.everywhere.popup/0.23.1600.839@0.23.1600.839" timestamp="1582511577352" />
+  </component>
+</project>
