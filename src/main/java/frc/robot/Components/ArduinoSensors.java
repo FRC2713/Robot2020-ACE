@@ -13,6 +13,7 @@ public class ArduinoSensors extends Components {
 
   public ArduinoSensors() {
     setIsActiveForTeleOp();
+    setIsActiveForAutonomous();
   }
 
   @Override
