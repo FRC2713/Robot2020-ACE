@@ -50,7 +50,7 @@ For example IntakeActions responds to events from ControllerEvents:
 
 Actions can be dependent on Events, Components, and spawned Actions not other non-spawned Actions, or low level classes.
 
-Actions can use the getComponents method to retrieve Components, the getEvents method to retrieve Events, and the spawnActions to spawn Actions. Spawned Actions objects must be directly managed by the Actions that spawned it.
+Actions can use the getComponents method to retrieve Components, the getEvents method to retrieve Events, and the spawnActions method to spawn Actions. Spawned Actions objects must be directly managed by the Actions that spawned it.
 
 # Components
 
@@ -66,9 +66,15 @@ For example IntakeComponent directly calls the DoubleSolenoid to open the intake
      isIntakeGateOpen = true;
     }
     
+Components can also be used to simplify the rest of the code, for example the Controllers Component turns xBoxController.getBumper(GenericHID.Hand.kLeft) to getXboxLeftBumper.
+
+    public boolean getXboxLeftBumper() {
+     return xBoxController.getBumper(GenericHID.Hand.kLeft);
+    }
+    
 ### Dependencies
 
-Components can be dependent on other Components, and low level classes. Components can use the getComponents method to retrieve other Components.
+Components can be dependent on other Components, and low level classes. Components should not be dependent on Events or Actions. Components can use the getComponents method to retrieve other Components.
 
 # RobotContainer
 
