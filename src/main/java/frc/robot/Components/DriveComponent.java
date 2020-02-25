@@ -108,8 +108,8 @@ public class DriveComponent extends Components {
     return (encoderValue * RobotMap.getEncoderConstant());
   }
 
-  public double toFeet(double encoderValue) {
-    return (toInches(encoderValue) / 12);
+  public double toFeet(double inches) {
+    return inches / 12;
   }
 
   public double slewLimit(double target, double current, double increment) {
