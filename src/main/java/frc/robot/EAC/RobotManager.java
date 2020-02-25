@@ -45,23 +45,23 @@ public class RobotManager extends TimedRobot {
   public static synchronized Actions spawnActions(Actions spawner, Class<? extends Actions> actions) {
     Actions a = (Actions) defaultInstance.newObject(actions);
     if (spawner.getIsActiveForAutonomous() && !a.getIsActiveForAutonomous()) {
-      throw new IllegalArgumentException("Spawned actions are not active for : " + "Autonomous");
+      throw new IllegalArgumentException("Spawned actions are not active for: " + "Autonomous");
     }
 
     if (spawner.getIsActiveForTeleOp() && !a.getIsActiveForTeleOp()) {
-      throw new IllegalArgumentException("Spawned actions are not active for : " + "TeleOp");
+      throw new IllegalArgumentException("Spawned actions are not active for: " + "TeleOp");
     }
 
     if (spawner.getIsActiveForDisabled() && !a.getIsActiveForDisabled()) {
-      throw new IllegalArgumentException("Spawned actions are not active for : " + "Disabled");
+      throw new IllegalArgumentException("Spawned actions are not active for: " + "Disabled");
     }
 
     if (spawner.getIsActiveForTest() && !a.getIsActiveForTest()) {
-      throw new IllegalArgumentException("Spawned actions are not active for : " + "Test");
+      throw new IllegalArgumentException("Spawned actions are not active for: " + "Test");
     }
 
     if (spawner.getIsActiveForPeriodic() && !a.getIsActiveForPeriodic()) {
-      throw new IllegalArgumentException("Spawned actions are not active for : " + "Periodic");
+      throw new IllegalArgumentException("Spawned actions are not active for: " + "Periodic");
     }
     a.doInitialization();
     return a;
@@ -70,23 +70,23 @@ public class RobotManager extends TimedRobot {
   public static synchronized Events getEvents(EACBase getter, String name) {
     Events events = defaultInstance.events_map.get(name);
     if (getter.getIsActiveForAutonomous() && !events.getIsActiveForAutonomous()) {
-      throw new IllegalArgumentException("Events are not active for : " + "Autonomous");
+      throw new IllegalArgumentException("Events are not active for: " + "Autonomous");
     }
 
     if (getter.getIsActiveForTeleOp() && !events.getIsActiveForTeleOp()) {
-      throw new IllegalArgumentException("Events are not active for : " + "TeleOp");
+      throw new IllegalArgumentException("Events are not active for: " + "TeleOp");
     }
 
     if (getter.getIsActiveForDisabled() && !events.getIsActiveForDisabled()) {
-      throw new IllegalArgumentException("Events are not active for : " + "Disabled");
+      throw new IllegalArgumentException("Events are not active for: " + "Disabled");
     }
 
     if (getter.getIsActiveForTest() && !events.getIsActiveForTest()) {
-      throw new IllegalArgumentException("Events are not active for : " + "Test");
+      throw new IllegalArgumentException("Events are not active for: " + "Test");
     }
 
     if (getter.getIsActiveForPeriodic() && !events.getIsActiveForPeriodic()) {
-      throw new IllegalArgumentException("Events are not active for : " + "Periodic");
+      throw new IllegalArgumentException("Events are not active for: " + "Periodic");
     }
     return events;
   }
@@ -94,23 +94,23 @@ public class RobotManager extends TimedRobot {
   public static synchronized Components getComponents(EACBase getter, String name) {
     Components components = defaultInstance.components_map.get(name);
     if (getter.getIsActiveForAutonomous() && !components.getIsActiveForAutonomous()) {
-      throw new IllegalArgumentException("Component is not active for : " + "Autonomous");
+      throw new IllegalArgumentException("Component is not active for: " + "Autonomous");
     }
 
     if (getter.getIsActiveForTeleOp() && !components.getIsActiveForTeleOp()) {
-      throw new IllegalArgumentException("Component is not active for : " + "TeleOp");
+      throw new IllegalArgumentException("Component is not active for: " + "TeleOp");
     }
 
     if (getter.getIsActiveForDisabled() && !components.getIsActiveForDisabled()) {
-      throw new IllegalArgumentException("Component is not active for : " + "Disabled");
+      throw new IllegalArgumentException("Component is not active for: " + "Disabled");
     }
 
     if (getter.getIsActiveForTest() && !components.getIsActiveForTest()) {
-      throw new IllegalArgumentException("Component is not active for : " + "Test");
+      throw new IllegalArgumentException("Component is not active for: " + "Test");
     }
 
     if (getter.getIsActiveForPeriodic() && !components.getIsActiveForPeriodic()) {
-      throw new IllegalArgumentException("Component is not active for : " + "Periodic");
+      throw new IllegalArgumentException("Component is not active for: " + "Periodic");
     }
     components.doInitialization();
     return components;
@@ -127,7 +127,8 @@ public class RobotManager extends TimedRobot {
       e.printStackTrace();
     }
     try {
-      if (ctor == null) return null;
+      if (ctor == null)
+        throw new IllegalAccessException("ctor is null!");
       object = ctor.newInstance();
     } catch (InstantiationException e) {
       e.printStackTrace();
