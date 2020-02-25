@@ -4,9 +4,6 @@
 
 ##### Not Tested yet, do not use!
 
-
-
-
 ## Overview
 
 
@@ -20,6 +17,18 @@ Events should provide a well defined and well formed API that promotes code read
      return controllers.getXboxLeftBumper();
     }
     
+### Dependencies
+
+Events can only be dependent on Components, not other Events, Actions or low level classes.
+
+Events can use the getComponents method to retrieve Components.
+ 
+     @Override
+     public void initialize() {
+      controllers = (Controllers) getComponents("Controllers");
+     }
+ All objects should be created or retrieved in the initialize method, NOT the constructor, and NOT at the top of the file as part of the object's definition.
+   
 # Actions
 
 Actions deal with the locomotion and actuation of the robot. Actions check for events from an Events object, then respond accordingly. Most of the robot's behavior should be described in Actions. A runActions method is called every iteration after an Events's pollEvents method.
@@ -37,6 +46,11 @@ For example IntakeActions responds to events from ControllerEvents:
      }
     }
     
+### Dependencies
+
+Actions can be dependent on Events, Components, and spawned Actions not other non-spawned Actions, or low level classes.
+
+Actions can use the getComponents method to retrieve Components, the getEvents method to retrieve Events, and the spawnActions to spawn Actions. Spawned Actions objects must be directly managed by the Actions that spawned it.
 
 # Components
 
@@ -52,6 +66,9 @@ For example IntakeComponent directly calls the DoubleSolenoid to open the intake
      isIntakeGateOpen = true;
     }
     
+### Dependencies
+
+Components can be dependent on other Components, and low level classes. Components can use the getComponents method to retrieve other Components.
 
 # RobotContainer
 
@@ -67,3 +84,10 @@ RobotContainer 'contains' the robot. All Events and Actions are added here via t
     }
 
 There is no longer a Robot.java file.
+
+To specify when an Events or Actions object runs use the setIsActiveForTeleOp method for teleop, or setIsActiveForAutonomous for Autonomous. These methods along with other setIsActiveFor methods and, the addRequiredComponent method for specifying required components are called in an object's constructor, and should be the only thing in an object's constructor.
+
+    public DriveActions() {
+     setIsActiveForTeleOp();
+     addRequiredComponent(DriveComponent.class);
+    }

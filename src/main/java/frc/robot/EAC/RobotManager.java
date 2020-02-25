@@ -20,29 +20,29 @@ public class RobotManager extends TimedRobot {
   private final Map<String, Actions> actions_map = new LinkedHashMap<>();
   private final Map<String, Components> components_map = new LinkedHashMap<>();
 
-  private static void setDefaultInstance(RobotManager robotManager) {
+  private static synchronized void setDefaultInstance(RobotManager robotManager) {
     defaultInstance = robotManager;
   }
 
-  public static void addEvents(Class<? extends Events> events) {
+  public static synchronized void addEvents(Class<? extends Events> events) {
     if (!events_class_map.containsKey(events.getName())) {
       events_class_map.put(events.getName(), events);
     }
   }
 
-  public static void addActions(Class<? extends Actions> actions) {
+  public static synchronized void addActions(Class<? extends Actions> actions) {
     if (!actions_class_map.containsKey(actions.getName())) {
       actions_class_map.put(actions.getName(), actions);
     }
   }
 
-  public static void addComponents(Class<? extends Components> components) {
+  public static synchronized void addComponents(Class<? extends Components> components) {
     if (!components_class_map.containsKey(components.getName())) {
       components_class_map.put(components.getName(), components);
     }
   }
 
-  public static Actions spawnActions(Actions spawner, Class<? extends Actions> actions) {
+  public static synchronized Actions spawnActions(Actions spawner, Class<? extends Actions> actions) {
     Actions a = (Actions) defaultInstance.newObject(actions);
     if (spawner.getIsActiveForAutonomous() && !a.getIsActiveForAutonomous()) {
       throw new IllegalArgumentException("Spawned actions are not active for : " + "Autonomous");
@@ -67,7 +67,7 @@ public class RobotManager extends TimedRobot {
     return a;
   }
 
-  public static Events getEvents(EACBase getter, String name) {
+  public static synchronized Events getEvents(EACBase getter, String name) {
     Events events = defaultInstance.events_map.get(name);
     if (getter.getIsActiveForAutonomous() && !events.getIsActiveForAutonomous()) {
       throw new IllegalArgumentException("Events are not active for : " + "Autonomous");
@@ -91,7 +91,7 @@ public class RobotManager extends TimedRobot {
     return events;
   }
 
-  public static Components getComponents(EACBase getter, String name) {
+  public static synchronized Components getComponents(EACBase getter, String name) {
     Components components = defaultInstance.components_map.get(name);
     if (getter.getIsActiveForAutonomous() && !components.getIsActiveForAutonomous()) {
       throw new IllegalArgumentException("Component is not active for : " + "Autonomous");

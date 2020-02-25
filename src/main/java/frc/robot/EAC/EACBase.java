@@ -18,8 +18,8 @@ public abstract class EACBase {
 
   public final void doInitialization() {
     if (isInitialized) return;
-    initialize();
     isInitialized = true;
+    initialize();
   }
 
   protected final void setIsActiveForAutonomous() {

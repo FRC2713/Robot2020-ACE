@@ -26,7 +26,11 @@ public class GoForward extends Actions {
   public void runActions() {
     if (accumulatedDist > 10) return;
     accumulatedDist += driveComponent.toFeet(driveComponent.encoderDistance(1, old_E_Value));
-    driveComponent.tankDrive(0.25, 0.25);
+    if (accumulatedDist <= 10) {
+      driveComponent.tankDrive(0.25, 0.25);
+    } else {
+      driveComponent.stopDrive();
+    }
   }
 
   @Override
