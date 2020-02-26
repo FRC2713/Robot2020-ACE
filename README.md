@@ -9,7 +9,7 @@
 
 # Events
 
-Events deal with input devices. A pollEvents method is provided, this is called before an Actions's runActions method, that allows Events to query the state of said input device every iteration if need be.
+Events deal with input devices. A pollEvents method is provided, this is called before the Actions's runActions method, that allows Events to query the state of said input device every iteration if need be.
 
 Events should provide a well defined and well formed API that promotes code readability, based on getters, to the rest of the code, for example, ControllerEvents turns getXboxLeftBumper to openIntake:
 
@@ -31,7 +31,7 @@ Events can use the getComponents method to retrieve Components.
    
 # Actions
 
-Actions deal with the locomotion and actuation of the robot. Actions check for events from an Events object, then respond accordingly. Most of the robot's behavior should be described in Actions. A runActions method is called every iteration after an Events's pollEvents method.
+Actions deal with the locomotion and actuation of the robot. Actions check for events from an Events object, then respond accordingly. Most of the robot's behavior should be described in Actions. A runActions method is called every iteration after the Events's pollEvents method.
 
 For example IntakeActions responds to events from ControllerEvents:
 
