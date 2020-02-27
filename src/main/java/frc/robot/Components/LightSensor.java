@@ -6,7 +6,7 @@ import frc.robot.RobotMap;
 
 public class LightSensor extends Components {
 
-  public DigitalInput lightSensor;
+  private DigitalInput lightSensor;
 
   public LightSensor() {
     setIsActiveForTeleOp();
