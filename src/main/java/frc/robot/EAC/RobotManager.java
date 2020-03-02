@@ -68,6 +68,9 @@ public class RobotManager extends TimedRobot {
   }
 
   public static synchronized Events getEvents(EACBase getter, String name) {
+    if (!defaultInstance.events_map.containsKey(name)) {
+      throw new IllegalArgumentException("No Events have the name of: " + name);
+    }
     Events events = defaultInstance.events_map.get(name);
     if (getter.getIsActiveForAutonomous() && !events.getIsActiveForAutonomous()) {
       throw new IllegalArgumentException("Events are not active for: " + "Autonomous");
@@ -92,6 +95,9 @@ public class RobotManager extends TimedRobot {
   }
 
   public static synchronized Components getComponents(EACBase getter, String name) {
+    if (!defaultInstance.components_map.containsKey(name)) {
+      throw new IllegalArgumentException("No Components have the name of: " + name);
+    }
     Components components = defaultInstance.components_map.get(name);
     if (getter.getIsActiveForAutonomous() && !components.getIsActiveForAutonomous()) {
       throw new IllegalArgumentException("Component is not active for: " + "Autonomous");
