@@ -27,7 +27,7 @@ Events can use the getComponents method to retrieve Components.
      public void initialize() {
       controllers = (Controllers) getComponents("Controllers");
      }
- All objects should be created or retrieved in the initialize method, NOT the constructor, and NOT at the top of the file as part of the object's definition.
+ All objects should be created or retrieved in the initialize method, NOT the constructor, and NOT at the top of the file as part of a variable's definition.
    
 # Actions
 
