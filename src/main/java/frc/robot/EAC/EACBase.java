@@ -12,6 +12,8 @@ public abstract class EACBase {
 
   private boolean isActiveForPeriodic = false;
 
+  private int mode = -1;
+
   public abstract void initialize();
 
   private boolean isInitialized = false;
@@ -60,6 +62,34 @@ public abstract class EACBase {
 
   public final boolean getIsActiveForPeriodic() {
     return isActiveForPeriodic;
+  }
+
+  public final void setMode(int mode) {
+    this.mode = mode;
+  }
+
+  protected boolean isModeInit() {
+    return mode == -1;
+  }
+
+  protected boolean isModeAutonomous() {
+    return mode == 0;
+  }
+
+  protected boolean isModeTeleOp() {
+    return mode == 1;
+  }
+
+  protected boolean isModeDisabled() {
+    return mode == 2;
+  }
+
+  protected boolean isModeTest() {
+    return mode == 3;
+  }
+
+  protected boolean isModePeriodic() {
+    return mode == 4;
   }
 
   protected Components getComponents(String name) {

@@ -173,81 +173,77 @@ public class RobotManager extends TimedRobot {
 
   }
 
+  private boolean IsActiveForMode(EACBase object, int mode) {
+    switch (mode) {
+      default:
+      case 0: return object.getIsActiveForAutonomous();
+      case 1: return object.getIsActiveForTeleOp();
+      case 2: return object.getIsActiveForDisabled();
+      case 3: return object.getIsActiveForTest();
+      case 4: return object.getIsActiveForPeriodic();
+    }
+  }
+
+  private void runInit(int mode) {
+    for (Actions actions : actions_map.values()) {
+      actions.setMode(mode);
+      if (!IsActiveForMode(actions,mode)) actions.doInterruptActions();
+    }
+  }
+
+  private void runPeriodic(int mode) {
+    for (Events events : events_map.values()) {
+      events.setMode(mode);
+      if (IsActiveForMode(events,mode)) events.pollEvents();
+    }
+    for (Actions actions : actions_map.values()) {
+      actions.setMode(mode);
+      if (IsActiveForMode(actions,mode)) actions.runActions();
+    }
+  }
+
   @Override
   public void autonomousInit() {
-    for (Actions actions : actions_map.values()) {
-      if (!actions.getIsActiveForAutonomous()) actions.doInterruptActions();
-    }
+    runInit(0);
   }
 
   @Override
   public void autonomousPeriodic() {
-    for (Events events : events_map.values()) {
-      if (events.getIsActiveForAutonomous()) events.pollEvents();
-    }
-    for (Actions actions : actions_map.values()) {
-      if (actions.getIsActiveForAutonomous()) actions.runActions();
-    }
+    runPeriodic(0);
   }
 
   @Override
   public void teleopInit() {
-    for (Actions actions : actions_map.values()) {
-      if (!actions.getIsActiveForTeleOp()) actions.doInterruptActions();
-    }
+    runInit(1);
   }
 
   @Override
   public void teleopPeriodic() {
-    for (Events events : events_map.values()) {
-      if (events.getIsActiveForTeleOp()) events.pollEvents();
-    }
-    for (Actions actions : actions_map.values()) {
-      if (actions.getIsActiveForTeleOp()) actions.runActions();
-    }
+    runPeriodic(1);
   }
 
   @Override
   public void disabledInit() {
-    for (Actions actions : actions_map.values()) {
-      if (!actions.getIsActiveForDisabled()) actions.doInterruptActions();
-    }
+    runInit(2);
   }
 
   @Override
   public void disabledPeriodic() {
-    for (Events events : events_map.values()) {
-      if (events.getIsActiveForDisabled()) events.pollEvents();
-    }
-    for (Actions actions : actions_map.values()) {
-      if (actions.getIsActiveForDisabled()) actions.runActions();
-    }
+    runPeriodic(2);
   }
 
   @Override
   public void testInit() {
-    for (Actions actions : actions_map.values()) {
-      if (!actions.getIsActiveForTest()) actions.doInterruptActions();
-    }
+    runInit(3);
   }
 
   @Override
   public void testPeriodic() {
-    for (Events events : events_map.values()) {
-      if (events.getIsActiveForTest()) events.pollEvents();
-    }
-    for (Actions actions : actions_map.values()) {
-      if (actions.getIsActiveForTest()) actions.runActions();
-    }
+    runPeriodic(3);
   }
 
   @Override
   public void robotPeriodic() {
-    for (Events events : events_map.values()) {
-      if (events.getIsActiveForPeriodic()) events.pollEvents();
-    }
-    for (Actions actions : actions_map.values()) {
-      if (actions.getIsActiveForPeriodic()) actions.runActions();
-    }
+    runPeriodic(4);
   }
 }
