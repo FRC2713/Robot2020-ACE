@@ -63,7 +63,6 @@ public class Controllers extends Components {
       buttonLastState[i] = buttonHeldState[i];
       buttonHeldState[i] = controller.getRawButton(i);
     }
-
   }
 
   private boolean getButtonPressed(int button, boolean[] buttonHeldState, boolean[] buttonLastState) {
@@ -77,35 +76,35 @@ public class Controllers extends Components {
   }
 
   public boolean getXboxAButton() {
-    return getButtonPressed(1,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getButtonPressed(XboxController.Button.kA.value,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public boolean getXboxBButton() {
-    return getButtonPressed(2,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getButtonPressed(XboxController.Button.kB.value,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public boolean getXboxXButton() {
-    return getButtonPressed(3,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getButtonPressed(XboxController.Button.kX.value,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public boolean getXboxYButton() {
-    return getButtonPressed(4,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getButtonPressed(XboxController.Button.kY.value,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public boolean getXboxBackButton() {
-    return getButtonPressed(7,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getButtonPressed(XboxController.Button.kBack.value,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public boolean getXboxStartButton() {
-    return getButtonPressed(8,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getButtonPressed(XboxController.Button.kStart.value,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public boolean getXboxLeftBumper() {
-    return getButtonPressed(5,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getButtonPressed(XboxController.Button.kBumperLeft.value,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public boolean getXboxRightBumper() {
-    return getButtonPressed(6,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getButtonPressed(XboxController.Button.kBumperRight.value,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public double getXboxLeftTrigger() {
