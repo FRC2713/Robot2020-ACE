@@ -68,31 +68,31 @@ public abstract class EACBase {
     this.mode = mode;
   }
 
-  protected boolean isModeInit() {
+  protected final boolean isModeInit() {
     return mode == -1;
   }
 
-  protected boolean isModeAutonomous() {
+  protected final boolean isModeAutonomous() {
     return mode == 0;
   }
 
-  protected boolean isModeTeleOp() {
+  protected final boolean isModeTeleOp() {
     return mode == 1;
   }
 
-  protected boolean isModeDisabled() {
+  protected final boolean isModeDisabled() {
     return mode == 2;
   }
 
-  protected boolean isModeTest() {
+  protected final boolean isModeTest() {
     return mode == 3;
   }
 
-  protected boolean isModePeriodic() {
+  protected final boolean isModePeriodic() {
     return mode == 4;
   }
 
-  protected Components getComponents(String name) {
+  protected final Components getComponents(String name) {
     return RobotManager.getComponents(this, name);
   }
 

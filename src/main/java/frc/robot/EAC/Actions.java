@@ -14,11 +14,11 @@ public abstract class Actions extends EACBase {
     resetActions();
   }
 
-  protected Events getEvents(String name) {
+  protected final Events getEvents(String name) {
     return RobotManager.getEvents(this, name);
   }
 
-  protected Actions spawnActions(Class<? extends Actions> actions) {
+  protected final Actions spawnActions(Class<? extends Actions> actions) {
     return RobotManager.spawnActions(this, actions);
   }
 }
