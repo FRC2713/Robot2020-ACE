@@ -17,6 +17,11 @@ public class ControllerEvents extends Events {
     controllers = (Controllers) getComponents("Controllers");
   }
 
+  @Override
+  public void pollEvents() {
+    controllers.updateAllButtons();
+  }
+
   public boolean openIntake() {
     return controllers.getXboxLeftBumper();
   }

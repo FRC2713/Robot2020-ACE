@@ -37,13 +37,11 @@ public final class RobotMap {
   public static final int configThreePort = 2;
 
   // Controllers
-  public static final int BACKUP_XBOX_PORT = 0;
-  public static final int BACKUP_ARCADE_PORT = 1;
-  public static final int ATTACK_LEFT_PORT = 2;
-
   public static final String XBOX_NAME = "Controller (XBOX 360 For Windows)";
   public static final String ARCADE_NAME = "Mayflash Arcade Stick";
   public static final String ATTACK_NAME = "Logitech Attack 3";
+  public static final String XBOX2_NAME = "Controller (Gamepad for Xbox 360)";
+  public static final String XBOX3_NAME = "Controller (Gamepad)";
 
   //Motors
   public static final int frontLeftMotorPort = 1; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL

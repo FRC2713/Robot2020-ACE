@@ -13,67 +13,99 @@ public class Controllers extends Components {
   private Joystick arcadeController;
   private Joystick leftAttack;
 
+  private boolean[] xBoxbuttonHeldState;
+  private boolean[] xBoxbuttonLastState;
+
   public Controllers() {
     setIsActiveForTeleOp();
   }
 
   @Override
   public void initialize() {
+    int empty_port = 0;
     for (int i = 0; i < 6; i++) {
       Joystick test = new Joystick(i);
-      if (test.getName().equals(RobotMap.XBOX_NAME)) {
+      if (test.getName().equals(RobotMap.XBOX_NAME)
+        ||test.getName().equals(RobotMap.XBOX2_NAME)
+        ||test.getName().equals(RobotMap.XBOX3_NAME)) {
         xBoxController = new XboxController(i);
       } else if (test.getName().equals(RobotMap.ARCADE_NAME)) {
         arcadeController = new Joystick(i);
       } else if (test.getName().equals(RobotMap.ATTACK_NAME)) {
         leftAttack = new Joystick(i);
       }
+      if (test.getName().isEmpty()){
+        empty_port = i;
+      }
     }
     if (xBoxController == null) {
-      xBoxController = new XboxController(RobotMap.BACKUP_XBOX_PORT);
+      xBoxController = new XboxController(empty_port);
     }
     if (arcadeController == null) {
-      arcadeController = new Joystick(RobotMap.BACKUP_ARCADE_PORT);
+      arcadeController = new Joystick(empty_port);
     }
     if (leftAttack == null) {
-      leftAttack = new Joystick(RobotMap.ATTACK_LEFT_PORT);
+      leftAttack = new Joystick(empty_port);
     }
+
+    int count = xBoxController.getButtonCount();
+    xBoxbuttonHeldState = new boolean[count];
+    xBoxbuttonLastState = new boolean[count];
+  }
+
+  public void updateAllButtons() {
+    updateButtons(xBoxController,xBoxbuttonHeldState,xBoxbuttonLastState);
+  }
+
+  private void updateButtons(GenericHID controller, boolean[] buttonHeldState, boolean[] buttonLastState) {
+    int count = controller.getButtonCount();
+    for (int i = 0; i < count; i++) {
+      buttonLastState[i] = buttonHeldState[i];
+      buttonHeldState[i] = controller.getRawButton(i);
+    }
+
+  }
+
+  private boolean getButtonPressed(int button, boolean[] buttonHeldState, boolean[] buttonLastState) {
+    if (!buttonHeldState[button] && !buttonLastState[button]) return false;
+    if (buttonHeldState[button] && !buttonLastState[button]) return true;
+    return false;
   }
 
   public boolean getXboxSwapDriveModeButton() {
-    return xBoxController.getRawButtonPressed(RobotMap.SwapDriveModeButton);
+    return getButtonPressed(RobotMap.SwapDriveModeButton,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public boolean getXboxAButton() {
-   return xBoxController.getAButtonPressed();
+    return getButtonPressed(1,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public boolean getXboxBButton() {
-    return xBoxController.getBButtonPressed();
+    return getButtonPressed(2,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public boolean getXboxXButton() {
-    return xBoxController.getXButtonPressed();
+    return getButtonPressed(3,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public boolean getXboxYButton() {
-    return xBoxController.getYButtonPressed();
+    return getButtonPressed(4,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public boolean getXboxBackButton() {
-    return xBoxController.getBackButtonPressed();
+    return getButtonPressed(7,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public boolean getXboxStartButton() {
-    return xBoxController.getStartButtonPressed();
+    return getButtonPressed(8,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public boolean getXboxLeftBumper() {
-    return xBoxController.getBumper(GenericHID.Hand.kLeft);
+    return getButtonPressed(5,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public boolean getXboxRightBumper() {
-    return xBoxController.getBumper(GenericHID.Hand.kRight);
+    return getButtonPressed(6,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public double getXboxLeftTrigger() {
