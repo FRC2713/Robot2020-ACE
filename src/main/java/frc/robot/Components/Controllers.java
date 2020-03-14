@@ -66,7 +66,6 @@ public class Controllers extends Components {
   }
 
   private boolean getButtonPressed(int button, boolean[] buttonHeldState, boolean[] buttonLastState) {
-    if (!buttonHeldState[button] && !buttonLastState[button]) return false;
     if (buttonHeldState[button] && !buttonLastState[button]) return true;
     return false;
   }
