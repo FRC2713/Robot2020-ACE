@@ -16,6 +16,12 @@ public class Controllers extends Components {
   private boolean[] xBoxbuttonHeldState;
   private boolean[] xBoxbuttonLastState;
 
+  private boolean[] arcadebuttonHeldState;
+  private boolean[] arcadebuttonLastState;
+
+  private boolean[] leftAttackbuttonHeldState;
+  private boolean[] leftAttackbuttonLastState;
+
   public Controllers() {
     setIsActiveForTeleOp();
   }
@@ -51,10 +57,20 @@ public class Controllers extends Components {
     int count = xBoxController.getButtonCount();
     xBoxbuttonHeldState = new boolean[count];
     xBoxbuttonLastState = new boolean[count];
+
+    count = arcadeController.getButtonCount();
+    arcadebuttonHeldState = new boolean[count];
+    arcadebuttonLastState = new boolean[count];
+
+    count = leftAttack.getButtonCount();
+    leftAttackbuttonHeldState = new boolean[count];
+    leftAttackbuttonLastState = new boolean[count];
   }
 
   public void updateAllButtons() {
     updateButtons(xBoxController,xBoxbuttonHeldState,xBoxbuttonLastState);
+    updateButtons(arcadeController,arcadebuttonHeldState,arcadebuttonLastState);
+    updateButtons(leftAttack,leftAttackbuttonHeldState,leftAttackbuttonLastState);
   }
 
   private void updateButtons(GenericHID controller, boolean[] buttonHeldState, boolean[] buttonLastState) {
@@ -66,44 +82,47 @@ public class Controllers extends Components {
   }
 
   private boolean getButtonPressed(int button, boolean[] buttonHeldState, boolean[] buttonLastState) {
-    if (buttonHeldState[button] && !buttonLastState[button]) return true;
-    return false;
+    return buttonHeldState[button] && !buttonLastState[button];
+  }
+
+  public boolean getXboxButton(int button) {
+    return getButtonPressed(button,xBoxbuttonHeldState,xBoxbuttonLastState);
   }
 
   public boolean getXboxSwapDriveModeButton() {
-    return getButtonPressed(RobotMap.SwapDriveModeButton,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getXboxButton(RobotMap.SwapDriveModeButton);
   }
 
   public boolean getXboxAButton() {
-    return getButtonPressed(XboxController.Button.kA.value,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getXboxButton(XboxController.Button.kA.value);
   }
 
   public boolean getXboxBButton() {
-    return getButtonPressed(XboxController.Button.kB.value,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getXboxButton(XboxController.Button.kB.value);
   }
 
   public boolean getXboxXButton() {
-    return getButtonPressed(XboxController.Button.kX.value,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getXboxButton(XboxController.Button.kX.value);
   }
 
   public boolean getXboxYButton() {
-    return getButtonPressed(XboxController.Button.kY.value,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getXboxButton(XboxController.Button.kY.value);
   }
 
   public boolean getXboxBackButton() {
-    return getButtonPressed(XboxController.Button.kBack.value,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getXboxButton(XboxController.Button.kBack.value);
   }
 
   public boolean getXboxStartButton() {
-    return getButtonPressed(XboxController.Button.kStart.value,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getXboxButton(XboxController.Button.kStart.value);
   }
 
   public boolean getXboxLeftBumper() {
-    return getButtonPressed(XboxController.Button.kBumperLeft.value,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getXboxButton(XboxController.Button.kBumperLeft.value);
   }
 
   public boolean getXboxRightBumper() {
-    return getButtonPressed(XboxController.Button.kBumperRight.value,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getXboxButton(XboxController.Button.kBumperRight.value);
   }
 
   public double getXboxLeftTrigger() {
@@ -132,6 +151,38 @@ public class Controllers extends Components {
 
   public void rumbleXbox(double intensity, int ms) {
     SM.rumbleController(xBoxController,intensity,ms);
+  }
+
+  public boolean getArcadeButton(int button) {
+    return getButtonPressed(button,arcadebuttonHeldState,arcadebuttonLastState);
+  }
+
+  public double getArcadeXAxis() {
+    return arcadeController.getX();
+  }
+
+  public double getArcadeYAxis() {
+    return arcadeController.getY();
+  }
+
+  public void rumbleArcade(double intensity, int ms) {
+    SM.rumbleController(arcadeController,intensity,ms);
+  }
+
+  public boolean getAttackButton(int button) {
+    return getButtonPressed(button,leftAttackbuttonHeldState,leftAttackbuttonLastState);
+  }
+
+  public double getAttackXAxis() {
+    return leftAttack.getX();
+  }
+
+  public double getAttackYAxis() {
+    return leftAttack.getY();
+  }
+
+  public void rumbleAttack(double intensity, int ms) {
+    SM.rumbleController(leftAttack,intensity,ms);
   }
 
 }
