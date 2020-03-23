@@ -22,6 +22,10 @@ public class Controllers extends Components {
   private boolean[] leftAttackbuttonHeldState;
   private boolean[] leftAttackbuttonLastState;
 
+  private double[] xBoxTriggerValue;
+  private double[] xBoxLastTriggerValue;
+  private boolean[] xBoxTriggerButtonState;
+  private boolean[] xBoxLastTriggerButtonState;
   public Controllers() {
     setIsActiveForTeleOp();
   }
@@ -65,12 +69,18 @@ public class Controllers extends Components {
     count = leftAttack.getButtonCount();
     leftAttackbuttonHeldState = new boolean[count];
     leftAttackbuttonLastState = new boolean[count];
+
+    xBoxTriggerValue = new double[2];
+    xBoxLastTriggerValue = new double[2];
+    xBoxTriggerButtonState = new boolean[2];
+    xBoxLastTriggerButtonState = new boolean[2];
   }
 
   public void updateAllButtons() {
     updateButtons(xBoxController,xBoxbuttonHeldState,xBoxbuttonLastState);
     updateButtons(arcadeController,arcadebuttonHeldState,arcadebuttonLastState);
     updateButtons(leftAttack,leftAttackbuttonHeldState,leftAttackbuttonLastState);
+    updateTriggers(xBoxController);
   }
 
   private void updateButtons(GenericHID controller, boolean[] buttonHeldState, boolean[] buttonLastState) {
@@ -78,6 +88,15 @@ public class Controllers extends Components {
     for (int i = 0; i < count; i++) {
       buttonLastState[i] = buttonHeldState[i];
       buttonHeldState[i] = controller.getRawButton(i);
+    }
+  }
+
+  private void updateTriggers(XboxController controller) {
+    for (int i = 0; i < 2; i++) {
+      GenericHID.Hand hand = (i == 0) ? GenericHID.Hand.kLeft : GenericHID.Hand.kRight;
+      xBoxLastTriggerValue[i] = xBoxTriggerValue[i];
+      xBoxTriggerValue[i] = controller.getTriggerAxis(hand);
+      xBoxTriggerButtonState[i] = xBoxLastTriggerButtonState[i];
     }
   }
 
@@ -126,11 +145,20 @@ public class Controllers extends Components {
   }
 
   public double getXboxLeftTrigger() {
-    return xBoxController.getTriggerAxis(GenericHID.Hand.kLeft);
+    return xBoxTriggerValue[GenericHID.Hand.kLeft.value];
   }
 
   public double getXboxRightTrigger() {
-    return xBoxController.getTriggerAxis(GenericHID.Hand.kRight);
+    return xBoxTriggerValue[GenericHID.Hand.kRight.value];
+  }
+
+  public boolean getXboxTriggerAsButton(GenericHID.Hand trigger, double threshold) {
+    if (xBoxTriggerValue[trigger.value] >= threshold && !xBoxTriggerButtonState[trigger.value]) {
+      xBoxLastTriggerButtonState[trigger.value] = true;
+      return true;
+    }
+    if (xBoxTriggerValue[trigger.value] != xBoxLastTriggerValue[trigger.value]) xBoxLastTriggerButtonState[trigger.value] = false;
+    return false;
   }
 
   public double getXboxXLeftAxis() {
