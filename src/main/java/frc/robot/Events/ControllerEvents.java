@@ -22,6 +22,10 @@ public class ControllerEvents extends Events {
     controllers.updateAllButtons();
   }
 
+  public boolean runIntakeConveyer() {
+    return controllers.getXboxRightTriggerAsButton(1);
+  }
+
   public boolean openIntake() {
     return controllers.getXboxLeftBumper();
   }

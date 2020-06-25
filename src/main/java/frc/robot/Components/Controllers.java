@@ -152,7 +152,16 @@ public class Controllers extends Components {
     return xBoxTriggerValue[GenericHID.Hand.kRight.value];
   }
 
-  public boolean getXboxTriggerAsButton(GenericHID.Hand trigger, double threshold) {
+
+  public boolean getXboxLeftTriggerAsButton(double threshold) {
+    return getXboxTriggerAsButton(GenericHID.Hand.kLeft,threshold);
+  }
+
+  public boolean getXboxRightTriggerAsButton(double threshold) {
+    return getXboxTriggerAsButton(GenericHID.Hand.kRight,threshold);
+  }
+
+  private boolean getXboxTriggerAsButton(GenericHID.Hand trigger, double threshold) {
     if (xBoxTriggerValue[trigger.value] >= threshold && !xBoxTriggerButtonState[trigger.value]) {
       xBoxLastTriggerButtonState[trigger.value] = true;
       return true;
