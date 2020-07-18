@@ -17,6 +17,7 @@ public class PixyComponent extends Components {
   public PixyComponent() {
     setIsActiveForTeleOp();
     setIsActiveForAutonomous();
+    setComponentIsPrimaryForInput();
   }
 
   @Override

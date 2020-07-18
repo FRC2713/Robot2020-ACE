@@ -10,6 +10,7 @@ public class LightSensor extends Components {
 
   public LightSensor() {
     setIsActiveForTeleOp();
+    setComponentIsPrimaryForInput();
   }
 
   @Override

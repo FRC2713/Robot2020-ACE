@@ -13,6 +13,7 @@ public class ConfigureBed extends Components {
   public ConfigureBed() {
     setIsActiveForTeleOp();
     setIsActiveForAutonomous();
+    setComponentIsPrimaryForInput();
   }
 
   @Override

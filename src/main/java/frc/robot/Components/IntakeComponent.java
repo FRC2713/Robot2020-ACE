@@ -12,6 +12,7 @@ public class IntakeComponent extends Components {
 
   public IntakeComponent() {
     setIsActiveForTeleOp();
+    setComponentIsPrimaryForOutput();
   }
 
   @Override

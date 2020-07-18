@@ -21,4 +21,8 @@ public abstract class Actions extends EACBase {
   protected final Actions spawnActions(Class<? extends Actions> actions) {
     return RobotManager.spawnActions(this, actions);
   }
+
+  protected final Components getComponents(String name) {
+    return getComponent(2, name);
+  }
 }

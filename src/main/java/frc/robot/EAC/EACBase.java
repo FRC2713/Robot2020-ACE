@@ -92,8 +92,15 @@ public abstract class EACBase {
     return mode == 4;
   }
 
-  protected final Components getComponents(String name) {
-    return RobotManager.getComponents(this, name);
+  protected final Components getComponent(int type, String name) {
+    Components component = RobotManager.getComponents(this, name);
+    if (type == 1 && component.getComponentIsPrimaryForOutput()) {
+      throw new IllegalArgumentException("Events can not use components marked as 'PrimaryForOutput'");
+    }
+    if (type == 2 && component.getComponentIsPrimaryForInput()) {
+      throw new IllegalArgumentException("Actions can not use components marked as 'PrimaryForInput'");
+    }
+    return component;
   }
 
   protected final void addRequiredComponent(Class<? extends Components> components) {

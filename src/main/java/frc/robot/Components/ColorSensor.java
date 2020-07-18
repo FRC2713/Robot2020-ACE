@@ -6,6 +6,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 package frc.robot.Components;
+
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
@@ -35,7 +36,7 @@ public class ColorSensor extends Components {
   /**
    * A Rev Color Match object is used to register and detect known colors. This can
    * be calibrated ahead of time or during operation.
-   *
+   * <p>
    * This object uses a simple euclidian distance to estimate the closest match
    * with given confidence range.
    */
@@ -55,6 +56,12 @@ public class ColorSensor extends Components {
   private final edu.wpi.first.wpilibj.util.Color kYellowTarget = ColorMatch.makeColor(1.0, 1.0, 0);
 
 
+  public ColorSensor() {
+    setIsActiveForTeleOp();
+    setIsActiveForAutonomous();
+    setComponentIsPrimaryForInput();
+  }
+
   @Override
   public void initialize() {
 
@@ -66,57 +73,57 @@ public class ColorSensor extends Components {
     m_colorMatcher.addColorMatch(kYellowTarget);
   }
 
-  public void testFunction(){
+  public void testFunction() {
 
-  /**
-   * The method GetColor() returns a normalized color value from the sensor and can be
-   * useful if outputting the color to an RGB LED or similar. To
-   * read the raw color, use GetRawColor().
-   *
-   * The color sensor works best when within a few inches from an object in
-   * well lit conditions (the built in LED is a big help here!). The farther
-   * an object is the more light from the surroundings will bleed into the
-   * measurements and make it difficult to accurately determine its color.
-   */
-  edu.wpi.first.wpilibj.util.Color detectedColor = m_colorSensor.getColor();
+    /**
+     * The method GetColor() returns a normalized color value from the sensor and can be
+     * useful if outputting the color to an RGB LED or similar. To
+     * read the raw color, use GetRawColor().
+     *
+     * The color sensor works best when within a few inches from an object in
+     * well lit conditions (the built in LED is a big help here!). The farther
+     * an object is the more light from the surroundings will bleed into the
+     * measurements and make it difficult to accurately determine its color.
+     */
+    edu.wpi.first.wpilibj.util.Color detectedColor = m_colorSensor.getColor();
 
-  /**
-   * Run the color match algorithm on our detected color
-   */
-  String colorString;
-  ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
+    /**
+     * Run the color match algorithm on our detected color
+     */
+    String colorString;
+    ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
 
-  if (match.color == kBlueTarget) {
-    colorString = "Blue";
-  } else if (match.color == kRedTarget) {
-    colorString = "Red";
-  } else if (match.color == kGreenTarget) {
-    colorString = "Green";
-  } else if (match.color == kYellowTarget) {
-    colorString = "Yellow";
-  } else {
-    colorString = "Unknown";
+    if (match.color == kBlueTarget) {
+      colorString = "Blue";
+    } else if (match.color == kRedTarget) {
+      colorString = "Red";
+    } else if (match.color == kGreenTarget) {
+      colorString = "Green";
+    } else if (match.color == kYellowTarget) {
+      colorString = "Yellow";
+    } else {
+      colorString = "Unknown";
+    }
+
+    /**
+     * Open Smart Dashboard or Shuffleboard to see the color detected by the
+     * sensor.
+     */
+    System.out.println("Color is: " + colorString);
+    System.out.println("Red: " + detectedColor.red);
+    System.out.println("Green: " + detectedColor.green);
+    System.out.println("Blue: " + detectedColor.blue);
+    System.out.println("Confidence: " + match.confidence);
+
+    SmartDashboard.putNumber("Red", detectedColor.red);
+    SmartDashboard.putNumber("Green", detectedColor.green);
+    SmartDashboard.putNumber("Blue", detectedColor.blue);
+    SmartDashboard.putNumber("Confidence", match.confidence);
+    SmartDashboard.putString("Detected Color", colorString);
   }
 
-  /**
-   * Open Smart Dashboard or Shuffleboard to see the color detected by the
-   * sensor.
-   */
-  System.out.println("Color is: " + colorString);
-  System.out.println("Red: " + detectedColor.red);
-  System.out.println("Green: " + detectedColor.green);
-  System.out.println("Blue: " + detectedColor.blue);
-  System.out.println("Confidence: " + match.confidence);
 
-  SmartDashboard.putNumber("Red", detectedColor.red);
-  SmartDashboard.putNumber("Green", detectedColor.green);
-  SmartDashboard.putNumber("Blue", detectedColor.blue);
-  SmartDashboard.putNumber("Confidence", match.confidence);
-  SmartDashboard.putString("Detected Color", colorString);
-  }
-
-
-  public String getColor(){
+  public String getColor() {
     String colorString;
     edu.wpi.first.wpilibj.util.Color detectedColor = m_colorSensor.getColor();
 

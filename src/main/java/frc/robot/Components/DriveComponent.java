@@ -28,6 +28,7 @@ public class DriveComponent extends Components {
   public DriveComponent() {
     setIsActiveForTeleOp();
     setIsActiveForAutonomous();
+    setComponentIsPrimaryForOutput();
     addRequiredComponent(ConfigureBed.class);
   }
 

@@ -26,8 +26,10 @@ public class Controllers extends Components {
   private double[] xBoxLastTriggerValue;
   private boolean[] xBoxTriggerButtonState;
   private boolean[] xBoxLastTriggerButtonState;
+
   public Controllers() {
     setIsActiveForTeleOp();
+    setComponentIsPrimaryForInput();
   }
 
   @Override
@@ -36,15 +38,15 @@ public class Controllers extends Components {
     for (int i = 0; i < 6; i++) {
       Joystick test = new Joystick(i);
       if (test.getName().equals(RobotMap.XBOX_NAME)
-        ||test.getName().equals(RobotMap.XBOX2_NAME)
-        ||test.getName().equals(RobotMap.XBOX3_NAME)) {
+        || test.getName().equals(RobotMap.XBOX2_NAME)
+        || test.getName().equals(RobotMap.XBOX3_NAME)) {
         xBoxController = new XboxController(i);
       } else if (test.getName().equals(RobotMap.ARCADE_NAME)) {
         arcadeController = new Joystick(i);
       } else if (test.getName().equals(RobotMap.ATTACK_NAME)) {
         leftAttack = new Joystick(i);
       }
-      if (test.getName().isEmpty()){
+      if (test.getName().isEmpty()) {
         empty_port = i;
       }
     }
@@ -77,9 +79,9 @@ public class Controllers extends Components {
   }
 
   public void updateAllButtons() {
-    updateButtons(xBoxController,xBoxbuttonHeldState,xBoxbuttonLastState);
-    updateButtons(arcadeController,arcadebuttonHeldState,arcadebuttonLastState);
-    updateButtons(leftAttack,leftAttackbuttonHeldState,leftAttackbuttonLastState);
+    updateButtons(xBoxController, xBoxbuttonHeldState, xBoxbuttonLastState);
+    updateButtons(arcadeController, arcadebuttonHeldState, arcadebuttonLastState);
+    updateButtons(leftAttack, leftAttackbuttonHeldState, leftAttackbuttonLastState);
     updateTriggers(xBoxController);
   }
 
@@ -105,7 +107,7 @@ public class Controllers extends Components {
   }
 
   public boolean getXboxButton(int button) {
-    return getButtonPressed(button,xBoxbuttonHeldState,xBoxbuttonLastState);
+    return getButtonPressed(button, xBoxbuttonHeldState, xBoxbuttonLastState);
   }
 
   public boolean getXboxSwapDriveModeButton() {
@@ -154,11 +156,11 @@ public class Controllers extends Components {
 
 
   public boolean getXboxLeftTriggerAsButton(double threshold) {
-    return getXboxTriggerAsButton(GenericHID.Hand.kLeft,threshold);
+    return getXboxTriggerAsButton(GenericHID.Hand.kLeft, threshold);
   }
 
   public boolean getXboxRightTriggerAsButton(double threshold) {
-    return getXboxTriggerAsButton(GenericHID.Hand.kRight,threshold);
+    return getXboxTriggerAsButton(GenericHID.Hand.kRight, threshold);
   }
 
   private boolean getXboxTriggerAsButton(GenericHID.Hand trigger, double threshold) {
@@ -166,7 +168,8 @@ public class Controllers extends Components {
       xBoxLastTriggerButtonState[trigger.value] = true;
       return true;
     }
-    if (xBoxTriggerValue[trigger.value] != xBoxLastTriggerValue[trigger.value]) xBoxLastTriggerButtonState[trigger.value] = false;
+    if (xBoxTriggerValue[trigger.value] != xBoxLastTriggerValue[trigger.value])
+      xBoxLastTriggerButtonState[trigger.value] = false;
     return false;
   }
 
@@ -187,11 +190,11 @@ public class Controllers extends Components {
   }
 
   public void rumbleXbox(double intensity, int ms) {
-    SM.rumbleController(xBoxController,intensity,ms);
+    SM.rumbleController(xBoxController, intensity, ms);
   }
 
   public boolean getArcadeButton(int button) {
-    return getButtonPressed(button,arcadebuttonHeldState,arcadebuttonLastState);
+    return getButtonPressed(button, arcadebuttonHeldState, arcadebuttonLastState);
   }
 
   public double getArcadeXAxis() {
@@ -203,11 +206,11 @@ public class Controllers extends Components {
   }
 
   public void rumbleArcade(double intensity, int ms) {
-    SM.rumbleController(arcadeController,intensity,ms);
+    SM.rumbleController(arcadeController, intensity, ms);
   }
 
   public boolean getAttackButton(int button) {
-    return getButtonPressed(button,leftAttackbuttonHeldState,leftAttackbuttonLastState);
+    return getButtonPressed(button, leftAttackbuttonHeldState, leftAttackbuttonLastState);
   }
 
   public double getAttackXAxis() {
@@ -219,7 +222,7 @@ public class Controllers extends Components {
   }
 
   public void rumbleAttack(double intensity, int ms) {
-    SM.rumbleController(leftAttack,intensity,ms);
+    SM.rumbleController(leftAttack, intensity, ms);
   }
 
 }
