@@ -8,7 +8,7 @@ public class GoForward extends Actions {
   private DriveComponent driveComponent;
   private double accumulatedDist = 0;
   private double[] old_E_Value;
-
+  private double targetDist = 0;
 
   public GoForward() {
     setIsActiveForAutonomous();
@@ -20,17 +20,26 @@ public class GoForward extends Actions {
     driveComponent = (DriveComponent) getComponents("DriveComponent");
     old_E_Value = new double[1];
     old_E_Value[0] = 0;
+    targetDist = 10;
   }
 
   @Override
   public void runActions() {
-    if (accumulatedDist > 10) return;
+    if (accumulatedDist > targetDist) return;
     accumulatedDist += driveComponent.toFeet(driveComponent.encoderDistance(1, old_E_Value));
-    if (accumulatedDist <= 10) {
+    if (accumulatedDist <= targetDist) {
       driveComponent.tankDrive(0.25, 0.25);
     } else {
       driveComponent.stopDrive();
     }
+  }
+
+  public void setTargetDistInInches(double inches) {
+    targetDist = inches;
+  }
+
+  public void setTargetDistInFeet(double feet) {
+    targetDist = feet*12;
   }
 
   @Override
