@@ -17,7 +17,7 @@ public class AutonomousActions extends Actions {
 
   @Override
   public void runActions() {
-    goForward.setTargetDistInInches(10);
+    goForward.setTargetDistInFeet(10);
     goForward.runActions();
   }
 

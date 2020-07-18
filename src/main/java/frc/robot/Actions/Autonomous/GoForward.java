@@ -35,11 +35,11 @@ public class GoForward extends Actions {
   }
 
   public void setTargetDistInInches(double inches) {
-    targetDist = inches;
+    targetDist = inches/12;
   }
 
   public void setTargetDistInFeet(double feet) {
-    targetDist = feet*12;
+    targetDist = feet;
   }
 
   @Override
