@@ -29,6 +29,15 @@ public class IntakeActions extends Actions {
     if (controllerEvents.closeIntake()) {
       intakeComponent.closeIntakeGate();
     }
+
+    if (controllerEvents.runIntakeConveyer()) {
+      intakeComponent.runConveyer();
+    }
+
+    if (!controllerEvents.runIntakeConveyer()) {
+      intakeComponent.stopConveyer();
+    }
+
   }
 
   @Override
