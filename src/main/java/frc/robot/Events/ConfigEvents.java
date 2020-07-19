@@ -15,7 +15,7 @@ public class ConfigEvents extends Events {
 
   @Override
   public void initialize() {
-    configureBed = (ConfigureBed) getComponents("ConfigureBed");
+    configureBed = (ConfigureBed) getComponent("ConfigureBed");
   }
 
   public Config getConfig() {

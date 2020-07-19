@@ -23,7 +23,7 @@ public class DriveActions extends Actions {
   @Override
   public void initialize() {
     controllerEvents = (ControllerEvents) getEvents("ControllerEvents");
-    driveComponent = (DriveComponent) getComponents("DriveComponent");
+    driveComponent = (DriveComponent) getComponent("DriveComponent");
   }
 
   @Override

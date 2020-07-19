@@ -22,7 +22,7 @@ public abstract class Actions extends ACEBase {
     return RobotManager.spawnActions(this, actions);
   }
 
-  protected final Component getComponents(String name) {
+  protected final Component getComponent(String name) {
     return getComponent(2, name);
   }
 }

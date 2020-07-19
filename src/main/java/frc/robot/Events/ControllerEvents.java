@@ -14,7 +14,7 @@ public class ControllerEvents extends Events {
 
   @Override
   public void initialize() {
-    controllers = (Controllers) getComponents("Controllers");
+    controllers = (Controllers) getComponent("Controllers");
   }
 
   @Override

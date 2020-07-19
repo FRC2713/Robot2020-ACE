@@ -17,7 +17,7 @@ public class IntakeActions extends Actions {
   @Override
   public void initialize() {
     controllerEvents = (ControllerEvents) getEvents("ControllerEvents");
-    intakeComponent = (IntakeComponent) getComponents("IntakeComponent");
+    intakeComponent = (IntakeComponent) getComponent("IntakeComponent");
   }
 
   @Override

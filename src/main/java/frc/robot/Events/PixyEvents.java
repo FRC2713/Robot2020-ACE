@@ -15,7 +15,7 @@ public class PixyEvents extends Events {
 
   @Override
   public void initialize() {
-    pixyComponent = (PixyComponent) getComponents("PixyComponent");
+    pixyComponent = (PixyComponent) getComponent("PixyComponent");
     pixyComponent.setLamp((byte) 1, (byte) 1);
     pixyComponent.setLED(255, 255, 255);
   }

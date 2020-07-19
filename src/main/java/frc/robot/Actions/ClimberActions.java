@@ -17,7 +17,7 @@ public class ClimberActions extends Actions {
   @Override
   public void initialize() {
     controllerEvents = (ControllerEvents) getEvents("ControllerEvents");
-    climberComponent = (ClimberComponent) getComponents("ClimberComponent");
+    climberComponent = (ClimberComponent) getComponent("ClimberComponent");
   }
 
   @Override

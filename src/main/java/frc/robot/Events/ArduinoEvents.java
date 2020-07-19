@@ -15,7 +15,7 @@ public class ArduinoEvents extends Events {
 
   @Override
   public void initialize() {
-    arduinoSensors = (ArduinoSensors) getComponents("ArduinoSensors");
+    arduinoSensors = (ArduinoSensors) getComponent("ArduinoSensors");
   }
 
   @Override

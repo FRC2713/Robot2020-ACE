@@ -17,7 +17,7 @@ public class GoForward extends Actions {
 
   @Override
   public void initialize() {
-    driveComponent = (DriveComponent) getComponents("DriveComponent");
+    driveComponent = (DriveComponent) getComponent("DriveComponent");
     old_E_Value = new double[1];
     old_E_Value[0] = 0;
     targetDist = 10;
