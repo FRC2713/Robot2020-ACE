@@ -22,16 +22,32 @@ public class ControllerEvents extends Events {
     controllers.updateAllButtons();
   }
 
-  public boolean runIntakeConveyer() {
-    return controllers.getXboxRightTriggerAsButton(1);
-  }
-
   public boolean openIntake() {
     return controllers.getXboxLeftBumper();
   }
 
   public boolean closeIntake() {
     return controllers.getXboxRightBumper();
+  }
+
+  public boolean runIntakeConveyer() {
+    return controllers.getXboxRightTriggerAsButton(1);
+  }
+
+  public boolean runClimber() {
+    return controllers.getClimberButton();
+  }
+
+  public double getClimberSpeed() {
+    return controllers.getAttackYAxis();
+  }
+
+  public boolean winchUp() {
+    return controllers.getWinchUpButton();
+  }
+
+  public boolean winchDown() {
+    return controllers.getWinchDownButton();
   }
 
   public boolean swapPolarity() {

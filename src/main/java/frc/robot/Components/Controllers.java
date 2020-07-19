@@ -106,8 +106,16 @@ public class Controllers extends Components {
     return buttonHeldState[button] && !buttonLastState[button];
   }
 
+  private boolean getButtonHeld(int button, boolean[] buttonHeldState) {
+    return buttonHeldState[button];
+  }
+
   public boolean getXboxButton(int button) {
     return getButtonPressed(button, xBoxbuttonHeldState, xBoxbuttonLastState);
+  }
+
+  public boolean getXboxButtonHeld(int button) {
+    return getButtonHeld(button, xBoxbuttonHeldState);
   }
 
   public boolean getXboxSwapDriveModeButton() {
@@ -211,6 +219,22 @@ public class Controllers extends Components {
 
   public boolean getAttackButton(int button) {
     return getButtonPressed(button, leftAttackbuttonHeldState, leftAttackbuttonLastState);
+  }
+
+  public boolean getAttackButtonHeld(int button) {
+    return getButtonHeld(button, leftAttackbuttonHeldState);
+  }
+
+  public boolean getClimberButton() {
+    return getAttackButtonHeld(RobotMap.climberButton);
+  }
+
+  public boolean getWinchUpButton() {
+    return getAttackButtonHeld(RobotMap.winchUpButton);
+  }
+
+  public boolean getWinchDownButton() {
+    return getAttackButtonHeld(RobotMap.winchDownButton);
   }
 
   public double getAttackXAxis() {

@@ -42,6 +42,6 @@ public class IntakeActions extends Actions {
 
   @Override
   public void interruptActions() {
-
+    intakeComponent.stopConveyer();
   }
 }

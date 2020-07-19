@@ -9,6 +9,7 @@ package frc.robot;
 
 
 import frc.robot.Actions.Autonomous.AutonomousActions;
+import frc.robot.Actions.ClimberActions;
 import frc.robot.Actions.DriveActions;
 import frc.robot.Actions.IntakeActions;
 import frc.robot.EAC.RobotManager;
@@ -26,6 +27,7 @@ public class RobotContainer {
     RobotManager.addEvents(ArduinoEvents.class);
     RobotManager.addActions(DriveActions.class);
     RobotManager.addActions(IntakeActions.class);
+    RobotManager.addActions(ClimberActions.class);
     RobotManager.addActions(AutonomousActions.class);
   }
 

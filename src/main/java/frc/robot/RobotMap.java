@@ -43,7 +43,7 @@ public final class RobotMap {
   public static final String XBOX2_NAME = "Controller (Gamepad for Xbox 360)";
   public static final String XBOX3_NAME = "Controller (Gamepad)";
 
-  //Motors
+  //Motors/Solenoids
   public static final int frontLeftMotorPort = 1; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static final int backLeftMotorPort = 2; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static final int frontRightMotorPort = 3; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
@@ -54,12 +54,20 @@ public final class RobotMap {
   public static final int intakeArmDownNode = 6;
   public static final int IntakeGateUpNode = 5;
   public static final int IntakeGateDownNode = 7;
+  public static final int ClimberUpMotorPort = 11;
+  public static final int WinchOneMotorPort = 14;
+  public static final int WinchTwoMotorPort = 12;
+
 
   //Sensors
   public static final int lightSensor = 4; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
 
   //Buttons
   public static final int SwapDriveModeButton = 7;
+  public static final int climberButton = 1; //3 on attack
+  public static final int winchUpButton = 3;//4 on attack
+  public static final int winchDownButton = 2;//5 on attack
+
 
 }
 

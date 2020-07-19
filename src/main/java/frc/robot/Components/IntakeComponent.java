@@ -22,6 +22,7 @@ public class IntakeComponent extends Components {
 
   public IntakeComponent() {
     setIsActiveForTeleOp();
+    setIsActiveForAutonomous();
     setComponentIsPrimaryForOutput();
   }
 
@@ -35,13 +36,13 @@ public class IntakeComponent extends Components {
 
   public void openIntakeGate() {
     if (isIntakeGateOpen) return;
-    gateSolenoid.set(DoubleSolenoid.Value.kReverse);
+    gateSolenoid.set(kReverse);
     isIntakeGateOpen = true;
   }
 
   public void closeIntakeGate() {
     if (!isIntakeGateOpen) return;
-    gateSolenoid.set(DoubleSolenoid.Value.kForward);
+    gateSolenoid.set(kForward);
     isIntakeGateOpen = false;
   }
 
