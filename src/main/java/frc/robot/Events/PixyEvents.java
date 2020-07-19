@@ -1,7 +1,7 @@
 package frc.robot.Events;
 
 import frc.robot.Components.PixyComponent;
-import frc.robot.EAC.Events;
+import frc.robot.ACE.Events;
 
 public class PixyEvents extends Events {
 

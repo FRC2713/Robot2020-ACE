@@ -4,13 +4,13 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import frc.robot.EAC.Components;
+import frc.robot.ACE.Component;
 import frc.robot.RobotMap;
 import frc.robot.SM;
 
 import static frc.robot.RobotMap.REGULAR_SPEED;
 
-public class DriveComponent extends Components {
+public class DriveComponent extends Component {
 
   private CANSparkMax frontLeft;
   private CANSparkMax frontRight;

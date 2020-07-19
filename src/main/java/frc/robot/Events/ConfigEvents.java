@@ -1,7 +1,7 @@
 package frc.robot.Events;
 
 import frc.robot.Components.ConfigureBed;
-import frc.robot.EAC.Events;
+import frc.robot.ACE.Events;
 
 public class ConfigEvents extends Events {
 

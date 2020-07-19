@@ -1,6 +1,6 @@
-package frc.robot.EAC;
+package frc.robot.ACE;
 
-public abstract class EACBase {
+public abstract class ACEBase {
 
   private boolean isActiveForAutonomous = false;
 
@@ -92,8 +92,8 @@ public abstract class EACBase {
     return mode == 4;
   }
 
-  protected final Components getComponent(int type, String name) {
-    Components component = RobotManager.getComponents(this, name);
+  protected final Component getComponent(int type, String name) {
+    Component component = RobotManager.getComponent(this, name);
     if (type == 1 && component.getComponentIsPrimaryForOutput()) {
       throw new IllegalArgumentException("Events can not use components marked as 'PrimaryForOutput'");
     }
@@ -103,7 +103,7 @@ public abstract class EACBase {
     return component;
   }
 
-  protected final void addRequiredComponent(Class<? extends Components> components) {
-    RobotManager.addComponents(components);
+  protected final void addRequiredComponent(Class<? extends Component> component) {
+    RobotManager.addComponent(component);
   }
 }

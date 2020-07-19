@@ -1,4 +1,4 @@
-package frc.robot.EAC;
+package frc.robot.ACE;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.RobotContainer;
@@ -14,11 +14,11 @@ public class RobotManager extends TimedRobot {
 
   private static final Map<String, Class<? extends Events>> events_class_map = new LinkedHashMap<>();
   private static final Map<String, Class<? extends Actions>> actions_class_map = new LinkedHashMap<>();
-  private static final Map<String, Class<? extends Components>> components_class_map = new LinkedHashMap<>();
+  private static final Map<String, Class<? extends Component>> component_class_map = new LinkedHashMap<>();
 
   private final Map<String, Events> events_map = new LinkedHashMap<>();
   private final Map<String, Actions> actions_map = new LinkedHashMap<>();
-  private final Map<String, Components> components_map = new LinkedHashMap<>();
+  private final Map<String, Component> component_map = new LinkedHashMap<>();
 
   private static synchronized void setDefaultInstance(RobotManager robotManager) {
     defaultInstance = robotManager;
@@ -36,9 +36,9 @@ public class RobotManager extends TimedRobot {
     }
   }
 
-  public static synchronized void addComponents(Class<? extends Components> components) {
-    if (!components_class_map.containsKey(components.getName())) {
-      components_class_map.put(components.getName(), components);
+  public static synchronized void addComponent(Class<? extends Component> component) {
+    if (!component_class_map.containsKey(component.getName())) {
+      component_class_map.put(component.getName(), component);
     }
   }
 
@@ -67,7 +67,7 @@ public class RobotManager extends TimedRobot {
     return a;
   }
 
-  public static synchronized Events getEvents(EACBase getter, String name) {
+  public static synchronized Events getEvents(ACEBase getter, String name) {
     if (!defaultInstance.events_map.containsKey(name)) {
       throw new IllegalArgumentException("No Events have the name of: " + name);
     }
@@ -94,37 +94,37 @@ public class RobotManager extends TimedRobot {
     return events;
   }
 
-  public static synchronized Components getComponents(EACBase getter, String name) {
-    if (!defaultInstance.components_map.containsKey(name)) {
+  public static synchronized Component getComponent(ACEBase getter, String name) {
+    if (!defaultInstance.component_map.containsKey(name)) {
       throw new IllegalArgumentException("No Components have the name of: " + name);
     }
-    Components components = defaultInstance.components_map.get(name);
-    if (getter.getIsActiveForAutonomous() && !components.getIsActiveForAutonomous()) {
+    Component component = defaultInstance.component_map.get(name);
+    if (getter.getIsActiveForAutonomous() && !component.getIsActiveForAutonomous()) {
       throw new IllegalArgumentException("Component is not active for: " + "Autonomous");
     }
 
-    if (getter.getIsActiveForTeleOp() && !components.getIsActiveForTeleOp()) {
+    if (getter.getIsActiveForTeleOp() && !component.getIsActiveForTeleOp()) {
       throw new IllegalArgumentException("Component is not active for: " + "TeleOp");
     }
 
-    if (getter.getIsActiveForDisabled() && !components.getIsActiveForDisabled()) {
+    if (getter.getIsActiveForDisabled() && !component.getIsActiveForDisabled()) {
       throw new IllegalArgumentException("Component is not active for: " + "Disabled");
     }
 
-    if (getter.getIsActiveForTest() && !components.getIsActiveForTest()) {
+    if (getter.getIsActiveForTest() && !component.getIsActiveForTest()) {
       throw new IllegalArgumentException("Component is not active for: " + "Test");
     }
 
-    if (getter.getIsActiveForPeriodic() && !components.getIsActiveForPeriodic()) {
+    if (getter.getIsActiveForPeriodic() && !component.getIsActiveForPeriodic()) {
       throw new IllegalArgumentException("Component is not active for: " + "Periodic");
     }
-    components.doInitialization();
-    return components;
+    component.doInitialization();
+    return component;
   }
 
-  private EACBase newObject(Class<? extends EACBase> cls) {
-    EACBase object = null;
-    Constructor<? extends EACBase> ctor = null;
+  private ACEBase newObject(Class<? extends ACEBase> cls) {
+    ACEBase object = null;
+    Constructor<? extends ACEBase> ctor = null;
     if (cls == null)
       throw new IllegalArgumentException("EAC Class is null!");
     try {
@@ -162,13 +162,13 @@ public class RobotManager extends TimedRobot {
       actions_map.put(actions.getClass().getName(), actions);
     }
 
-    for (Class<? extends Components> components_class : components_class_map.values()) {
-      Components components = (Components) newObject(components_class);
-      components_map.put(components.getClass().getName(), components);
+    for (Class<? extends Component> component_class : component_class_map.values()) {
+      Component components = (Component) newObject(component_class);
+      component_map.put(components.getClass().getName(), components);
     }
 
-    for (Components components : components_map.values()) {
-      components.doInitialization();
+    for (Component component : component_map.values()) {
+      component.doInitialization();
     }
     for (Events events : events_map.values()) {
       events.doInitialization();
@@ -179,7 +179,7 @@ public class RobotManager extends TimedRobot {
 
   }
 
-  private boolean IsActiveForMode(EACBase object, int mode) {
+  private boolean IsActiveForMode(ACEBase object, int mode) {
     switch (mode) {
       default:
       case 0: return object.getIsActiveForAutonomous();

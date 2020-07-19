@@ -12,13 +12,13 @@ import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.EAC.Components;
+import frc.robot.ACE.Component;
 
 /**
  * This is a simple example to show how the REV Color Sensor V3 can be used to
  * detect pre-configured colors.
  */
-public class ColorSensor extends Components {
+public class ColorSensor extends Component {
   /**
    * Change the I2C port below to match the connection of your color sensor
    */

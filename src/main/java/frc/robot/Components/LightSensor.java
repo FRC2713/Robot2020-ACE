@@ -1,10 +1,10 @@
 package frc.robot.Components;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import frc.robot.EAC.Components;
+import frc.robot.ACE.Component;
 import frc.robot.RobotMap;
 
-public class LightSensor extends Components {
+public class LightSensor extends Component {
 
   private DigitalInput lightSensor;
 

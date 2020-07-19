@@ -1,6 +1,6 @@
-# Robot2020_EAC
+# Robot2020 ACE
 
-#### Experimental EAC(Events,Actions, and Components) programming model repo
+#### Experimental ACE(Actions, Events, and Components) programming model repo
 
 ##### Not Tested yet, do not use!
 

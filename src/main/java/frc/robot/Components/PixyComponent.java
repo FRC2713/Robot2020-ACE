@@ -2,14 +2,14 @@ package frc.robot.Components;
 
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.EAC.Components;
+import frc.robot.ACE.Component;
 import io.github.pseudoresonance.pixy2api.Pixy2;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC;
 import io.github.pseudoresonance.pixy2api.links.SPILink;
 
 import java.util.ArrayList;
 
-public class PixyComponent extends Components {
+public class PixyComponent extends Component {
 
   private Pixy2 pixy;
 

@@ -2,10 +2,10 @@ package frc.robot.Components;
 
 import edu.wpi.first.hal.util.UncleanStatusException;
 import edu.wpi.first.wpilibj.SerialPort;
-import frc.robot.EAC.Components;
+import frc.robot.ACE.Component;
 
 
-public class ArduinoSensors extends Components {
+public class ArduinoSensors extends Component {
 
   private double LRFinches = 0;
   private int SwitchBool = -1;

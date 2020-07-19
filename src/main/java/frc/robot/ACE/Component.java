@@ -1,6 +1,6 @@
-package frc.robot.EAC;
+package frc.robot.ACE;
 
-public abstract class Components extends EACBase {
+public abstract class Component extends ACEBase {
   private int component_type = 0;
 
   protected final void setComponentIsPrimaryForInput() {
@@ -19,7 +19,7 @@ public abstract class Components extends EACBase {
     return component_type == 2 ? true : false;
   }
 
-  protected final Components getComponents(String name) {
+  protected final Component getComponents(String name) {
     return getComponent(0, name);
   }
 }

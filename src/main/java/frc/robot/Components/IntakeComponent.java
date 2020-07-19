@@ -3,14 +3,14 @@ package frc.robot.Components;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import frc.robot.EAC.Components;
+import frc.robot.ACE.Component;
 import frc.robot.RobotMap;
 import frc.robot.SM;
 
 import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.kForward;
 import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.kReverse;
 
-public class IntakeComponent extends Components {
+public class IntakeComponent extends Component {
 
   private DoubleSolenoid gateSolenoid;
   private boolean isIntakeGateOpen = false;

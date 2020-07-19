@@ -3,11 +3,11 @@ package frc.robot.Components;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.EAC.Components;
+import frc.robot.ACE.Component;
 import frc.robot.RobotMap;
 import frc.robot.SM;
 
-public class Controllers extends Components {
+public class Controllers extends Component {
 
   private XboxController xBoxController;
   private Joystick arcadeController;

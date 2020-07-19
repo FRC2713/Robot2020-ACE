@@ -1,6 +1,6 @@
-package frc.robot.EAC;
+package frc.robot.ACE;
 
-public abstract class Actions extends EACBase {
+public abstract class Actions extends ACEBase {
 
   public abstract void runActions();
 
@@ -22,7 +22,7 @@ public abstract class Actions extends EACBase {
     return RobotManager.spawnActions(this, actions);
   }
 
-  protected final Components getComponents(String name) {
+  protected final Component getComponents(String name) {
     return getComponent(2, name);
   }
 }
