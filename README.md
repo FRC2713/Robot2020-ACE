@@ -2,7 +2,7 @@
 
 #### Experimental ACE(Actions, Components, and Events) programming model repo
 
-##### Not Tested yet, do not use!
+### Not Tested yet, do not use!
 
 ## Overview
 
@@ -21,11 +21,11 @@ Events should provide a well defined and well formed API that promotes code read
 
 Events can only be dependent on Components, not other Events, Actions or low level classes.
 
-Events can use the getComponents method to retrieve Components.
+Events can use the getComponent method to retrieve Components.
  
      @Override
      public void initialize() {
-      controllers = (Controllers) getComponents("Controllers");
+      controllers = (Controllers) getComponent("Controllers");
      }
  All objects should be created or retrieved in the initialize method, NOT the constructor, and NOT at the top of the file as part of a variable's definition.
    
@@ -50,7 +50,7 @@ For example IntakeActions responds to events from ControllerEvents:
 
 Actions can be dependent on Events, Components, and spawned Actions, not other non-spawned Actions, or low level classes. Actions should not be dependent on Components for input, only Events.
 
-Actions can use the getComponents method to retrieve Components, the getEvents method to retrieve Events, and the spawnActions method to spawn Actions. Spawned Actions objects must be directly managed by the Actions that spawned it.
+Actions can use the getComponent method to retrieve Components, the getEvents method to retrieve Events, and the spawnActions method to spawn Actions. Spawned Actions objects must be directly managed by the Actions that spawned it.
 
 # Components
 
@@ -74,7 +74,7 @@ Components can also be used to simplify the rest of the code, for example the Co
     
 ### Dependencies
 
-Components can be dependent on other Components, and low level classes. Components should not be dependent on Events or Actions. Components can use the getComponents method to retrieve other Components.
+Components can be dependent on other Components, and low level classes. Components should not be dependent on Events or Actions. Components can use the getComponent method to retrieve other Components.
 
 # RobotContainer
 
@@ -84,9 +84,11 @@ RobotContainer 'contains' the robot. All Events and Actions are added here via t
      RobotManager.addEvents(ControllerEvents.class);
      RobotManager.addEvents(ConfigEvents.class);
      RobotManager.addEvents(PixyEvents.class);
+     RobotManager.addEvents(ArduinoEvents.class);
      RobotManager.addActions(DriveActions.class);
      RobotManager.addActions(IntakeActions.class);
-     RobotManager.addActions(AutonomousActions.class);
+     RobotManager.addActions(ClimberActions.class);
+     RobotManager.addActions(AutonomousActions.class);   
     }
 
 There is no longer a Robot.java file.
