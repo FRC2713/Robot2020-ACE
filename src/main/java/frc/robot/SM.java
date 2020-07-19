@@ -3,8 +3,10 @@ package frc.robot;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
+
+/**
+ * System Module - Class for utility methods.
+ **/
 
 public class SM {
 
@@ -19,27 +21,30 @@ public class SM {
    * Given a target number, current number, and increment, adjust current number by increment until we reach target
    * This is useful particularly in {@link frc.robot.Actions.DriveActions} where we need to ramp up to user input to avoid jerkiness
    *
-   * @param target The number you eventually want to get to (ie. joystick speed)
-   * @param current The current number you are at (so we know what to start at for the increment)
+   * @param target    The number you eventually want to get to (ie. joystick speed)
+   * @param current   The current number you are at (so we know what to start at for the increment)
    * @param increment How much to increase current by until current = target
-   *
-   * @see <a href="https://en.wikipedia.org/wiki/Slew_rate">Wikipedia article on Slew rates</a>
    * @return Adjusted target
+   * @see <a href="https://en.wikipedia.org/wiki/Slew_rate">Wikipedia article on Slew rates</a>
    */
   public static double slewLimit(double target, double current, double increment) {
     increment = Math.abs(increment); // Professionally validating user input right here 👌
     double change = target - current;
     if (Math.abs(current) > Math.abs(target)) return target; // Always slow down immediately for safety concerns
-    if (change > increment) { change = increment; }
-    else if (change < -increment) { change = -increment; }
+    if (change > increment) {
+      change = increment;
+    } else if (change < -increment) {
+      change = -increment;
+    }
     return current + change;
   }
 
 
   /**
    * Rumbles a given controller for a specified time
+   *
    * @param stick Controller to rumble
-   * @param ms Time in Milliseconds
+   * @param ms    Time in Milliseconds
    */
   public static void rumbleController(GenericHID stick, double intensity, int ms) {
     rumbleController(stick, intensity, ms, GenericHID.RumbleType.kLeftRumble);
@@ -48,15 +53,19 @@ public class SM {
   /**
    * Rumbles a given controller for a specified time
    * Left rumble is like an earthquake, right rumble is like a vibrating toothbrush
-   * @param stick Controller to rumble
-   * @param ms Time in Milliseconds
+   *
+   * @param stick      Controller to rumble
+   * @param ms         Time in Milliseconds
    * @param rumbleType Type of rumble to use
    */
   public static void rumbleController(GenericHID stick, double intensity, int ms, GenericHID.RumbleType rumbleType) {
     if (ms > 0) {
       new Thread(() -> {
         _setRumble(stick, intensity, rumbleType);
-        try { Thread.sleep(ms); } catch (InterruptedException ignored) {}
+        try {
+          Thread.sleep(ms);
+        } catch (InterruptedException ignored) {
+        }
         _setRumble(stick, 0, rumbleType);
       }).start();
     } else {
