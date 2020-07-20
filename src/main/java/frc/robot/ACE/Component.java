@@ -19,7 +19,8 @@ public abstract class Component extends ACEBase {
     return component_type == 2 ? true : false;
   }
 
-  protected final Component getComponents(String name) {
+  protected final Component getComponent(String name) {
     return getComponent(0, name);
   }
+
 }

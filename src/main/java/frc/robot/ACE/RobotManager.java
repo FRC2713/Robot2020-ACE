@@ -96,7 +96,7 @@ public class RobotManager extends TimedRobot {
 
   public static synchronized Component getComponent(ACEBase getter, String name) {
     if (!defaultInstance.component_map.containsKey(name)) {
-      throw new IllegalArgumentException("No Components have the name of: " + name);
+      throw new IllegalArgumentException("No Component has the name of: " + name);
     }
     Component component = defaultInstance.component_map.get(name);
     if (getter.getIsActiveForAutonomous() && !component.getIsActiveForAutonomous()) {
@@ -146,6 +146,30 @@ public class RobotManager extends TimedRobot {
     return object;
   }
 
+  private String getClassName(String baseName) {
+    int i = 0;
+    int j = 0;
+    int x = 0;
+    String className = "";
+    while (i < baseName.length()) {
+      if (baseName.charAt(i) == '.') j++;
+      i++;
+    }
+    x = j;
+    i = 0;
+    j = 0;
+    while (i < baseName.length()) {
+      if (baseName.charAt(i) == '.') j++;
+      i++;
+      if (j == x) break;
+    }
+    while (i < baseName.length()) {
+      className += baseName.charAt(i);
+      i++;
+    }
+    return className;
+  }
+
   @Override
   public void robotInit() {
     setDefaultInstance(this);
@@ -163,8 +187,8 @@ public class RobotManager extends TimedRobot {
     }
 
     for (Class<? extends Component> component_class : component_class_map.values()) {
-      Component components = (Component) newObject(component_class);
-      component_map.put(components.getClass().getName(), components);
+      Component component = (Component) newObject(component_class);
+      component_map.put(getClassName(component.getClass().getName()), component);
     }
 
     for (Component component : component_map.values()) {
@@ -182,29 +206,34 @@ public class RobotManager extends TimedRobot {
   private boolean IsActiveForMode(ACEBase object, int mode) {
     switch (mode) {
       default:
-      case 0: return object.getIsActiveForAutonomous();
-      case 1: return object.getIsActiveForTeleOp();
-      case 2: return object.getIsActiveForDisabled();
-      case 3: return object.getIsActiveForTest();
-      case 4: return object.getIsActiveForPeriodic();
+      case 0:
+        return object.getIsActiveForAutonomous();
+      case 1:
+        return object.getIsActiveForTeleOp();
+      case 2:
+        return object.getIsActiveForDisabled();
+      case 3:
+        return object.getIsActiveForTest();
+      case 4:
+        return object.getIsActiveForPeriodic();
     }
   }
 
   private void runInit(int mode) {
     for (Actions actions : actions_map.values()) {
       actions.setMode(mode);
-      if (!IsActiveForMode(actions,mode)) actions.doInterruptActions();
+      if (!IsActiveForMode(actions, mode)) actions.doInterruptActions();
     }
   }
 
   private void runPeriodic(int mode) {
     for (Events events : events_map.values()) {
       events.setMode(mode);
-      if (IsActiveForMode(events,mode)) events.pollEvents();
+      if (IsActiveForMode(events, mode)) events.pollEvents();
     }
     for (Actions actions : actions_map.values()) {
       actions.setMode(mode);
-      if (IsActiveForMode(actions,mode)) actions.runActions();
+      if (IsActiveForMode(actions, mode)) actions.runActions();
     }
   }
 

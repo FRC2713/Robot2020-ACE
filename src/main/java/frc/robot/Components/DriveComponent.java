@@ -35,7 +35,7 @@ public class DriveComponent extends Component {
   @Override
   public void initialize() {
 
-    configureBed = (ConfigureBed) getComponents("ConfigureBed");
+    configureBed = (ConfigureBed) getComponent("ConfigureBed");
 
     if (configureBed.getconfig() == ConfigureBed.Jumper.ONE || configureBed.getconfig() == ConfigureBed.Jumper.THREE) {
       //System.out.println("this is a test; 1");
