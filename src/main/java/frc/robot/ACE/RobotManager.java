@@ -25,20 +25,23 @@ public class RobotManager extends TimedRobot {
   }
 
   public static synchronized void addEvents(Class<? extends Events> events) {
-    if (!events_class_map.containsKey(events.getName())) {
-      events_class_map.put(events.getName(), events);
+    String name = defaultInstance.getClassName(events.getName());
+    if (!events_class_map.containsKey(name)) {
+      events_class_map.put(name, events);
     }
   }
 
   public static synchronized void addActions(Class<? extends Actions> actions) {
-    if (!actions_class_map.containsKey(actions.getName())) {
-      actions_class_map.put(actions.getName(), actions);
+    String name = defaultInstance.getClassName(actions.getName());
+    if (!actions_class_map.containsKey(name)) {
+      actions_class_map.put(name, actions);
     }
   }
 
   public static synchronized void addComponent(Class<? extends Component> component) {
-    if (!component_class_map.containsKey(component.getName())) {
-      component_class_map.put(component.getName(), component);
+    String name = defaultInstance.getClassName(component.getName());
+    if (!component_class_map.containsKey(name)) {
+      component_class_map.put(name, component);
     }
   }
 
@@ -178,12 +181,12 @@ public class RobotManager extends TimedRobot {
 
     for (Class<? extends Events> events_class : events_class_map.values()) {
       Events events = (Events) newObject(events_class);
-      events_map.put(events.getClass().getName(), events);
+      events_map.put(getClassName(events.getClass().getName()), events);
     }
 
     for (Class<? extends Actions> actions_class : actions_class_map.values()) {
       Actions actions = (Actions) newObject(actions_class);
-      actions_map.put(actions.getClass().getName(), actions);
+      actions_map.put(getClassName(actions.getClass().getName()), actions);
     }
 
     for (Class<? extends Component> component_class : component_class_map.values()) {
