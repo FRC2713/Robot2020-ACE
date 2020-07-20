@@ -11,6 +11,7 @@ public class IntakeActions extends Actions {
 
   public IntakeActions() {
     setIsActiveForTeleOp();
+    setIsActiveForAutonomous();
     addRequiredComponent(IntakeComponent.class);
   }
 
