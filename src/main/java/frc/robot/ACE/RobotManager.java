@@ -129,7 +129,7 @@ public class RobotManager extends TimedRobot {
     ACEBase object = null;
     Constructor<? extends ACEBase> ctor = null;
     if (cls == null)
-      throw new IllegalArgumentException("EAC Class is null!");
+      throw new IllegalArgumentException("ACE Class is null!");
     try {
       ctor = cls.getConstructor();
     } catch (NoSuchMethodException e) {

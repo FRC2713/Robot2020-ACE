@@ -110,11 +110,11 @@ public class Controllers extends Component {
     return buttonHeldState[button];
   }
 
-  public boolean getXboxButton(int button) {
+  private boolean getXboxButton(int button) {
     return getButtonPressed(button, xBoxbuttonHeldState, xBoxbuttonLastState);
   }
 
-  public boolean getXboxButtonHeld(int button) {
+  private boolean getXboxButtonHeld(int button) {
     return getButtonHeld(button, xBoxbuttonHeldState);
   }
 
@@ -201,8 +201,12 @@ public class Controllers extends Component {
     SM.rumbleController(xBoxController, intensity, ms);
   }
 
-  public boolean getArcadeButton(int button) {
+  private boolean getArcadeButton(int button) {
     return getButtonPressed(button, arcadebuttonHeldState, arcadebuttonLastState);
+  }
+
+  private boolean getArcadeButtonHeld(int button) {
+    return getButtonHeld(button, arcadebuttonHeldState);
   }
 
   public double getArcadeXAxis() {
@@ -217,11 +221,11 @@ public class Controllers extends Component {
     SM.rumbleController(arcadeController, intensity, ms);
   }
 
-  public boolean getAttackButton(int button) {
+  private boolean getAttackButton(int button) {
     return getButtonPressed(button, leftAttackbuttonHeldState, leftAttackbuttonLastState);
   }
 
-  public boolean getAttackButtonHeld(int button) {
+  private boolean getAttackButtonHeld(int button) {
     return getButtonHeld(button, leftAttackbuttonHeldState);
   }
 
