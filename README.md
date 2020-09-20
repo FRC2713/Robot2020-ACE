@@ -54,7 +54,7 @@ Actions can use the getComponent method to retrieve Components, the getEvents me
 
 # Components
 
-Events and Actions should not directly use low level classes(SM,RobotMap,WPILib,etc.). Only Components should use low level classes. Components should represent or manage a specific hardware or software resource.
+Events and Actions should not directly use low level classes(SM,WPILib,etc.). Only Components should use low level classes. Components should represent or manage a specific hardware or software resource.
 
 Components should provide a well defined and well formed API, that promotes code readability and minimizes the need for code changes  from hardware or software changes.
 

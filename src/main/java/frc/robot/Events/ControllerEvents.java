@@ -2,6 +2,7 @@ package frc.robot.Events;
 
 import frc.robot.Components.Controllers;
 import frc.robot.ACE.Events;
+import frc.robot.RobotMap;
 
 public class ControllerEvents extends Events {
 
@@ -35,7 +36,7 @@ public class ControllerEvents extends Events {
   }
 
   public boolean runClimber() {
-    return controllers.getClimberButton();
+    return controllers.getAttackButtonHeld(RobotMap.climberButton);
   }
 
   public double getClimberSpeed() {
@@ -43,11 +44,11 @@ public class ControllerEvents extends Events {
   }
 
   public boolean winchUp() {
-    return controllers.getWinchUpButton();
+    return controllers.getAttackButtonHeld(RobotMap.winchUpButton);
   }
 
   public boolean winchDown() {
-    return controllers.getWinchDownButton();
+    return controllers.getAttackButtonHeld(RobotMap.winchDownButton);
   }
 
   public boolean swapPolarity() {

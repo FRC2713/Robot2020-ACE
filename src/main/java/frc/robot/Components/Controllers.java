@@ -110,11 +110,11 @@ public class Controllers extends Component {
     return buttonHeldState[button];
   }
 
-  private boolean getXboxButton(int button) {
+  public boolean getXboxButton(int button) {
     return getButtonPressed(button, xBoxbuttonHeldState, xBoxbuttonLastState);
   }
 
-  private boolean getXboxButtonHeld(int button) {
+  public boolean getXboxButtonHeld(int button) {
     return getButtonHeld(button, xBoxbuttonHeldState);
   }
 
@@ -201,7 +201,7 @@ public class Controllers extends Component {
     SM.rumbleController(xBoxController, intensity, ms);
   }
 
-  private boolean getArcadeButton(int button) {
+  public boolean getArcadeButton(int button) {
     return getButtonPressed(button, arcadebuttonHeldState, arcadebuttonLastState);
   }
 
@@ -221,24 +221,12 @@ public class Controllers extends Component {
     SM.rumbleController(arcadeController, intensity, ms);
   }
 
-  private boolean getAttackButton(int button) {
+  public boolean getAttackButton(int button) {
     return getButtonPressed(button, leftAttackbuttonHeldState, leftAttackbuttonLastState);
   }
 
-  private boolean getAttackButtonHeld(int button) {
+  public boolean getAttackButtonHeld(int button) {
     return getButtonHeld(button, leftAttackbuttonHeldState);
-  }
-
-  public boolean getClimberButton() {
-    return getAttackButtonHeld(RobotMap.climberButton);
-  }
-
-  public boolean getWinchUpButton() {
-    return getAttackButtonHeld(RobotMap.winchUpButton);
-  }
-
-  public boolean getWinchDownButton() {
-    return getAttackButtonHeld(RobotMap.winchDownButton);
   }
 
   public double getAttackXAxis() {
