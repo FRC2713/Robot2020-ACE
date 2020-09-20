@@ -205,7 +205,7 @@ public class Controllers extends Component {
     return getButtonPressed(button, arcadebuttonHeldState, arcadebuttonLastState);
   }
 
-  private boolean getArcadeButtonHeld(int button) {
+  public boolean getArcadeButtonHeld(int button) {
     return getButtonHeld(button, arcadebuttonHeldState);
   }
 
