@@ -12,7 +12,6 @@ public class GoForward extends Actions {
 
   public GoForward() {
     setIsActiveForAutonomous();
-    addRequiredComponent(DriveComponent.class);
   }
 
   @Override

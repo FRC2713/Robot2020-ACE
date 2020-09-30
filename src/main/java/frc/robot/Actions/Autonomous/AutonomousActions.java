@@ -1,6 +1,7 @@
 package frc.robot.Actions.Autonomous;
 
 import frc.robot.ACE.Actions;
+import frc.robot.Components.DriveComponent;
 
 public class AutonomousActions extends Actions {
 
@@ -8,6 +9,8 @@ public class AutonomousActions extends Actions {
 
   public AutonomousActions() {
     setIsActiveForAutonomous();
+    //Required components for a spawned action need to be added here
+    addRequiredComponent(DriveComponent.class);
   }
 
   @Override
