@@ -76,6 +76,11 @@ public class ControllerEvents extends Events {
   }
 
   public void rumbleXbox(double intensity, int ms) {
-    controllers.rumbleXbox(intensity,ms);
+    controllers.rumbleXbox(intensity, ms);
+  }
+
+  @Override
+  public void resetEvents() {
+    controllers.reset();
   }
 }

@@ -60,6 +60,17 @@ public class Controllers extends Component {
       leftAttack = new Joystick(empty_port);
     }
 
+    reset();
+  }
+
+  public void updateAllButtons() {
+    updateButtons(xBoxController, xBoxbuttonHeldState, xBoxbuttonLastState);
+    updateButtons(arcadeController, arcadebuttonHeldState, arcadebuttonLastState);
+    updateButtons(leftAttack, leftAttackbuttonHeldState, leftAttackbuttonLastState);
+    updateTriggers(xBoxController);
+  }
+
+  public void reset() {
     int count = xBoxController.getButtonCount();
     xBoxbuttonHeldState = new boolean[count];
     xBoxbuttonLastState = new boolean[count];
@@ -76,13 +87,6 @@ public class Controllers extends Component {
     xBoxLastTriggerValue = new double[2];
     xBoxTriggerButtonState = new boolean[2];
     xBoxLastTriggerButtonState = new boolean[2];
-  }
-
-  public void updateAllButtons() {
-    updateButtons(xBoxController, xBoxbuttonHeldState, xBoxbuttonLastState);
-    updateButtons(arcadeController, arcadebuttonHeldState, arcadebuttonLastState);
-    updateButtons(leftAttack, leftAttackbuttonHeldState, leftAttackbuttonLastState);
-    updateTriggers(xBoxController);
   }
 
   private void updateButtons(GenericHID controller, boolean[] buttonHeldState, boolean[] buttonLastState) {

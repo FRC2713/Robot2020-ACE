@@ -223,6 +223,10 @@ public class RobotManager extends TimedRobot {
   }
 
   private void runInit(int mode) {
+    for (Events events : events_map.values()) {
+      events.setMode(mode);
+      if (!IsActiveForMode(events, mode)) events.resetEvents();
+    }
     for (Actions actions : actions_map.values()) {
       actions.setMode(mode);
       if (!IsActiveForMode(actions, mode)) actions.doInterruptActions();
