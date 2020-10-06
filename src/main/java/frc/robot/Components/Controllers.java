@@ -71,15 +71,15 @@ public class Controllers extends Component {
   }
 
   public void reset() {
-    int count = xBoxController.getButtonCount();
+    int count = getButtonCount(xBoxController);
     xBoxbuttonHeldState = new boolean[count];
     xBoxbuttonLastState = new boolean[count];
 
-    count = arcadeController.getButtonCount();
+    count = getButtonCount(arcadeController);
     arcadebuttonHeldState = new boolean[count];
     arcadebuttonLastState = new boolean[count];
 
-    count = leftAttack.getButtonCount();
+    count = getButtonCount(leftAttack);
     leftAttackbuttonHeldState = new boolean[count];
     leftAttackbuttonLastState = new boolean[count];
 
@@ -89,8 +89,13 @@ public class Controllers extends Component {
     xBoxLastTriggerButtonState = new boolean[2];
   }
 
-  private void updateButtons(GenericHID controller, boolean[] buttonHeldState, boolean[] buttonLastState) {
+  private int getButtonCount(GenericHID controller) {
     int count = controller.getButtonCount();
+    return (count == 0) ? RobotMap.default_button_count_for_controller : count;
+  }
+
+  private void updateButtons(GenericHID controller, boolean[] buttonHeldState, boolean[] buttonLastState) {
+    int count = getButtonCount(controller);
     for (int i = 0; i < count; i++) {
       buttonLastState[i] = buttonHeldState[i];
       buttonHeldState[i] = controller.getRawButton(i);
