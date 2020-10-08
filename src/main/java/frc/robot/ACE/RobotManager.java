@@ -1,16 +1,19 @@
 package frc.robot.ACE;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import frc.robot.RobotContainer;
+import edu.wpi.first.wpilibj.RobotBase;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class RobotManager extends TimedRobot {
 
   private static RobotManager defaultInstance = null;
+
+  private static Supplier<?> m_robotContainer;
 
   private static final Map<String, Class<? extends Events>> events_class_map = new LinkedHashMap<>();
   private static final Map<String, Class<? extends Actions>> actions_class_map = new LinkedHashMap<>();
@@ -22,6 +25,11 @@ public class RobotManager extends TimedRobot {
 
   private static synchronized void setDefaultInstance(RobotManager robotManager) {
     defaultInstance = robotManager;
+  }
+
+  public static void startRobotWithContainer(Supplier<?> robotContainer) {
+    m_robotContainer = robotContainer;
+    RobotBase.startRobot(RobotManager::new);
   }
 
   public static synchronized void addEvents(Class<? extends Events> events) {
@@ -177,7 +185,7 @@ public class RobotManager extends TimedRobot {
   public void robotInit() {
     setDefaultInstance(this);
 
-    new RobotContainer();
+    m_robotContainer.get();
 
     for (Class<? extends Events> events_class : events_class_map.values()) {
       Events events = (Events) newObject(events_class);
