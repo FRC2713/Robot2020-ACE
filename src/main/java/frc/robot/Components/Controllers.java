@@ -71,15 +71,15 @@ public class Controllers extends Component {
   }
 
   public void reset() {
-    int count = getButtonCount(xBoxController);
+    int count = getButtonCount(xBoxController) + 1;
     xBoxbuttonHeldState = new boolean[count];
     xBoxbuttonLastState = new boolean[count];
 
-    count = getButtonCount(arcadeController);
+    count = getButtonCount(arcadeController) + 1;
     arcadebuttonHeldState = new boolean[count];
     arcadebuttonLastState = new boolean[count];
 
-    count = getButtonCount(leftAttack);
+    count = getButtonCount(leftAttack) + 1;
     leftAttackbuttonHeldState = new boolean[count];
     leftAttackbuttonLastState = new boolean[count];
 
@@ -96,7 +96,7 @@ public class Controllers extends Component {
 
   private void updateButtons(GenericHID controller, boolean[] buttonHeldState, boolean[] buttonLastState) {
     int count = getButtonCount(controller);
-    for (int i = 0; i < count; i++) {
+    for (int i = 1; i < count; i++) {
       buttonLastState[i] = buttonHeldState[i];
       buttonHeldState[i] = controller.getRawButton(i);
     }
