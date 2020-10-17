@@ -5,9 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+package frc.robot.AdditionalClasses;
 
 import frc.robot.ACE.RobotManager;
+import frc.robot.RobotContainer;
 
 /**
  * Do NOT add any static variables to this class, or any initialization at all. Unless you know what

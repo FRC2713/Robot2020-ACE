@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.ACE.Component;
 import frc.robot.AdditionalClasses.XboxImpostor;
 import frc.robot.RobotMap;
-import frc.robot.SM;
+import frc.robot.AdditionalClasses.SM;
 
 public class Controllers extends Component {
 

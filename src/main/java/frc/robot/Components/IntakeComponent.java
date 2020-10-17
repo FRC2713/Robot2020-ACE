@@ -5,7 +5,7 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.robot.ACE.Component;
 import frc.robot.RobotMap;
-import frc.robot.SM;
+import frc.robot.AdditionalClasses.SM;
 
 import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.kForward;
 import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.kReverse;

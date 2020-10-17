@@ -1,8 +1,9 @@
-package frc.robot;
+package frc.robot.AdditionalClasses;
 
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.GenericHID;
+import frc.robot.RobotMap;
 
 /**
  * System Module - Class for utility methods.
