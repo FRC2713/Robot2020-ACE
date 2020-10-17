@@ -1,5 +1,6 @@
 package frc.robot.Actions;
 
+import frc.robot.ACE.RobotManager;
 import frc.robot.Components.DriveComponent;
 import frc.robot.ACE.Actions;
 import frc.robot.Events.ControllerEvents;
@@ -53,6 +54,18 @@ public class DriveActions extends Actions {
       speed = driveComponent.slewLimit(controllerEvents.getSpeedForBradford(), lastLeftStickVal, joystickChangeLimit);
       turn = driveComponent.slewLimit(controllerEvents.getTurnForBradford(), lastRightStickVal, joystickChangeLimit);
       driveComponent.bradfordDrive(-speed * polarity, turn * polarity);
+    }
+
+    if (RobotManager.isSimulation()) {
+      System.out.print("Dive Mode: ");
+      if (useArcadeInsteadOfBradford) {
+        System.out.println("Arcade");
+      } else {
+        System.out.println("Bradford");
+      }
+      System.out.println("Speed: " + -speed * polarity);
+      System.out.println("Turn: " + turn * polarity);
+      System.out.println("Polarity: " + polarity);
     }
 
     lastLeftStickVal = speed;

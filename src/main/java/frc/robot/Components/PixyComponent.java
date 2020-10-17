@@ -49,7 +49,7 @@ public class PixyComponent extends Component {
       return;
     }
 
-    System.out.println("count :" + blocks.size());
+    //System.out.println("count :" + blocks.size());
 
     for (Pixy2CCC.Block block : blocks) {
       blockWidth = block.getWidth();

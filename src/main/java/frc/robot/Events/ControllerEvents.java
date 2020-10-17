@@ -31,7 +31,7 @@ public class ControllerEvents extends Events {
     return controllers.getXboxRightBumper();
   }
 
-  public boolean runIntakeConveyer() {
+  public boolean runIntakeConveyor() {
     return controllers.getXboxRightTriggerAsButton(1);
   }
 

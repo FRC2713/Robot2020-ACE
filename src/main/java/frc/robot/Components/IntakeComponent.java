@@ -46,13 +46,13 @@ public class IntakeComponent extends Component {
     isIntakeGateOpen = false;
   }
 
-  public void runConveyer() {
+  public void runConveyor() {
     intakeArmSolenoid.set(kReverse);
     intakeArmMotor.set(.5);
     intakeMotor.set(1);
   }
 
-  public void stopConveyer() {
+  public void stopConveyor() {
     intakeArmSolenoid.set(kForward);
     intakeArmMotor.stopMotor();
     intakeMotor.stopMotor();
