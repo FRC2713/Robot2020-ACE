@@ -34,12 +34,24 @@ public class Controllers extends Component {
 
   @Override
   public void initialize() {
+    reset();
+  }
+
+  public void updateAllButtons() {
+    updateButtons(xBoxController, xBoxbuttonHeldState, xBoxbuttonLastState);
+    updateButtons(arcadeController, arcadebuttonHeldState, arcadebuttonLastState);
+    updateButtons(leftAttack, leftAttackbuttonHeldState, leftAttackbuttonLastState);
+    updateTriggers(xBoxController);
+  }
+
+  public void reset() {
     int empty_port = 0;
     for (int i = 0; i < 6; i++) {
       Joystick test = new Joystick(i);
       if (test.getName().equals(RobotMap.XBOX_NAME)
         || test.getName().equals(RobotMap.XBOX2_NAME)
-        || test.getName().equals(RobotMap.XBOX3_NAME)) {
+        || test.getName().equals(RobotMap.XBOX3_NAME)
+        || test.getName().equals(RobotMap.XBOX4_NAME)) {
         xBoxController = new XboxController(i);
       } else if (test.getName().equals(RobotMap.ARCADE_NAME)) {
         arcadeController = new Joystick(i);
@@ -60,17 +72,6 @@ public class Controllers extends Component {
       leftAttack = new Joystick(empty_port);
     }
 
-    reset();
-  }
-
-  public void updateAllButtons() {
-    updateButtons(xBoxController, xBoxbuttonHeldState, xBoxbuttonLastState);
-    updateButtons(arcadeController, arcadebuttonHeldState, arcadebuttonLastState);
-    updateButtons(leftAttack, leftAttackbuttonHeldState, leftAttackbuttonLastState);
-    updateTriggers(xBoxController);
-  }
-
-  public void reset() {
     int count = getButtonCount(xBoxController) + 1;
     xBoxbuttonHeldState = new boolean[count];
     xBoxbuttonLastState = new boolean[count];

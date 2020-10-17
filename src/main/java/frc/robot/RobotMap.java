@@ -44,7 +44,8 @@ public final class RobotMap {
   public static final String ARCADE_NAME = "Mayflash Arcade Stick";
   public static final String ATTACK_NAME = "Logitech Attack 3";
   public static final String XBOX2_NAME = "Controller (Gamepad for Xbox 360)";
-  public static final String XBOX3_NAME = "Controller (Gamepad)";
+  public static final String XBOX3_NAME = "Controller (Gamepad)"; //
+  public static final String XBOX4_NAME = "Logitech Dual Action";
 
   //Motors/Solenoids
   public static final int frontLeftMotorPort = 1; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
