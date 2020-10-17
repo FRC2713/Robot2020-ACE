@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.ACE.Component;
+import frc.robot.AdditionalClasses.XboxImpostor;
 import frc.robot.RobotMap;
 import frc.robot.SM;
 
@@ -48,18 +49,26 @@ public class Controllers extends Component {
     int empty_port = 0;
     for (int i = 0; i < 6; i++) {
       Joystick test = new Joystick(i);
-      if (test.getName().equals(RobotMap.XBOX_NAME)
-        || test.getName().equals(RobotMap.XBOX2_NAME)
-        || test.getName().equals(RobotMap.XBOX3_NAME)
-        || test.getName().equals(RobotMap.XBOX4_NAME)) {
-        xBoxController = new XboxController(i);
-      } else if (test.getName().equals(RobotMap.ARCADE_NAME)) {
-        arcadeController = new Joystick(i);
-      } else if (test.getName().equals(RobotMap.ATTACK_NAME)) {
-        leftAttack = new Joystick(i);
-      }
-      if (test.getName().isEmpty()) {
-        empty_port = i;
+      switch (test.getName()) {
+        case RobotMap.XBOX_NAME:
+        case RobotMap.XBOX2_NAME:
+        case RobotMap.XBOX3_NAME:
+          xBoxController = new XboxController(i);
+          break;
+        case RobotMap.XBOX4_NAME:
+          xBoxController = new XboxImpostor(i);
+          break;
+        case RobotMap.ARCADE_NAME:
+          arcadeController = new Joystick(i);
+          break;
+        case RobotMap.ATTACK_NAME:
+          leftAttack = new Joystick(i);
+          break;
+        default:
+          if (test.getName().isEmpty()) {
+            empty_port = i;
+          }
+          break;
       }
     }
     if (xBoxController == null) {
@@ -96,7 +105,7 @@ public class Controllers extends Component {
   }
 
   private void updateButtons(GenericHID controller, boolean[] buttonHeldState, boolean[] buttonLastState) {
-    int count = getButtonCount(controller);
+    int count = buttonLastState.length;
     for (int i = 1; i < count; i++) {
       buttonLastState[i] = buttonHeldState[i];
       buttonHeldState[i] = controller.getRawButton(i);

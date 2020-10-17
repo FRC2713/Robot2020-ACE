@@ -66,10 +66,10 @@ For example IntakeComponent directly calls the DoubleSolenoid to open the intake
      isIntakeGateOpen = true;
     }
     
-Components can also be used to simplify the rest of the code, for example the Controllers Component turns xBoxController.getBumper(GenericHID.Hand.kLeft) to getXboxLeftBumper.
+Components can also be used to simplify the rest of the code, for example the Controllers Component turns xBoxController.getX(GenericHID.Hand.kLeft) to getXboxXLeftAxis.
 
-    public boolean getXboxLeftBumper() {
-     return xBoxController.getBumper(GenericHID.Hand.kLeft);
+    public double getXboxXLeftAxis() {
+     return xBoxController.getX(GenericHID.Hand.kLeft);
     }
     
 ### Dependencies

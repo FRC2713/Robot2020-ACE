@@ -60,6 +60,16 @@ public class DriveActions extends Actions {
   }
 
   @Override
+  public void resetActions() {
+    lastLeftStickVal = 0;
+    lastRightStickVal = 0;
+    //should be reset?
+    //useArcadeInsteadOfBradford = false;
+    //polarityBoolean = false;
+    //polarity = 1;
+  }
+
+  @Override
   public void interruptActions() {
     driveComponent.stopDrive();
   }
