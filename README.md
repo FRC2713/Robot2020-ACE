@@ -2,7 +2,7 @@
 
 #### Experimental ACE(Actions, Components, and Events) programming model repo
 
-### Not Tested yet, do not use!
+### Tested only in wpilib robot simulator.
 
 ## Overview
 

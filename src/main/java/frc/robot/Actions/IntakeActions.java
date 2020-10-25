@@ -39,7 +39,9 @@ public class IntakeActions extends Actions {
     }
 
     if (conveyor_active) {
-      if (RobotManager.isSimulation()) System.out.println("Running IntakeConveyor");
+      if (RobotManager.isSimulation()) {
+        System.out.println("Running IntakeConveyor");
+      }
       intakeComponent.runConveyor();
     }
 
