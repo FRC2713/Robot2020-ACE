@@ -105,7 +105,7 @@ public class Controllers extends Component {
   }
 
   private void updateButtons(GenericHID controller, boolean[] buttonHeldState, boolean[] buttonLastState) {
-    int count = buttonLastState.length;
+    int count = buttonHeldState.length;
     for (int i = 1; i < count; i++) {
       buttonLastState[i] = buttonHeldState[i];
       buttonHeldState[i] = controller.getRawButton(i);
@@ -122,10 +122,12 @@ public class Controllers extends Component {
   }
 
   private boolean getButtonPressed(int button, boolean[] buttonHeldState, boolean[] buttonLastState) {
+    if (button >= buttonHeldState.length) return false;
     return buttonHeldState[button] && !buttonLastState[button];
   }
 
   private boolean getButtonHeld(int button, boolean[] buttonHeldState) {
+    if (button >= buttonHeldState.length) return false;
     return buttonHeldState[button];
   }
 
