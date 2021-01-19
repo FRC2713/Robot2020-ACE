@@ -37,9 +37,6 @@ public final class RobotMap {
 
   // Controllers
 
-  //Must be at least the max amount of buttons on any controller
-  public static final int default_button_count_for_controller = 25;
-
   public static final String XBOX_NAME = "Controller (XBOX 360 For Windows)";
   public static final String ARCADE_NAME = "Mayflash Arcade Stick";
   public static final String ATTACK_NAME = "Logitech Attack 3";
