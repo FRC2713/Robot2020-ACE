@@ -32,6 +32,14 @@ public class RobotManager extends TimedRobot {
     RobotBase.startRobot(RobotManager::new);
   }
 
+  public static synchronized void addPeriodicCallback(Runnable callback, double periodSeconds) {
+    defaultInstance.addPeriodic(callback,periodSeconds);
+  }
+
+  public static synchronized void addPeriodicCallback(Runnable callback, double periodSeconds, double offsetSeconds) {
+    defaultInstance.addPeriodic(callback,periodSeconds,offsetSeconds);
+  }
+
   public static synchronized void addEvents(Class<? extends Events> events) {
     String name = defaultInstance.getClassName(events.getName());
     if (!events_class_map.containsKey(name)) {
@@ -74,6 +82,11 @@ public class RobotManager extends TimedRobot {
     if (spawner.getIsActiveForPeriodic() && !a.getIsActiveForPeriodic()) {
       throw new IllegalArgumentException("Spawned actions are not active for: " + "Periodic");
     }
+
+    if (spawner.getIsActiveForSimulation() && !a.getIsActiveForSimulation()) {
+      throw new IllegalArgumentException("Spawned actions are not active for: " + "Simulation");
+    }
+
     a.doInitialization();
     return a;
   }
@@ -102,6 +115,11 @@ public class RobotManager extends TimedRobot {
     if (getter.getIsActiveForPeriodic() && !events.getIsActiveForPeriodic()) {
       throw new IllegalArgumentException("Events are not active for: " + "Periodic");
     }
+
+    if (getter.getIsActiveForSimulation() && !events.getIsActiveForSimulation()) {
+      throw new IllegalArgumentException("Events are not active for: " + "Simulation");
+    }
+
     return events;
   }
 
@@ -129,6 +147,11 @@ public class RobotManager extends TimedRobot {
     if (getter.getIsActiveForPeriodic() && !component.getIsActiveForPeriodic()) {
       throw new IllegalArgumentException("Component is not active for: " + "Periodic");
     }
+
+    if (getter.getIsActiveForSimulation() && !component.getIsActiveForSimulation()) {
+      throw new IllegalArgumentException("Component is not active for: " + "Simulation");
+    }
+
     component.doInitialization();
     return component;
   }
@@ -227,6 +250,8 @@ public class RobotManager extends TimedRobot {
         return object.getIsActiveForTest();
       case 4:
         return object.getIsActiveForPeriodic();
+      case 5:
+        return object.getIsActiveForSimulation();
     }
   }
 
@@ -296,5 +321,15 @@ public class RobotManager extends TimedRobot {
   @Override
   public void robotPeriodic() {
     runPeriodic(4);
+  }
+
+  @Override
+  public void simulationInit() {
+    runInit(5);
+  }
+
+  @Override
+  public void simulationPeriodic() {
+    runPeriodic(5);
   }
 }

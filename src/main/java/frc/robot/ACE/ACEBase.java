@@ -12,6 +12,8 @@ public abstract class ACEBase {
 
   private boolean isActiveForPeriodic = false;
 
+  private boolean isActiveForSimulation = false;
+
   private int mode = -1;
 
   public abstract void initialize();
@@ -62,6 +64,14 @@ public abstract class ACEBase {
 
   public final boolean getIsActiveForPeriodic() {
     return isActiveForPeriodic;
+  }
+
+  protected final void setIsActiveForSimulation() {
+    isActiveForSimulation = true;
+  }
+
+  public final boolean getIsActiveForSimulation() {
+    return isActiveForSimulation;
   }
 
   public final void setMode(int mode) {
