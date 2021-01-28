@@ -81,15 +81,15 @@ public class Controllers extends Component {
       leftAttack = new Joystick(empty_port);
     }
 
-    int count = getButtonCount(xBoxController) + 1;
+    int count = xBoxController.getButtonCount() + 1;
     xBoxbuttonHeldState = new boolean[count];
     xBoxbuttonLastState = new boolean[count];
 
-    count = getButtonCount(arcadeController) + 1;
+    count = arcadeController.getButtonCount() + 1;
     arcadebuttonHeldState = new boolean[count];
     arcadebuttonLastState = new boolean[count];
 
-    count = getButtonCount(leftAttack) + 1;
+    count = leftAttack.getButtonCount() + 1;
     leftAttackbuttonHeldState = new boolean[count];
     leftAttackbuttonLastState = new boolean[count];
 
@@ -97,11 +97,6 @@ public class Controllers extends Component {
     xBoxLastTriggerValue = new double[2];
     xBoxTriggerButtonState = new boolean[2];
     xBoxLastTriggerButtonState = new boolean[2];
-  }
-
-  private int getButtonCount(GenericHID controller) {
-    int count = controller.getButtonCount();
-    return (count == 0) ? RobotMap.default_button_count_for_controller : count;
   }
 
   private void updateButtons(GenericHID controller, boolean[] buttonHeldState, boolean[] buttonLastState) {
