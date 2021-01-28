@@ -74,7 +74,7 @@ Components can also be used to simplify the rest of the code, for example the Co
     
 ### Dependencies
 
-Components can be dependent on other Components, and low level classes. Components should not be dependent on Events or Actions. Components can use the getComponent method to retrieve other Components.
+Components can be dependent on other Components, and low level classes, NOT Events or Actions. Components can use the getComponent method to retrieve other Components.
 
 # RobotContainer
 
