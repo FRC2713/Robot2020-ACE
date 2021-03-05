@@ -48,7 +48,7 @@ For example IntakeActions responds to events from ControllerEvents:
     
 ### Dependencies
 
-Actions can be dependent on Events, Components, and spawned Actions, not other non-spawned Actions, or low level classes. Actions should not be dependent on Components for input, only Events.
+Actions can be dependent on Events, Components, and spawned Actions, not other non-spawned Actions, or low level classes. Actions should for the most part not be dependent on Components for input.
 
 Actions can use the getComponent method to retrieve Components, the getEvents method to retrieve Events, and the spawnActions method to spawn Actions. Spawned Actions objects must be directly managed by the Actions that spawned it.
 
