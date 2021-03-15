@@ -8,6 +8,8 @@ import frc.robot.AdditionalClasses.XboxImpostor;
 import frc.robot.RobotMap;
 import frc.robot.AdditionalClasses.SM;
 
+import java.util.function.Supplier;
+
 public class Controllers extends Component {
 
   private XboxController xBoxController;
@@ -16,17 +18,22 @@ public class Controllers extends Component {
 
   private boolean[] xBoxbuttonHeldState;
   private boolean[] xBoxbuttonLastState;
+  private boolean[] xBoxbuttonToggleState;
 
   private boolean[] arcadebuttonHeldState;
   private boolean[] arcadebuttonLastState;
+  private boolean[] arcadetoggleState;
 
   private boolean[] leftAttackbuttonHeldState;
   private boolean[] leftAttackbuttonLastState;
+  private boolean[] leftAttacktoggleState;
 
   private double[] xBoxTriggerValue;
   private double[] xBoxLastTriggerValue;
   private boolean[] xBoxTriggerButtonState;
   private boolean[] xBoxLastTriggerButtonState;
+  private boolean[] xBoxtriggerToggleState;
+  private double[] xBoxtriggerToggleThresholdTarget;
 
   public Controllers() {
     setIsActiveForTeleOp();
@@ -43,6 +50,10 @@ public class Controllers extends Component {
     updateButtons(arcadeController, arcadebuttonHeldState, arcadebuttonLastState);
     updateButtons(leftAttack, leftAttackbuttonHeldState, leftAttackbuttonLastState);
     updateTriggers(xBoxController);
+    updateButtonToggles(xBoxController,xBoxbuttonToggleState,xBoxbuttonHeldState, xBoxbuttonLastState);
+    updateButtonToggles(arcadeController,arcadetoggleState,arcadebuttonHeldState, arcadebuttonLastState);
+    updateButtonToggles(leftAttack,leftAttacktoggleState,leftAttackbuttonHeldState, leftAttackbuttonLastState);
+    updateTriggerToggles(xBoxtriggerToggleState);
   }
 
   public void reset() {
@@ -84,19 +95,26 @@ public class Controllers extends Component {
     int count = xBoxController.getButtonCount() + 1;
     xBoxbuttonHeldState = new boolean[count];
     xBoxbuttonLastState = new boolean[count];
+    xBoxbuttonToggleState = new boolean[count];
 
     count = arcadeController.getButtonCount() + 1;
     arcadebuttonHeldState = new boolean[count];
     arcadebuttonLastState = new boolean[count];
+    arcadetoggleState = new boolean[count];
 
     count = leftAttack.getButtonCount() + 1;
     leftAttackbuttonHeldState = new boolean[count];
     leftAttackbuttonLastState = new boolean[count];
+    leftAttacktoggleState = new boolean[count];
 
     xBoxTriggerValue = new double[2];
     xBoxLastTriggerValue = new double[2];
     xBoxTriggerButtonState = new boolean[2];
     xBoxLastTriggerButtonState = new boolean[2];
+    xBoxtriggerToggleState = new boolean[2];
+    xBoxtriggerToggleThresholdTarget = new double[2];
+    xBoxtriggerToggleThresholdTarget[0] = Double.POSITIVE_INFINITY;
+    xBoxtriggerToggleThresholdTarget[1] = Double.POSITIVE_INFINITY;
   }
 
   private void updateButtons(GenericHID controller, boolean[] buttonHeldState, boolean[] buttonLastState) {
@@ -107,12 +125,34 @@ public class Controllers extends Component {
     }
   }
 
+  private void updateButtonToggles(GenericHID controller, boolean[] toggleState, boolean[] buttonHeldState, boolean[] buttonLastState) {
+    int count = toggleState.length;
+    for (int i = 1; i < count; i++) {
+      if (getButtonPressed(i,buttonHeldState,buttonLastState) && !toggleState[i]) {
+        toggleState[i] = true;
+      } else if (getButtonPressed(i,buttonHeldState,buttonLastState) && toggleState[i]) {
+        toggleState[i] = false;
+      }
+    }
+  }
+
   private void updateTriggers(XboxController controller) {
     for (int i = 0; i < 2; i++) {
       GenericHID.Hand hand = (i == 0) ? GenericHID.Hand.kLeft : GenericHID.Hand.kRight;
       xBoxLastTriggerValue[i] = xBoxTriggerValue[i];
       xBoxTriggerValue[i] = controller.getTriggerAxis(hand);
       xBoxTriggerButtonState[i] = xBoxLastTriggerButtonState[i];
+    }
+  }
+
+  private void updateTriggerToggles(boolean[] toggleState) {
+    for (int i = 0; i < 2; i++) {
+      GenericHID.Hand hand = (i == 0) ? GenericHID.Hand.kLeft : GenericHID.Hand.kRight;
+      if (getXboxTriggerAsButton(hand,xBoxtriggerToggleThresholdTarget[i]) && !toggleState[i]) {
+        toggleState[i] = true;
+      } else if (getXboxTriggerAsButton(hand,xBoxtriggerToggleThresholdTarget[i]) && toggleState[i]) {
+        toggleState[i] = false;
+      }
     }
   }
 
@@ -195,6 +235,19 @@ public class Controllers extends Component {
     if (xBoxTriggerValue[trigger.value] != xBoxLastTriggerValue[trigger.value])
       xBoxLastTriggerButtonState[trigger.value] = false;
     return false;
+  }
+
+  public boolean getXboxLeftTriggerAsToggle(double threshold) {
+    return getXboxTriggerAsToggle(GenericHID.Hand.kLeft, threshold);
+  }
+
+  public boolean getXboxRightTriggerAsToggle(double threshold) {
+    return getXboxTriggerAsToggle(GenericHID.Hand.kRight, threshold);
+  }
+
+  private boolean getXboxTriggerAsToggle(GenericHID.Hand trigger, double threshold) {
+    xBoxtriggerToggleThresholdTarget[trigger.value] = threshold;
+    return xBoxtriggerToggleState[trigger.value];
   }
 
   public double getXboxXLeftAxis() {

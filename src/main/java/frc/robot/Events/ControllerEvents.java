@@ -32,7 +32,7 @@ public class ControllerEvents extends Events {
   }
 
   public boolean runIntakeConveyor() {
-    return controllers.getXboxRightTriggerAsButton(1);
+    return controllers.getXboxRightTriggerAsToggle(1);
   }
 
   public boolean runClimber() {
