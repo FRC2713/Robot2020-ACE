@@ -1,6 +1,6 @@
 package frc.robot.Events;
 
-import frc.robot.Components.Controllers;
+import frc.robot.Components.Controllers.Controllers;
 import frc.robot.ACE.Events;
 import frc.robot.RobotMap;
 
@@ -24,59 +24,59 @@ public class ControllerEvents extends Events {
   }
 
   public boolean openIntake() {
-    return controllers.getXboxLeftBumper();
+    return controllers.getDriveController().getLeftBumper();
   }
 
   public boolean closeIntake() {
-    return controllers.getXboxRightBumper();
+    return controllers.getDriveController().getRightBumper();
   }
 
   public boolean runIntakeConveyor() {
-    return controllers.getXboxRightTriggerAsToggle(1);
+    return controllers.getDriveController().getRightTriggerAsToggle(1);
   }
 
   public boolean runClimber() {
-    return controllers.getAttackButtonHeld(RobotMap.climberButton);
+    return controllers.getAuxiliaryController().getButtonHeld(RobotMap.climberButton);
   }
 
   public double getClimberSpeed() {
-    return controllers.getAttackYAxis();
+    return controllers.getAuxiliaryController().getYAxis();
   }
 
   public boolean winchUp() {
-    return controllers.getAttackButtonHeld(RobotMap.winchUpButton);
+    return controllers.getAuxiliaryController().getButtonHeld(RobotMap.winchUpButton);
   }
 
   public boolean winchDown() {
-    return controllers.getAttackButtonHeld(RobotMap.winchDownButton);
+    return controllers.getAuxiliaryController().getButtonHeld(RobotMap.winchDownButton);
   }
 
   public boolean swapPolarity() {
-    return controllers.getXboxBButton();
+    return controllers.getDriveController().getBButton();
   }
 
   public boolean swapDriveMode() {
-    return controllers.getXboxSwapDriveModeButton();
+    return controllers.getDriveController().getSwapDriveModeButton();
   }
 
   public double getSpeedForArcade() {
-    return controllers.getXboxYLeftAxis();
+    return controllers.getDriveController().getYLeftAxis();
   }
 
   public double getTurnForArcade() {
-    return controllers.getXboxXLeftAxis();
+    return controllers.getDriveController().getXLeftAxis();
   }
 
   public double getSpeedForBradford() {
-    return controllers.getXboxYLeftAxis();
+    return controllers.getDriveController().getYLeftAxis();
   }
 
   public double getTurnForBradford() {
-    return controllers.getXboxXRightAxis();
+    return controllers.getDriveController().getXRightAxis();
   }
 
   public void rumbleXbox(double intensity, int ms) {
-    controllers.rumbleXbox(intensity, ms);
+    controllers.getDriveController().rumble(intensity, ms);
   }
 
   @Override
