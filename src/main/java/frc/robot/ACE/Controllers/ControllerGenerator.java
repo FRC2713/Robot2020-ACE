@@ -40,6 +40,10 @@ public class ControllerGenerator {
     return object;
   }
 
+  private static String getControllerName(String baseName) {
+    return "Controller#" + controller_ids.toString() + ": " +  baseName ;
+  }
+
   public static void scan() {
     controller_ids = 1;
     number_of_ports = the_number_of_ports;
@@ -59,7 +63,7 @@ public class ControllerGenerator {
 
   public static Controller generate(Class<? extends Controller> controller_class, String name) {
     Controller controller = newObject(controller_class);
-    SmartDashboard.putString(name + " - " + controller_ids.toString(), "Online.");
+    SmartDashboard.putString(getControllerName(name), "Online.");
     if (controller_map.containsKey(name)) {
       ArrayList<Integer> values = controller_map.get(name);
       if (values.size() > 0 && number_of_ports > 0) {
@@ -68,10 +72,10 @@ public class ControllerGenerator {
         number_of_ports--;
         values.remove(0);
       } else {
-        SmartDashboard.putString(name + " - " + controller_ids.toString(), "No ports are available.");
+        SmartDashboard.putString(getControllerName(name), "No ports are available.");
       }
     } else {
-      SmartDashboard.putString(name + " - " + controller_ids.toString(), "No controller with that name.");
+      SmartDashboard.putString(getControllerName(name), "No controller with that name.");
     }
     controller_ids = controller_ids + 1;
     return controller;
@@ -79,7 +83,7 @@ public class ControllerGenerator {
 
   public static Controller generate(Class<? extends Controller> controller_class, String name, int port) {
     Controller controller = newObject(controller_class);
-    SmartDashboard.putString(name + " - " + controller_ids.toString(), "Online.");
+    SmartDashboard.putString(getControllerName(name), "Online.");
     if (number_of_ports > 0) {
       Joystick test = new Joystick(port);
       if (name.equals(test.getName())) {
@@ -87,10 +91,10 @@ public class ControllerGenerator {
         controller.setActive();
         number_of_ports--;
       } else {
-        SmartDashboard.putString(name + " - " + controller_ids.toString(), "Given port does not match name.");
+        SmartDashboard.putString(getControllerName(name), "Given port does not match name.");
       }
     } else {
-      SmartDashboard.putString(name + " - " + controller_ids.toString(), "No ports are available.");
+      SmartDashboard.putString(getControllerName(name), "No ports are available.");
     }
     controller_ids = controller_ids + 1;
     return controller;
