@@ -41,7 +41,11 @@ public class ControllerGenerator {
   }
 
   private static String getControllerName(String baseName) {
-    return "Controller#" + controller_ids.toString() + ": " +  baseName ;
+    return "Controller#" + controller_ids.toString() + ": " + baseName;
+  }
+
+  private static String getControllerGroupName(String groupName) {
+    return "Controller Group#" + controller_ids.toString() + ": " + groupName;
   }
 
   public static void scan() {
@@ -63,7 +67,7 @@ public class ControllerGenerator {
 
   public static Controller generate(Class<? extends Controller> controller_class, String name) {
     Controller controller = newObject(controller_class);
-    SmartDashboard.putString(getControllerName(name), "Online.");
+    SmartDashboard.putString(getControllerName(name), "Initialized.");
     if (controller_map.containsKey(name)) {
       ArrayList<Integer> values = controller_map.get(name);
       if (values.size() > 0 && number_of_ports > 0) {
@@ -81,9 +85,35 @@ public class ControllerGenerator {
     return controller;
   }
 
+  public static Controller generate(Class<? extends Controller> controller_class, String group_name, String[] names) {
+    Controller controller = newObject(controller_class);
+    for (String name : names) {
+      if (controller_map.containsKey(name)) {
+        SmartDashboard.putString(getControllerGroupName(group_name), "Initialized, with: " + name + ".");
+        ArrayList<Integer> values = controller_map.get(name);
+        if (values.size() > 0 && number_of_ports > 0) {
+          controller.initialize(name, values.get(0));
+          controller.setActive();
+          number_of_ports--;
+          values.remove(0);
+        } else {
+          SmartDashboard.putString(getControllerGroupName(group_name), "No ports are available.");
+        }
+      }
+      if (controller.getIsActive()) {
+        controller_ids = controller_ids + 1;
+        return controller;
+      }
+    }
+    SmartDashboard.putString(getControllerGroupName(group_name),
+      "No controller with a name in group.");
+    controller_ids = controller_ids + 1;
+    return controller;
+  }
+
   public static Controller generate(Class<? extends Controller> controller_class, String name, int port) {
     Controller controller = newObject(controller_class);
-    SmartDashboard.putString(getControllerName(name), "Online.");
+    SmartDashboard.putString(getControllerName(name), "Initialized.");
     if (number_of_ports > 0) {
       Joystick test = new Joystick(port);
       if (name.equals(test.getName())) {

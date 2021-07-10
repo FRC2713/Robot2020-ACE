@@ -28,7 +28,7 @@ public class Controllers extends Component {
 
   public void reset() {
     ControllerGenerator.scan();
-    driveController = (Xbox) ControllerGenerator.generate(Xbox.class, RobotMap.XBOX4_NAME);
+    driveController = (Xbox) ControllerGenerator.generate(Xbox.class, "Drive", RobotMap.ALL_XBOX_NAMES);
     auxiliaryController = (GenericController) ControllerGenerator.generate(GenericController.class, RobotMap.ATTACK_NAME);
   }
 

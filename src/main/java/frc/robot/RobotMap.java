@@ -44,6 +44,8 @@ public final class RobotMap {
   public static final String XBOX3_NAME = "Controller (Gamepad)"; //
   public static final String XBOX4_NAME = "Logitech Dual Action";
 
+  public static final String[] ALL_XBOX_NAMES = {XBOX_NAME,XBOX2_NAME,XBOX3_NAME,XBOX4_NAME};
+
   //Motors/Solenoids
   public static final int frontLeftMotorPort = 1; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
   public static final int backLeftMotorPort = 2; //NEEDS TO BE CHANGED WHEN PORTS ARE OFFICIAL
