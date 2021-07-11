@@ -10,6 +10,7 @@ public class ControllerEvents extends Events {
 
   public ControllerEvents() {
     setIsActiveForTeleOp();
+    setIsActiveForDisabled();
     addRequiredComponent(Controllers.class);
   }
 
@@ -20,7 +21,12 @@ public class ControllerEvents extends Events {
 
   @Override
   public void pollEvents() {
-    controllers.updateAllButtons();
+    controllers.update();
+  }
+
+  @Override
+  public void resetEvents() {
+    controllers.reset();
   }
 
   public boolean openIntake() {
@@ -77,10 +83,5 @@ public class ControllerEvents extends Events {
 
   public void rumbleXbox(double intensity, int ms) {
     controllers.getDriveController().rumble(intensity, ms);
-  }
-
-  @Override
-  public void resetEvents() {
-    controllers.reset();
   }
 }

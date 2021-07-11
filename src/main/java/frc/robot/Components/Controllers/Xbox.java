@@ -6,13 +6,11 @@ import frc.robot.ACE.Controllers.Controller;
 import frc.robot.AdditionalClasses.XboxImpostor;
 import frc.robot.RobotMap;
 
+import java.util.List;
+
 public class Xbox extends Controller {
 
   private XboxController xbox;
-
-  private boolean[] buttonHeldState;
-  private boolean[] buttonLastState;
-  private boolean[] buttonToggleState;
 
   private double[] TriggerValue;
   private double[] LastTriggerValue;
@@ -21,6 +19,10 @@ public class Xbox extends Controller {
   private boolean[] triggerToggleState;
   private double[] triggerToggleThresholdTarget;
 
+  public Xbox(String groupName, List<String> names) {
+    super(groupName, names);
+  }
+
   @Override
   public void initialize(String name, int port) {
     if (name.equals(RobotMap.XBOX4_NAME)) {
@@ -28,12 +30,12 @@ public class Xbox extends Controller {
     } else {
       xbox = new XboxController(port);
     }
+    setController(xbox);
+    generateState();
+    setName(name);
+  }
 
-    int count = xbox.getButtonCount() + 1;
-    buttonHeldState = new boolean[count];
-    buttonLastState = new boolean[count];
-    buttonToggleState = new boolean[count];
-
+  protected void generateCustomState() {
     TriggerValue = new double[2];
     LastTriggerValue = new double[2];
     TriggerButtonState = new boolean[2];
@@ -46,8 +48,7 @@ public class Xbox extends Controller {
 
   @Override
   public void update() {
-    updateButtons(xbox, buttonHeldState, buttonLastState);
-    updateButtonToggles(xbox, buttonToggleState, buttonHeldState, buttonLastState);
+    super.update();
     updateTriggers(xbox);
     updateTriggerToggles(triggerToggleState);
   }
@@ -83,14 +84,6 @@ public class Xbox extends Controller {
     if (TriggerValue[trigger.value] != LastTriggerValue[trigger.value])
       LastTriggerButtonState[trigger.value] = false;
     return false;
-  }
-
-  public boolean getButton(int button) {
-    return getButtonPressed(button, buttonHeldState, buttonLastState);
-  }
-
-  public boolean getButtonHeld(int button) {
-    return getButtonHeld(button, buttonHeldState);
   }
 
   public boolean getSwapDriveModeButton() {
@@ -139,7 +132,6 @@ public class Xbox extends Controller {
     return TriggerValue[GenericHID.Hand.kRight.value];
   }
 
-
   public boolean getLeftTriggerAsButton(double threshold) {
     return getTriggerAsButton(GenericHID.Hand.kLeft, threshold);
   }
@@ -180,9 +172,5 @@ public class Xbox extends Controller {
   public double getYRightAxis() {
     if (!getIsActive()) return 0.0;
     return xbox.getY(GenericHID.Hand.kRight);
-  }
-
-  public void rumble(double intensity, int ms) {
-    rumbleController(xbox, intensity, ms);
   }
 }

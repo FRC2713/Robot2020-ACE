@@ -256,6 +256,10 @@ public class RobotManager extends TimedRobot {
   }
 
   private void runInit(int mode) {
+    //make sure components know mode
+    for (Component component : component_map.values()) {
+      component.setMode(mode);
+    }
     //reset everything that is not robotPeriodic
     for (Events events : events_map.values()) {
       events.setMode(mode);
@@ -268,6 +272,10 @@ public class RobotManager extends TimedRobot {
   }
 
   private void runPeriodic(int mode) {
+    //make sure components know mode
+    for (Component component : component_map.values()) {
+      component.setMode(mode);
+    }
     for (Events events : events_map.values()) {
       events.setMode(mode);
       if (IsActiveForMode(events, mode)) events.pollEvents();

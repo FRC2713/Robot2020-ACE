@@ -2,41 +2,43 @@ package frc.robot.Components.Controllers;
 
 
 import frc.robot.ACE.Component;
-import frc.robot.ACE.Controllers.ControllerGenerator;
+import frc.robot.ACE.Controllers.Controller;
 import frc.robot.RobotMap;
 
 
 public class Controllers extends Component {
 
   private Xbox driveController;
-  private GenericController auxiliaryController;
+  private Controller auxiliaryController;
 
   public Controllers() {
     setIsActiveForTeleOp();
+    setIsActiveForDisabled();
     setComponentIsPrimaryForInput();
   }
 
   @Override
   public void initialize() {
-    reset();
+    driveController = new Xbox("Drive",RobotMap.ALL_XBOX_NAMES);
+    auxiliaryController = new Controller(RobotMap.ATTACK_NAME);
+    update();
   }
 
-  public void updateAllButtons() {
+  public void update() {
     driveController.update();
     auxiliaryController.update();
   }
 
   public void reset() {
-    ControllerGenerator.scan();
-    driveController = (Xbox) ControllerGenerator.generate(Xbox.class, "Drive", RobotMap.ALL_XBOX_NAMES);
-    auxiliaryController = (GenericController) ControllerGenerator.generate(GenericController.class, RobotMap.ATTACK_NAME);
+    driveController.resetState();
+    auxiliaryController.resetState();
   }
 
   public Xbox getDriveController() {
     return driveController;
   }
 
-  public GenericController getAuxiliaryController() {
+  public Controller getAuxiliaryController() {
     return auxiliaryController;
   }
 }

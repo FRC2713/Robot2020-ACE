@@ -5,6 +5,10 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.GenericHID;
 import frc.robot.RobotMap;
 
+import java.util.List;
+import java.util.Arrays;
+import  java.util.Collections;
+
 /**
  * System Module - Class for utility methods.
  **/
