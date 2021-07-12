@@ -65,6 +65,14 @@ public class ControllerEvents extends Events {
     return controllers.getDriveController().getSwapDriveModeButton();
   }
 
+  public double getLeftSpeedForTank() {
+    return controllers.getDriveController().getYLeftAxis();
+  }
+
+  public double getRightSpeedForTank() {
+    return controllers.getDriveController().getYRightAxis();
+  }
+
   public double getSpeedForArcade() {
     return controllers.getDriveController().getYLeftAxis();
   }

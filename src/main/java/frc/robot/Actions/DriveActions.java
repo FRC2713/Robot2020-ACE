@@ -1,5 +1,6 @@
 package frc.robot.Actions;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.ACE.Manager.RobotManager;
 import frc.robot.Components.DriveComponent;
 import frc.robot.ACE.Actions;
@@ -9,12 +10,12 @@ public class DriveActions extends Actions {
 
   private ControllerEvents controllerEvents;
   private DriveComponent driveComponent;
-  private boolean useArcadeInsteadOfBradford = false;
   private boolean polarityBoolean = false;
   private double lastLeftStickVal = 0;
   private double lastRightStickVal = 0;
   private double joystickChangeLimit = 0.3;
   private int polarity = 1;
+  private int driveMode = 2;
 
   public DriveActions() {
     setIsActiveForTeleOp();
@@ -30,11 +31,13 @@ public class DriveActions extends Actions {
   @Override
   public void runActions() {
 
-    double speed;
-    double turn;
+    double rightValue;
+    double leftValue;
+
+    final String[] driveModes = {"Arcade", "Tank", "Bradford"};
 
     if (controllerEvents.swapDriveMode()) {
-      useArcadeInsteadOfBradford = !useArcadeInsteadOfBradford;
+      driveMode = (driveMode == 2) ? 0 : driveMode + 1;
       lastRightStickVal = 0;
       lastLeftStickVal = 0;
       controllerEvents.rumbleDriveController(.5, 500);
@@ -46,30 +49,41 @@ public class DriveActions extends Actions {
       controllerEvents.rumbleDriveController(0.2, 500);
     }
 
-    if (useArcadeInsteadOfBradford) {
-      speed = driveComponent.slewLimit(controllerEvents.getSpeedForArcade(), lastLeftStickVal, joystickChangeLimit);
-      turn = driveComponent.slewLimit(controllerEvents.getTurnForArcade(), lastRightStickVal, joystickChangeLimit);
-      driveComponent.arcadeDrive(-speed * polarity, turn * polarity);
-    } else {
-      speed = driveComponent.slewLimit(controllerEvents.getSpeedForBradford(), lastLeftStickVal, joystickChangeLimit);
-      turn = driveComponent.slewLimit(controllerEvents.getTurnForBradford(), lastRightStickVal, joystickChangeLimit);
-      driveComponent.bradfordDrive(-speed * polarity, turn * polarity);
+    SmartDashboard.putString("Drive Mode is:", driveModes[driveMode]);
+
+    switch (driveModes[driveMode]) {
+      default:
+      case "Bradford":
+        leftValue = driveComponent.slewLimit(controllerEvents.getSpeedForBradford(), lastLeftStickVal, joystickChangeLimit);
+        rightValue = driveComponent.slewLimit(controllerEvents.getTurnForBradford(), lastRightStickVal, joystickChangeLimit);
+        driveComponent.bradfordDrive(-leftValue * polarity, rightValue * polarity);
+        break;
+      case "Arcade":
+        leftValue = driveComponent.slewLimit(controllerEvents.getSpeedForArcade(), lastLeftStickVal, joystickChangeLimit);
+        rightValue = driveComponent.slewLimit(controllerEvents.getTurnForArcade(), lastRightStickVal, joystickChangeLimit);
+        driveComponent.arcadeDrive(-leftValue * polarity, rightValue * polarity);
+        break;
+      case "Tank":
+        leftValue = driveComponent.slewLimit(controllerEvents.getLeftSpeedForTank(), lastLeftStickVal, joystickChangeLimit);
+        rightValue = driveComponent.slewLimit(controllerEvents.getRightSpeedForTank(), lastRightStickVal, joystickChangeLimit);
+        driveComponent.tankDrive(-leftValue * polarity, -rightValue * polarity);
+        break;
     }
 
     if (RobotManager.isSimulation()) {
       System.out.print("Dive Mode: ");
-      if (useArcadeInsteadOfBradford) {
-        System.out.println("Arcade");
+      System.out.println(driveModes[driveMode]);
+      System.out.println("Left Value: " + -leftValue * polarity);
+      if (driveMode == 1) { //tank
+        System.out.println("Right Value: " + -rightValue * polarity);
       } else {
-        System.out.println("Bradford");
+        System.out.println("Right Value: " + rightValue * polarity);
       }
-      System.out.println("Speed: " + -speed * polarity);
-      System.out.println("Turn: " + turn * polarity);
       System.out.println("Polarity: " + polarity);
     }
 
-    lastLeftStickVal = speed;
-    lastRightStickVal = turn;
+    lastLeftStickVal = leftValue;
+    lastRightStickVal = rightValue;
   }
 
   @Override

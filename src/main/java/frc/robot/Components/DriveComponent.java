@@ -125,8 +125,8 @@ public class DriveComponent extends Component {
     roboDrive.arcadeDrive(speed,turn,true);
   }
 
-  public void tankDrive(double leftspeed, double rightspeed) {
-    roboDrive.tankDrive(leftspeed,rightspeed,true);
+  public void tankDrive(double leftSpeed, double rightSpeed) {
+    roboDrive.tankDrive(leftSpeed,rightSpeed,true);
   }
 
   public void stopDrive() {
