@@ -5,10 +5,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.GenericHID;
 import frc.robot.RobotMap;
 
-import java.util.List;
-import java.util.Arrays;
-import  java.util.Collections;
-
 /**
  * System Module - Class for utility methods.
  **/
@@ -18,7 +14,6 @@ public class SM {
   public static void initializeSparkDefaults(CANSparkMax... sparks) {
     for (CANSparkMax spark : sparks) {
       spark.setSmartCurrentLimit(RobotMap.MAX_MOTOR_STALL_AMPS, RobotMap.MAX_MOTOR_FREE_AMPS);
-
     }
   }
 

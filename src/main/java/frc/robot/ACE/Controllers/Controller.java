@@ -25,7 +25,9 @@ public class Controller {
   private String groupName;
   private String[] names;
   private String name;
+  private int setPort = -1;
   private int port = -1;
+
 
   private Controller() {
     controller_id = controller_ids;
@@ -35,6 +37,12 @@ public class Controller {
   public Controller(String name) {
     this();
     this.name = name;
+  }
+
+  public Controller(String name, int port) {
+    this();
+    this.name = name;
+    this.setPort = port;
   }
 
   public Controller(String groupName, List<String> names) {
@@ -113,12 +121,39 @@ public class Controller {
     }
   }
 
+  private void scan(int setPort) {
+    Joystick test = new Joystick(setPort);
+    if (name.equals(test.getName())) {
+      has_found_name = true;
+      if (!ports[setPort]) {
+        initialize(name, setPort);
+        ports[setPort] = true;
+        setActive();
+        setPort(setPort);
+      }
+    }
+  }
+
   private void scanPorts() {
     has_found_name = false;
     is_active = false;
     if (port != -1) {
       ports[port] = false;
       port = -1;
+    }
+    if (setPort != -1) {
+      scan(setPort);
+      if (!getIsActive()) {
+        if (!has_found_name) {
+          scanReport("Given port does not match name, port: " + setPort + ".");
+        } else {
+          scanReport("Port is already in use, port: " + setPort + "." );
+        }
+        has_state = false;
+      } else{
+        scanReport("Initialized, on given port: " + setPort + "." );
+      }
+      return;
     }
     if (names != null) {
       scan(names);

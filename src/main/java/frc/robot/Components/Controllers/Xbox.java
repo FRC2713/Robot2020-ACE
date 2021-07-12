@@ -23,6 +23,14 @@ public class Xbox extends Controller {
     super(groupName, names);
   }
 
+  public Xbox(String name,int port) {
+    super(name,port);
+  }
+
+  public Xbox(String name) {
+    super(name);
+  }
+
   @Override
   public void initialize(String name, int port) {
     if (name.equals(RobotMap.XBOX4_NAME)) {

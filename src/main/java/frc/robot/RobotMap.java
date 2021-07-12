@@ -9,7 +9,6 @@ package frc.robot;
 
 
 import edu.wpi.first.wpilibj.I2C;
-import frc.robot.AdditionalClasses.SM;
 
 import java.util.List;
 
@@ -45,7 +44,7 @@ public final class RobotMap {
   public static final String ARCADE_NAME = "Mayflash Arcade Stick";
   public static final String ATTACK_NAME = "Logitech Attack 3";
   public static final String XBOX2_NAME = "Controller (Gamepad for Xbox 360)";
-  public static final String XBOX3_NAME = "Controller (Gamepad)"; //
+  public static final String XBOX3_NAME = "Controller (Gamepad)";
   public static final String XBOX4_NAME = "Logitech Dual Action";
 
   public static final List<String> ALL_XBOX_NAMES = List.of(new String[]{
