@@ -1,6 +1,6 @@
 package frc.robot.Actions;
 
-import frc.robot.ACE.RobotManager;
+import frc.robot.ACE.Manager.RobotManager;
 import frc.robot.Components.DriveComponent;
 import frc.robot.ACE.Actions;
 import frc.robot.Events.ControllerEvents;
@@ -37,13 +37,13 @@ public class DriveActions extends Actions {
       useArcadeInsteadOfBradford = !useArcadeInsteadOfBradford;
       lastRightStickVal = 0;
       lastLeftStickVal = 0;
-      controllerEvents.rumbleXbox(.5, 500);
+      controllerEvents.rumbleDriveController(.5, 500);
     }
 
     if (controllerEvents.swapPolarity()) {
       polarityBoolean = !polarityBoolean;
       polarity *= -1;
-      controllerEvents.rumbleXbox(0.2, 500);
+      controllerEvents.rumbleDriveController(0.2, 500);
     }
 
     if (useArcadeInsteadOfBradford) {

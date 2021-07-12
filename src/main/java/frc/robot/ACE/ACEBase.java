@@ -1,5 +1,7 @@
 package frc.robot.ACE;
 
+import frc.robot.ACE.Manager.RobotManager;
+
 public abstract class ACEBase {
 
   private boolean isActiveForAutonomous = false;

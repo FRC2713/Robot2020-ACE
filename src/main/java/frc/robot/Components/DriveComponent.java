@@ -6,7 +6,7 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.ACE.Component;
 import frc.robot.RobotMap;
-import frc.robot.AdditionalClasses.SM;
+import frc.robot.Utility.UtilityModule;
 
 import static frc.robot.RobotMap.REGULAR_SPEED;
 
@@ -62,7 +62,7 @@ public class DriveComponent extends Component {
       backRight = new CANSparkMax(RobotMap.backRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
 
-    SM.initializeSparkDefaults(frontLeft, frontRight);
+    UtilityModule.initializeSparkDefaults(frontLeft, frontRight);
 
     backLeft.follow(frontLeft);
     backRight.follow(frontRight);
@@ -114,7 +114,7 @@ public class DriveComponent extends Component {
   }
 
   public double slewLimit(double target, double current, double increment) {
-    return SM.slewLimit(target, current, increment);
+    return UtilityModule.slewLimit(target, current, increment);
   }
 
   public void bradfordDrive(double speed, double turn) {

@@ -1,15 +1,14 @@
-package frc.robot.AdditionalClasses;
+package frc.robot.Utility;
 
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.GenericHID;
 import frc.robot.RobotMap;
 
 /**
- * System Module - Class for utility methods.
+ * Utility Module - Class for utility methods.
  **/
 
-public class SM {
+public class UtilityModule {
 
   public static void initializeSparkDefaults(CANSparkMax... sparks) {
     for (CANSparkMax spark : sparks) {
@@ -37,44 +36,6 @@ public class SM {
       change = -increment;
     }
     return current + change;
-  }
-
-
-  /**
-   * Rumbles a given controller for a specified time
-   *
-   * @param stick Controller to rumble
-   * @param ms    Time in Milliseconds
-   */
-  public static void rumbleController(GenericHID stick, double intensity, int ms) {
-    rumbleController(stick, intensity, ms, GenericHID.RumbleType.kLeftRumble);
-  }
-
-  /**
-   * Rumbles a given controller for a specified time
-   * Left rumble is like an earthquake, right rumble is like a vibrating toothbrush
-   *
-   * @param stick      Controller to rumble
-   * @param ms         Time in Milliseconds
-   * @param rumbleType Type of rumble to use
-   */
-  public static void rumbleController(GenericHID stick, double intensity, int ms, GenericHID.RumbleType rumbleType) {
-    if (ms > 0) {
-      new Thread(() -> {
-        _setRumble(stick, intensity, rumbleType);
-        try {
-          Thread.sleep(ms);
-        } catch (InterruptedException ignored) {
-        }
-        _setRumble(stick, 0, rumbleType);
-      }).start();
-    } else {
-      _setRumble(stick, intensity, rumbleType);
-    }
-  }
-
-  private static void _setRumble(GenericHID stick, double intensity, GenericHID.RumbleType rumbleType) {
-    stick.setRumble(rumbleType, intensity);
   }
 
   /**

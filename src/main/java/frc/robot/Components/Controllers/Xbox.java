@@ -3,7 +3,7 @@ package frc.robot.Components.Controllers;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.ACE.Controllers.Controller;
-import frc.robot.AdditionalClasses.XboxImpostor;
+import frc.robot.Utility.XboxImpostor;
 import frc.robot.RobotMap;
 
 import java.util.List;

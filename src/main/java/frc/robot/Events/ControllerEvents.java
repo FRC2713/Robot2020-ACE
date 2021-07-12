@@ -81,7 +81,7 @@ public class ControllerEvents extends Events {
     return controllers.getDriveController().getXRightAxis();
   }
 
-  public void rumbleXbox(double intensity, int ms) {
+  public void rumbleDriveController(double intensity, int ms) {
     controllers.getDriveController().rumble(intensity, ms);
   }
 }

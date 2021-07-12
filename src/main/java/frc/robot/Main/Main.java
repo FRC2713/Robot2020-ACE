@@ -5,9 +5,9 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.AdditionalClasses;
+package frc.robot.Main;
 
-import frc.robot.ACE.RobotManager;
+import frc.robot.ACE.Manager.RobotManager;
 import frc.robot.RobotContainer;
 
 /**

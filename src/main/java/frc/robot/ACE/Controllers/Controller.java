@@ -3,7 +3,6 @@ package frc.robot.ACE.Controllers;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.AdditionalClasses.SM;
 
 import java.util.List;
 
@@ -85,11 +84,11 @@ public class Controller {
   }
 
   private String getControllerName(String baseName) {
-    return "ID#" + controller_id.toString() + " Controller: "+ baseName;
+    return  "Controller(" + controller_id.toString() + "): " + baseName;
   }
 
   private String getControllerGroupName(String groupName) {
-    return "ID#" + controller_id.toString() + " Controller Group: "+ groupName;
+    return  "Controller Group(" + controller_id.toString() + "): " + groupName;
   }
 
   private void scanReport(String report) {
@@ -259,9 +258,42 @@ public class Controller {
     return buttontoggleState[button];
   }
 
-  protected void rumbleController(GenericHID controller, double intensity, int ms) {
+  /**
+   * Rumbles a given controller for a specified time
+   *
+   * @param stick Controller to rumble
+   * @param ms    Time in Milliseconds
+   */
+  private void rumbleController(GenericHID stick, double intensity, int ms) {
     if (!getIsActive()) return;
-    SM.rumbleController(controller, intensity, ms);
+    rumbleController(stick, intensity, ms, GenericHID.RumbleType.kLeftRumble);
+  }
+
+  /**
+   * Rumbles a given controller for a specified time
+   * Left rumble is like an earthquake, right rumble is like a vibrating toothbrush
+   *
+   * @param stick      Controller to rumble
+   * @param ms         Time in Milliseconds
+   * @param rumbleType Type of rumble to use
+   */
+  private static void rumbleController(GenericHID stick, double intensity, int ms, GenericHID.RumbleType rumbleType) {
+    if (ms > 0) {
+      new Thread(() -> {
+        _setRumble(stick, intensity, rumbleType);
+        try {
+          Thread.sleep(ms);
+        } catch (InterruptedException ignored) {
+        }
+        _setRumble(stick, 0, rumbleType);
+      }).start();
+    } else {
+      _setRumble(stick, intensity, rumbleType);
+    }
+  }
+
+  private static void _setRumble(GenericHID stick, double intensity, GenericHID.RumbleType rumbleType) {
+    stick.setRumble(rumbleType, intensity);
   }
 
   public boolean getButton(int button) {
