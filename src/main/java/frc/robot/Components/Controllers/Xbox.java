@@ -2,7 +2,7 @@ package frc.robot.Components.Controllers;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.ACE.Controllers.Controller;
+import frc.robot.ACE.Base.Controller;
 import frc.robot.Utility.XboxImpostor;
 import frc.robot.RobotMap;
 
@@ -23,7 +23,7 @@ public class Xbox extends Controller {
     super(groupName, names);
   }
 
-  public Xbox(String name,int port) {
+  public Xbox(String name, int port) {
     super(name,port);
   }
 
@@ -62,7 +62,7 @@ public class Xbox extends Controller {
   }
 
   private void updateTriggers(XboxController controller) {
-    if (!getIsActive()) return;
+    if (!isActive()) return;
     for (int i = 0; i < 2; i++) {
       GenericHID.Hand hand = (i == 0) ? GenericHID.Hand.kLeft : GenericHID.Hand.kRight;
       LastTriggerValue[i] = TriggerValue[i];
@@ -72,7 +72,7 @@ public class Xbox extends Controller {
   }
 
   private void updateTriggerToggles(boolean[] toggleState) {
-    if (!getIsActive()) return;
+    if (!isActive()) return;
     for (int i = 0; i < 2; i++) {
       GenericHID.Hand hand = (i == 0) ? GenericHID.Hand.kLeft : GenericHID.Hand.kRight;
       if (getTriggerAsButton(hand, triggerToggleThresholdTarget[i]) && !toggleState[i]) {
@@ -84,7 +84,7 @@ public class Xbox extends Controller {
   }
 
   private boolean getTriggerAsButton(GenericHID.Hand trigger, double threshold) {
-    if (!getIsActive()) return false;
+    if (!isActive()) return false;
     if (TriggerValue[trigger.value] >= threshold && !TriggerButtonState[trigger.value]) {
       LastTriggerButtonState[trigger.value] = true;
       return true;
@@ -131,12 +131,12 @@ public class Xbox extends Controller {
   }
 
   public double getLeftTrigger() {
-    if (!getIsActive()) return 0.0;
+    if (!isActive()) return 0.0;
     return TriggerValue[GenericHID.Hand.kLeft.value];
   }
 
   public double getRightTrigger() {
-    if (!getIsActive()) return 0.0;
+    if (!isActive()) return 0.0;
     return TriggerValue[GenericHID.Hand.kRight.value];
   }
 
@@ -157,28 +157,28 @@ public class Xbox extends Controller {
   }
 
   private boolean getTriggerAsToggle(GenericHID.Hand trigger, double threshold) {
-    if (!getIsActive()) return false;
+    if (!isActive()) return false;
     triggerToggleThresholdTarget[trigger.value] = threshold;
     return triggerToggleState[trigger.value];
   }
 
   public double getXLeftAxis() {
-    if (!getIsActive()) return 0.0;
+    if (!isActive()) return 0.0;
     return xbox.getX(GenericHID.Hand.kLeft);
   }
 
   public double getXRightAxis() {
-    if (!getIsActive()) return 0.0;
+    if (!isActive()) return 0.0;
     return xbox.getX(GenericHID.Hand.kRight);
   }
 
   public double getYLeftAxis() {
-    if (!getIsActive()) return 0.0;
+    if (!isActive()) return 0.0;
     return xbox.getY(GenericHID.Hand.kLeft);
   }
 
   public double getYRightAxis() {
-    if (!getIsActive()) return 0.0;
+    if (!isActive()) return 0.0;
     return xbox.getY(GenericHID.Hand.kRight);
   }
 }

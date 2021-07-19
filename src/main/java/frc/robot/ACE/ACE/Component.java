@@ -1,4 +1,6 @@
-package frc.robot.ACE;
+package frc.robot.ACE.ACE;
+
+import frc.robot.ACE.Base.ACEBase;
 
 public abstract class Component extends ACEBase {
   private int component_type = 0;
@@ -11,11 +13,11 @@ public abstract class Component extends ACEBase {
     component_type = 2;
   }
 
-  protected final boolean getComponentIsPrimaryForInput() {
+  public final boolean getComponentIsPrimaryForInput() {
     return component_type == 1 ? true : false;
   }
 
-  protected final boolean getComponentIsPrimaryForOutput() {
+  public final boolean getComponentIsPrimaryForOutput() {
     return component_type == 2 ? true : false;
   }
 

@@ -2,10 +2,10 @@ package frc.robot.ACE.Manager;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.RobotBase;
-import frc.robot.ACE.ACEBase;
-import frc.robot.ACE.Actions;
-import frc.robot.ACE.Component;
-import frc.robot.ACE.Events;
+import frc.robot.ACE.Base.ACEBase;
+import frc.robot.ACE.ACE.Actions;
+import frc.robot.ACE.ACE.Component;
+import frc.robot.ACE.ACE.Events;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -65,30 +65,30 @@ public class RobotManager extends TimedRobot {
     }
   }
 
-  public static synchronized Actions spawnActions(Actions spawner, Class<? extends Actions> actions) {
+  public static synchronized Actions manageActions(Actions manager, Class<? extends Actions> actions) {
     Actions a = (Actions) defaultInstance.newObject(actions);
-    if (spawner.getIsActiveForAutonomous() && !a.getIsActiveForAutonomous()) {
-      throw new IllegalArgumentException("Spawned actions are not active for: " + "Autonomous");
+    if (manager.getIsActiveForAutonomous() && !a.getIsActiveForAutonomous()) {
+      throw new IllegalArgumentException("Managed actions are not active for: " + "Autonomous");
     }
 
-    if (spawner.getIsActiveForTeleOp() && !a.getIsActiveForTeleOp()) {
-      throw new IllegalArgumentException("Spawned actions are not active for: " + "TeleOp");
+    if (manager.getIsActiveForTeleOp() && !a.getIsActiveForTeleOp()) {
+      throw new IllegalArgumentException("Managed actions are not active for: " + "TeleOp");
     }
 
-    if (spawner.getIsActiveForDisabled() && !a.getIsActiveForDisabled()) {
-      throw new IllegalArgumentException("Spawned actions are not active for: " + "Disabled");
+    if (manager.getIsActiveForDisabled() && !a.getIsActiveForDisabled()) {
+      throw new IllegalArgumentException("Managed actions are not active for: " + "Disabled");
     }
 
-    if (spawner.getIsActiveForTest() && !a.getIsActiveForTest()) {
-      throw new IllegalArgumentException("Spawned actions are not active for: " + "Test");
+    if (manager.getIsActiveForTest() && !a.getIsActiveForTest()) {
+      throw new IllegalArgumentException("Managed actions are not active for: " + "Test");
     }
 
-    if (spawner.getIsActiveForPeriodic() && !a.getIsActiveForPeriodic()) {
-      throw new IllegalArgumentException("Spawned actions are not active for: " + "Periodic");
+    if (manager.getIsActiveForPeriodic() && !a.getIsActiveForPeriodic()) {
+      throw new IllegalArgumentException("Managed actions are not active for: " + "Periodic");
     }
 
-    if (spawner.getIsActiveForSimulation() && !a.getIsActiveForSimulation()) {
-      throw new IllegalArgumentException("Spawned actions are not active for: " + "Simulation");
+    if (manager.getIsActiveForSimulation() && !a.getIsActiveForSimulation()) {
+      throw new IllegalArgumentException("Managed actions are not active for: " + "Simulation");
     }
 
     a.doInitialization();
@@ -127,7 +127,18 @@ public class RobotManager extends TimedRobot {
     return events;
   }
 
-  public static synchronized Component getComponent(ACEBase getter, String name) {
+  public static synchronized Component getComponent(int type, ACEBase getter, String name) {
+    Component component = RobotManager.getComponent(getter, name);
+    if (type == 1 && component.getComponentIsPrimaryForOutput()) {
+      throw new IllegalArgumentException("Events can not use components marked as 'PrimaryForOutput'");
+    }
+    if (type == 2 && component.getComponentIsPrimaryForInput()) {
+      throw new IllegalArgumentException("Actions can not use components marked as 'PrimaryForInput'");
+    }
+    return component;
+  }
+
+  private static synchronized Component getComponent(ACEBase getter, String name) {
     if (!defaultInstance.component_map.containsKey(name)) {
       throw new IllegalArgumentException("No Component has the name of: " + name);
     }

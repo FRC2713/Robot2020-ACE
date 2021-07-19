@@ -3,7 +3,7 @@ package frc.robot.Components;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import frc.robot.ACE.Component;
+import frc.robot.ACE.ACE.Component;
 import frc.robot.RobotMap;
 import frc.robot.Utility.UtilityModule;
 

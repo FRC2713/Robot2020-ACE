@@ -1,4 +1,4 @@
-package frc.robot.ACE.Controllers;
+package frc.robot.ACE.Base;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -142,7 +142,7 @@ public class Controller {
     }
     if (setPort != -1) {
       scan(setPort);
-      if (!getIsActive()) {
+      if (!isActive()) {
         if (!has_found_name) {
           scanReport("Given port does not match name, port: " + setPort + ".");
         } else {
@@ -156,7 +156,7 @@ public class Controller {
     }
     if (names != null) {
       scan(names);
-      if (!getIsActive()) {
+      if (!isActive()) {
         if (!has_found_name) {
           scanReport("No controller with a name in group.");
         } else {
@@ -168,7 +168,7 @@ public class Controller {
       }
     } else {
       scan(name);
-      if (!getIsActive()) {
+      if (!isActive()) {
         if (!has_found_name) {
           scanReport("No controller with that name.");
         } else {
@@ -185,7 +185,7 @@ public class Controller {
     has_state = false;
   }
 
-  public boolean getIsActive() {
+  public boolean isActive() {
     return is_active;
   }
 
@@ -220,7 +220,7 @@ public class Controller {
   }
 
   protected void updateButtons(GenericHID controller, boolean[] buttonHeldState, boolean[] buttonLastState) {
-    if (!getIsActive()) return;
+    if (!isActive()) return;
     int count = buttonHeldState.length;
     for (int i = 1; i < count; i++) {
       buttonLastState[i] = buttonHeldState[i];
@@ -229,7 +229,7 @@ public class Controller {
   }
 
   protected void updateButtonToggles(GenericHID controller, boolean[] buttontoggleState, boolean[] buttonHeldState, boolean[] buttonLastState) {
-    if (!getIsActive()) return;
+    if (!isActive()) return;
     int count = buttontoggleState.length;
     for (int i = 1; i < count; i++) {
       if (getButtonPressed(i, buttonHeldState, buttonLastState) && !buttontoggleState[i]) {
@@ -241,19 +241,19 @@ public class Controller {
   }
 
   protected boolean getButtonPressed(int button, boolean[] buttonHeldState, boolean[] buttonLastState) {
-    if (!getIsActive()) return false;
+    if (!isActive()) return false;
     if (button >= buttonHeldState.length) return false;
     return buttonHeldState[button] && !buttonLastState[button];
   }
 
   protected boolean getButtonHeld(int button, boolean[] buttonHeldState) {
-    if (!getIsActive()) return false;
+    if (!isActive()) return false;
     if (button >= buttonHeldState.length) return false;
     return buttonHeldState[button];
   }
 
   protected boolean getButtonToggle(int button, boolean[] buttontoggleState) {
-    if (!getIsActive()) return false;
+    if (!isActive()) return false;
     if (button >= buttontoggleState.length) return false;
     return buttontoggleState[button];
   }
@@ -265,7 +265,7 @@ public class Controller {
    * @param ms    Time in Milliseconds
    */
   private void rumbleController(GenericHID stick, double intensity, int ms) {
-    if (!getIsActive()) return;
+    if (!isActive()) return;
     rumbleController(stick, intensity, ms, GenericHID.RumbleType.kLeftRumble);
   }
 
@@ -305,12 +305,12 @@ public class Controller {
   }
 
   public double getXAxis() {
-    if (!getIsActive()) return 0.0;
+    if (!isActive()) return 0.0;
     return controller.getX();
   }
 
   public double getYAxis() {
-    if (!getIsActive()) return 0.0;
+    if (!isActive()) return 0.0;
     return controller.getY();
   }
 

@@ -1,5 +1,6 @@
-package frc.robot.ACE;
+package frc.robot.ACE.Base;
 
+import frc.robot.ACE.ACE.Component;
 import frc.robot.ACE.Manager.RobotManager;
 
 public abstract class ACEBase {
@@ -105,14 +106,7 @@ public abstract class ACEBase {
   }
 
   protected final Component getComponent(int type, String name) {
-    Component component = RobotManager.getComponent(this, name);
-    if (type == 1 && component.getComponentIsPrimaryForOutput()) {
-      throw new IllegalArgumentException("Events can not use components marked as 'PrimaryForOutput'");
-    }
-    if (type == 2 && component.getComponentIsPrimaryForInput()) {
-      throw new IllegalArgumentException("Actions can not use components marked as 'PrimaryForInput'");
-    }
-    return component;
+    return RobotManager.getComponent(type,this,name);
   }
 
   protected final void addRequiredComponent(Class<? extends Component> component) {

@@ -1,7 +1,7 @@
 package frc.robot.Components;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import frc.robot.ACE.Component;
+import frc.robot.ACE.ACE.Component;
 import frc.robot.RobotMap;
 
 public class ConfigureBed extends Component {
