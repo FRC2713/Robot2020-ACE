@@ -1,8 +1,7 @@
 package frc.robot.Events;
 
-import frc.robot.ACE.ACE.Events;
+import frc.robot.ACE.Events;
 import frc.robot.Components.GyroComponent;
-import frc.robot.Components.PixyComponent;
 
 public class GyroEvents extends Events {
 

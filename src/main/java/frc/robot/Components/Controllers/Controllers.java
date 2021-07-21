@@ -1,8 +1,8 @@
 package frc.robot.Components.Controllers;
 
 
-import frc.robot.ACE.ACE.Component;
-import frc.robot.ACE.Base.Controller;
+import frc.robot.ACE.Component;
+import frc.robot.ACE.Foundation.Controller;
 import frc.robot.RobotMap;
 
 

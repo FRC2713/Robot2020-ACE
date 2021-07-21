@@ -1,7 +1,7 @@
 package frc.robot.Components;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import frc.robot.ACE.ACE.Component;
+import frc.robot.ACE.Component;
 
 public class GyroComponent extends Component {
 

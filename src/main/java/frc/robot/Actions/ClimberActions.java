@@ -1,7 +1,7 @@
 package frc.robot.Actions;
 
 import frc.robot.Components.ClimberComponent;
-import frc.robot.ACE.ACE.Actions;
+import frc.robot.ACE.Actions;
 import frc.robot.Events.ControllerEvents;
 
 public class ClimberActions extends Actions {

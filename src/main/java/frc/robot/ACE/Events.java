@@ -1,7 +1,6 @@
-package frc.robot.ACE.ACE;
+package frc.robot.ACE;
 
-import frc.robot.ACE.Base.ACEBase;
-import frc.robot.ACE.ACE.Component;
+import frc.robot.ACE.Foundation.ACEBase;
 
 public abstract class Events extends ACEBase {
 

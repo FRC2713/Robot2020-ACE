@@ -2,7 +2,7 @@ package frc.robot.Components;
 
 import edu.wpi.first.hal.util.UncleanStatusException;
 import edu.wpi.first.wpilibj.SerialPort;
-import frc.robot.ACE.ACE.Component;
+import frc.robot.ACE.Component;
 
 
 public class ArduinoSensors extends Component {

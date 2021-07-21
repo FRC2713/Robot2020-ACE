@@ -5,10 +5,10 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.robot.RobotMap;
 
 /**
- * Utility Module - Class for utility methods.
+ * Utility - Class for utility methods.
  **/
 
-public class UtilityModule {
+public class Utility {
 
   public static void initializeSparkDefaults(CANSparkMax... sparks) {
     for (CANSparkMax spark : sparks) {

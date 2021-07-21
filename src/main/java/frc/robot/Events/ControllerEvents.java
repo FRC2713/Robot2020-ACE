@@ -1,7 +1,7 @@
 package frc.robot.Events;
 
 import frc.robot.Components.Controllers.Controllers;
-import frc.robot.ACE.ACE.Events;
+import frc.robot.ACE.Events;
 import frc.robot.RobotMap;
 
 public class ControllerEvents extends Events {

@@ -1,7 +1,6 @@
-package frc.robot.ACE.Base;
+package frc.robot.ACE.Foundation;
 
-import frc.robot.ACE.ACE.Component;
-import frc.robot.ACE.Manager.RobotManager;
+import frc.robot.ACE.Component;
 
 public abstract class ACEBase {
 

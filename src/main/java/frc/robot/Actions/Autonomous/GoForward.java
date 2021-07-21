@@ -1,7 +1,7 @@
 package frc.robot.Actions.Autonomous;
 
 import frc.robot.Components.DriveComponent;
-import frc.robot.ACE.ACE.Actions;
+import frc.robot.ACE.Actions;
 
 public class GoForward extends Actions {
 
@@ -9,6 +9,10 @@ public class GoForward extends Actions {
   private double accumulatedDist = 0;
   private double[] old_E_Value;
   private double targetDist = 0;
+
+  public GoForward() {
+    setIsActiveForAutonomous();
+  }
 
   @Override
   public void initialize() {

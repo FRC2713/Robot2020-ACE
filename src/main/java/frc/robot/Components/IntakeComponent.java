@@ -3,9 +3,9 @@ package frc.robot.Components;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import frc.robot.ACE.ACE.Component;
+import frc.robot.ACE.Component;
 import frc.robot.RobotMap;
-import frc.robot.Utility.UtilityModule;
+import frc.robot.Utility.Utility;
 
 import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.kForward;
 import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.kReverse;
@@ -28,8 +28,8 @@ public class IntakeComponent extends Component {
 
   @Override
   public void initialize() {
-    gateSolenoid = UtilityModule.getDoubleSolenoid(RobotMap.IntakeGateUpNode, RobotMap.IntakeGateDownNode);
-    intakeArmSolenoid = UtilityModule.getDoubleSolenoid(RobotMap.intakeArmUpNode, RobotMap.intakeArmDownNode);
+    gateSolenoid = Utility.getDoubleSolenoid(RobotMap.IntakeGateUpNode, RobotMap.IntakeGateDownNode);
+    intakeArmSolenoid = Utility.getDoubleSolenoid(RobotMap.intakeArmUpNode, RobotMap.intakeArmDownNode);
     intakeMotor = new CANSparkMax(RobotMap.intakeTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
     intakeArmMotor = new CANSparkMax(RobotMap.intakeArmTalonPort, CANSparkMaxLowLevel.MotorType.kBrushed);
   }

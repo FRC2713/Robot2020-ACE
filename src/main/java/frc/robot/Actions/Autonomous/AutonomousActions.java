@@ -1,13 +1,13 @@
 package frc.robot.Actions.Autonomous;
 
-import frc.robot.ACE.ACE.Actions;
+import frc.robot.ACE.Actions;
 import frc.robot.Components.DriveComponent;
 
 public class AutonomousActions extends Actions {
 
   public AutonomousActions() {
     setIsActiveForAutonomous();
-    //Required components for an added actions need to be added here
+    //Required components for action group actions need to be added here
     addRequiredComponent(DriveComponent.class);
   }
 
@@ -20,7 +20,6 @@ public class AutonomousActions extends Actions {
   @Override
   public void runActions() {
     runActionGroup();
-
   }
 
   @Override

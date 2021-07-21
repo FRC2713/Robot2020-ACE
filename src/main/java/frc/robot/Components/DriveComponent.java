@@ -3,11 +3,10 @@ package frc.robot.Components;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import frc.robot.ACE.ACE.Component;
+import frc.robot.ACE.Component;
 import frc.robot.RobotMap;
-import frc.robot.Utility.UtilityModule;
+import frc.robot.Utility.Utility;
 
 import static frc.robot.RobotMap.REGULAR_SPEED;
 
@@ -63,7 +62,7 @@ public class DriveComponent extends Component {
       backRight = new CANSparkMax(RobotMap.backRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
 
-    UtilityModule.initializeSparkDefaults(frontLeft, frontRight);
+    Utility.initializeSparkDefaults(frontLeft, frontRight);
 
     backLeft.follow(frontLeft);
     backRight.follow(frontRight);
@@ -101,8 +100,7 @@ public class DriveComponent extends Component {
     double traveledUnits = (current_E_Value - old_E_Value[0]);
     double traveledInches = toInches(traveledUnits);
     old_E_Value[0] = current_E_Value;
-    System.out.println();
-    System.out.println("Traveled " + traveledInches + "Inches");
+    System.out.println("Traveled: " + traveledInches + " Inches");
     return traveledInches;
   }
 
@@ -115,7 +113,7 @@ public class DriveComponent extends Component {
   }
 
   public double slewLimit(double target, double current, double increment) {
-    return UtilityModule.slewLimit(target, current, increment);
+    return Utility.slewLimit(target, current, increment);
   }
 
   public void bradfordDrive(double speed, double turn) {

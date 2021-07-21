@@ -1,8 +1,8 @@
 package frc.robot.Actions;
 
-import frc.robot.ACE.Manager.RobotManager;
+import frc.robot.ACE.Foundation.RobotManager;
 import frc.robot.Components.IntakeComponent;
-import frc.robot.ACE.ACE.Actions;
+import frc.robot.ACE.Actions;
 import frc.robot.Events.ControllerEvents;
 
 public class IntakeActions extends Actions {

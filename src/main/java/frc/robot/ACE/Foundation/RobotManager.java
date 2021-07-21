@@ -1,11 +1,10 @@
-package frc.robot.ACE.Manager;
+package frc.robot.ACE.Foundation;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.RobotBase;
-import frc.robot.ACE.Base.ACEBase;
-import frc.robot.ACE.ACE.Actions;
-import frc.robot.ACE.ACE.Component;
-import frc.robot.ACE.ACE.Events;
+import frc.robot.ACE.Actions;
+import frc.robot.ACE.Component;
+import frc.robot.ACE.Events;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -65,34 +64,32 @@ public class RobotManager extends TimedRobot {
     }
   }
 
-  public static synchronized Actions manageActions(Actions manager, Class<? extends Actions> actions) {
-    Actions a = (Actions) defaultInstance.newObject(actions);
-    if (manager.getIsActiveForAutonomous() && !a.getIsActiveForAutonomous()) {
-      throw new IllegalArgumentException("Managed actions are not active for: " + "Autonomous");
+  public static synchronized Actions verifyActions(Actions manager, Actions actions) {
+    if (manager.getIsActiveForAutonomous() && !actions.getIsActiveForAutonomous()) {
+      throw new IllegalArgumentException("actionGroup actions are not active for: " + "Autonomous");
     }
 
-    if (manager.getIsActiveForTeleOp() && !a.getIsActiveForTeleOp()) {
-      throw new IllegalArgumentException("Managed actions are not active for: " + "TeleOp");
+    if (manager.getIsActiveForTeleOp() && !actions.getIsActiveForTeleOp()) {
+      throw new IllegalArgumentException("actionGroup actions are not active for: " + "TeleOp");
     }
 
-    if (manager.getIsActiveForDisabled() && !a.getIsActiveForDisabled()) {
-      throw new IllegalArgumentException("Managed actions are not active for: " + "Disabled");
+    if (manager.getIsActiveForDisabled() && !actions.getIsActiveForDisabled()) {
+      throw new IllegalArgumentException("actionGroup actions are not active for: " + "Disabled");
     }
 
-    if (manager.getIsActiveForTest() && !a.getIsActiveForTest()) {
-      throw new IllegalArgumentException("Managed actions are not active for: " + "Test");
+    if (manager.getIsActiveForTest() && !actions.getIsActiveForTest()) {
+      throw new IllegalArgumentException("actionGroup actions are not active for: " + "Test");
     }
 
-    if (manager.getIsActiveForPeriodic() && !a.getIsActiveForPeriodic()) {
-      throw new IllegalArgumentException("Managed actions are not active for: " + "Periodic");
+    if (manager.getIsActiveForPeriodic() && !actions.getIsActiveForPeriodic()) {
+      throw new IllegalArgumentException("actionGroup actions are not active for: " + "Periodic");
     }
 
-    if (manager.getIsActiveForSimulation() && !a.getIsActiveForSimulation()) {
-      throw new IllegalArgumentException("Managed actions are not active for: " + "Simulation");
+    if (manager.getIsActiveForSimulation() && !actions.getIsActiveForSimulation()) {
+      throw new IllegalArgumentException("actionGroup actions are not active for: " + "Simulation");
     }
-
-    a.doInitialization();
-    return a;
+    actions.doInitialization();
+    return actions;
   }
 
   public static synchronized Events getEvents(ACEBase getter, String name) {

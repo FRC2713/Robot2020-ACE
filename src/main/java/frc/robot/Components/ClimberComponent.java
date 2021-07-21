@@ -2,7 +2,7 @@ package frc.robot.Components;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-import frc.robot.ACE.ACE.Component;
+import frc.robot.ACE.Component;
 import frc.robot.RobotMap;
 
 public class ClimberComponent extends Component {
