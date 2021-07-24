@@ -24,7 +24,7 @@ public class Controller {
   private String groupName;
   private String[] names;
   private String name;
-  private int setPort = -1;
+  private int set_port = -1;
   private int port = -1;
 
 
@@ -41,7 +41,7 @@ public class Controller {
   public Controller(String name, int port) {
     this();
     this.name = name;
-    this.setPort = port;
+    this.set_port = port;
   }
 
   public Controller(String groupName, List<String> names) {
@@ -140,17 +140,17 @@ public class Controller {
       ports[port] = false;
       port = -1;
     }
-    if (setPort != -1) {
-      scan(setPort);
+    if (set_port != -1) {
+      scan(set_port);
       if (!isActive()) {
         if (!has_found_name) {
-          scanReport("Given port does not match name, port: " + setPort + ".");
+          scanReport("Given port does not match name, port: " + set_port + ".");
         } else {
-          scanReport("Port is already in use, port: " + setPort + "." );
+          scanReport("Port is already in use, port: " + set_port + "." );
         }
         has_state = false;
       } else{
-        scanReport("Initialized, on given port: " + setPort + "." );
+        scanReport("Initialized, on given port: " + set_port + "." );
       }
       return;
     }
