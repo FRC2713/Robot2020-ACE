@@ -5,7 +5,7 @@ import frc.robot.ACE.Actions;
 import frc.robot.Components.DriveComponent;
 import frc.robot.Events.GyroEvents;
 
-public class GyroTurnLeft extends Actions {
+public class GyroTurnRight extends Actions {
 
   private double targetAngle;
   private double currentAngle;
@@ -18,7 +18,7 @@ public class GyroTurnLeft extends Actions {
   private DriveComponent driveComponent;
   private GyroEvents gyroEvents;
 
-  public GyroTurnLeft() {
+  public GyroTurnRight() {
     setIsActiveForAutonomous();
   }
 
@@ -39,22 +39,22 @@ public class GyroTurnLeft extends Actions {
 
   @Override
   public void runActions() {
-    if (Math.abs(currentAngle) >= targetAngle) {
+    if (currentAngle >= targetAngle) {
       driveComponent.stopDrive();
       setAreActionsDone(true);
       Timer.delay(0.25);
       return;
     }
     currentAngle = gyroEvents.getAngle() - originalAngle;
-    if (Math.abs(currentAngle) < (targetAngle - SLEW_DIST)) {
-      if (leftSpeed > -0.5) {
-        leftSpeed -= ACCEL_CONSTANT;
-        rightSpeed += ACCEL_CONSTANT;
-      }
-    } else {
-      if (leftSpeed < ACCEL_CONSTANT) {
+    if (currentAngle < targetAngle - SLEW_DIST) {
+      if (leftSpeed < 0.5) {
         leftSpeed += ACCEL_CONSTANT;
         rightSpeed -= ACCEL_CONSTANT;
+      }
+    } else {
+      if (leftSpeed > ACCEL_CONSTANT) {
+        leftSpeed -= ACCEL_CONSTANT;
+        rightSpeed += ACCEL_CONSTANT;
       } else {
         currentAngle = targetAngle + 1;
       }

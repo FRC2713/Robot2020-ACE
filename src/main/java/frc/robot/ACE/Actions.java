@@ -10,17 +10,14 @@ import java.util.function.Supplier;
 
 public abstract class Actions extends ACEBase {
 
-  public abstract void runActions();
-
-  public abstract void interruptActions();
-
   private ActionGroup actionGroup = new ActionGroup(this);
   private boolean are_actions_done = false;
 
   private class ActionGroup {
     private final ArrayList<Actions> actionGroup = new ArrayList<>();
     private final Map<String, ActionGroup> actionGroupMap = new LinkedHashMap<>();
-    private Actions managerActions;
+    private boolean is_action_group_done = false;
+    private final Actions managerActions;
     private Actions nowActions;
     private int index = -1;
 
@@ -30,6 +27,10 @@ public abstract class Actions extends ACEBase {
 
     private Actions verifyActions(Actions actions) {
       return RobotManager.verifyActions(managerActions, actions);
+    }
+
+    public boolean isActionGroupDone() {
+      return is_action_group_done;
     }
 
     public ActionGroup get(String groupName) {
@@ -49,6 +50,7 @@ public abstract class Actions extends ACEBase {
       for (ActionGroup actionGroup : actionGroupMap.values()) {
         actionGroup.resetActionGroup();
       }
+      is_action_group_done = false;
       nowActions = null;
       index = -1;
     }
@@ -59,11 +61,13 @@ public abstract class Actions extends ACEBase {
         try {
           nextActions = actionGroup.get(++index);
         } catch (IndexOutOfBoundsException e) {
+          is_action_group_done = true;
           nextActions = null;
+          index--;
         }
         if (nextActions != null) nowActions = nextActions;
       }
-      nowActions.runActions();
+     if (nowActions != null) nowActions.runActions();
     }
 
     public Actions addAction(Supplier<Actions> actions) {
@@ -71,6 +75,11 @@ public abstract class Actions extends ACEBase {
       actionGroup.add(verifiedActions);
       return verifiedActions;
     }
+  }
+
+  public abstract void runActions();
+
+  public void interruptActions() {
   }
 
   public void resetActions() {
@@ -89,6 +98,14 @@ public abstract class Actions extends ACEBase {
 
   public void setAreActionsDone(boolean done) {
     are_actions_done = done;
+  }
+
+  public boolean isActionGroupDone() {
+    return isActionGroupDone(null);
+  }
+
+  public boolean isActionGroupDone(String groupName) {
+    return actionGroup.get(groupName).isActionGroupDone();
   }
 
   protected final <T> T addActions(Supplier<T> actions) {

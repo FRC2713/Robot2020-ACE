@@ -104,6 +104,18 @@ public class DriveComponent extends Component {
     return traveledInches;
   }
 
+  public double  accumulatedEncoderDistance(int encoder, double old_E_Value[]) {
+    double current_E_Value = getEncoder(encoder).getPosition();
+    double traveledUnits = (current_E_Value - old_E_Value[0]);
+    double traveledInches = toInches(traveledUnits);
+    System.out.println("Traveled: " + traveledInches + " Inches");
+    return traveledInches;
+  }
+
+  public void resetEncoder(int encoder, double old_E_Value[]) {
+    old_E_Value[0] = getEncoder(encoder).getPosition();
+  }
+
   private double toInches(double encoderValue)  {
     return (encoderValue * RobotMap.getEncoderConstant());
   }

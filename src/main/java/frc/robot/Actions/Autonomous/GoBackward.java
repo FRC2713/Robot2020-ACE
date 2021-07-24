@@ -1,9 +1,9 @@
 package frc.robot.Actions.Autonomous;
 
-import frc.robot.Components.DriveComponent;
 import frc.robot.ACE.Actions;
+import frc.robot.Components.DriveComponent;
 
-public class GoForward extends Actions {
+public class GoBackward extends Actions {
 
 
   static final double ACCEL_CONSTANT = 0.005; //0.02 will bring speed from 0 to 1 in 1 second; scales linearly
@@ -16,7 +16,7 @@ public class GoForward extends Actions {
 
   private DriveComponent driveComponent;
 
-  public GoForward() {
+  public GoBackward() {
     setIsActiveForAutonomous();
   }
 
@@ -37,7 +37,7 @@ public class GoForward extends Actions {
 
   @Override
   public void runActions() {
-    if (accumulatedDist >= targetDist) {
+    if (accumulatedDist > targetDist) {
       driveComponent.stopDrive();
       setAreActionsDone(true);
       return;
@@ -45,14 +45,14 @@ public class GoForward extends Actions {
     System.out.println("Hello: " + targetDist);
     accumulatedDist = Math.abs(driveComponent.toFeet(driveComponent.accumulatedEncoderDistance(1, old_E_Value)));
     if (accumulatedDist < targetDist - SLEW_DIST) {
-      if (leftSpeed < 1) {
-        leftSpeed += ACCEL_CONSTANT;
-        rightSpeed += ACCEL_CONSTANT;
+      if (leftSpeed > -1) {
+        leftSpeed -= ACCEL_CONSTANT;
+        rightSpeed -= ACCEL_CONSTANT;
       }
     } else {
       if (leftSpeed > ACCEL_CONSTANT) {
-        leftSpeed -= ACCEL_CONSTANT;
-        rightSpeed -= ACCEL_CONSTANT;
+        leftSpeed += ACCEL_CONSTANT;
+        rightSpeed += ACCEL_CONSTANT;
       } else {
         accumulatedDist = targetDist + 1;
       }

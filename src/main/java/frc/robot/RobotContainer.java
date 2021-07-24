@@ -12,6 +12,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     RobotManager.addEvents(GyroEvents.class);
+    RobotManager.addEvents(AutonomousSelector.class);
     RobotManager.addEvents(ControllerEvents.class);
     RobotManager.addEvents(ArduinoEvents.class);
     RobotManager.addEvents(ConfigEvents.class);

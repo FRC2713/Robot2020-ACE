@@ -15,7 +15,6 @@ public class GyroEvents extends Events {
   @Override
   public void initialize() {
     gyroComponent = (GyroComponent) getComponent("GyroComponent");
-    //gyroComponent.calibrate();
   }
 
   public double getAngle() {
