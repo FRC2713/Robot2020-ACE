@@ -41,11 +41,19 @@ public class Controller {
   public Controller(String name, int port) {
     this();
     this.name = name;
-    this.set_port = port;
+    verifySetPort(port);
   }
 
   public Controller(String groupName, List<String> names) {
     this();
+    this.groupName = groupName;
+    this.names = new String[names.size()];
+    this.names = names.toArray(this.names);
+  }
+
+  public Controller(String groupName, List<String> names, int port) {
+    this();
+    verifySetPort(port);
     this.groupName = groupName;
     this.names = new String[names.size()];
     this.names = names.toArray(this.names);
@@ -57,6 +65,11 @@ public class Controller {
 
   protected GenericHID getController() {
     return controller;
+  }
+
+  private void verifySetPort(int set_port) {
+    if (set_port < 0 || set_port > 5) set_port = 0;
+    this.set_port = set_port;
   }
 
   protected void setPort(int port) {
@@ -122,6 +135,23 @@ public class Controller {
 
   private void scan(int setPort) {
     Joystick test = new Joystick(setPort);
+
+    if (names != null) {
+      for (String name : names) {
+        if (name.equals(test.getName())) {
+          has_found_name = true;
+          if (!ports[setPort]) {
+            initialize(name, setPort);
+            ports[setPort] = true;
+            setActive();
+            setPort(setPort);
+            return;
+          }
+        }
+      }
+      return;
+    }
+
     if (name.equals(test.getName())) {
       has_found_name = true;
       if (!ports[setPort]) {
@@ -144,7 +174,11 @@ public class Controller {
       scan(set_port);
       if (!isActive()) {
         if (!has_found_name) {
-          scanReport("Given port does not match name, port: " + set_port + ".");
+          if (names == null) {
+            scanReport("Given port does not match name, port: " + set_port + ".");
+          } else {
+            scanReport("Given port does not match name in group, port: " + set_port + ".");
+          }
         } else {
           scanReport("Port is already in use, port: " + set_port + "." );
         }

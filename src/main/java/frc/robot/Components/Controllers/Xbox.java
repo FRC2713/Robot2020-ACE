@@ -23,6 +23,10 @@ public class Xbox extends Controller {
     super(groupName, names);
   }
 
+  public Xbox(String groupName, List<String> names, int port) {
+    super(groupName, names, port);
+  }
+
   public Xbox(String name, int port) {
     super(name,port);
   }
