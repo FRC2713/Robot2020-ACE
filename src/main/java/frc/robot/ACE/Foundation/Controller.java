@@ -258,42 +258,22 @@ public class Controller {
     return buttontoggleState[button];
   }
 
-  /**
-   * Rumbles a given controller for a specified time
-   *
-   * @param stick Controller to rumble
-   * @param ms    Time in Milliseconds
-   */
   private void rumbleController(GenericHID stick, double intensity, int ms) {
     if (!isActive()) return;
-    rumbleController(stick, intensity, ms, GenericHID.RumbleType.kLeftRumble);
-  }
-
-  /**
-   * Rumbles a given controller for a specified time
-   * Left rumble is like an earthquake, right rumble is like a vibrating toothbrush
-   *
-   * @param stick      Controller to rumble
-   * @param ms         Time in Milliseconds
-   * @param rumbleType Type of rumble to use
-   */
-  private static void rumbleController(GenericHID stick, double intensity, int ms, GenericHID.RumbleType rumbleType) {
+    //Left rumble is like an earthquake, right rumble is like a vibrating toothbrush
+    GenericHID.RumbleType rumbleType = GenericHID.RumbleType.kLeftRumble;
     if (ms > 0) {
       new Thread(() -> {
-        _setRumble(stick, intensity, rumbleType);
+        stick.setRumble(rumbleType, intensity);
         try {
           Thread.sleep(ms);
         } catch (InterruptedException ignored) {
         }
-        _setRumble(stick, 0, rumbleType);
+        stick.setRumble(rumbleType, intensity);
       }).start();
     } else {
-      _setRumble(stick, intensity, rumbleType);
+      stick.setRumble(rumbleType, intensity);
     }
-  }
-
-  private static void _setRumble(GenericHID stick, double intensity, GenericHID.RumbleType rumbleType) {
-    stick.setRumble(rumbleType, intensity);
   }
 
   public boolean getButton(int button) {

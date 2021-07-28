@@ -10,10 +10,10 @@ import java.util.function.Supplier;
 
 public abstract class Actions extends ACEBase {
 
-  private ActionGroup actionGroup = new ActionGroup(this);
+  private final ActionGroup actionGroup = new ActionGroup(this);
   private boolean are_actions_done = false;
 
-  private class ActionGroup {
+  private static class ActionGroup {
     private final ArrayList<Actions> actionGroup = new ArrayList<>();
     private final Map<String, ActionGroup> actionGroupMap = new LinkedHashMap<>();
     private boolean is_action_group_done = false;
@@ -67,7 +67,7 @@ public abstract class Actions extends ACEBase {
         }
         if (nextActions != null) nowActions = nextActions;
       }
-     if (nowActions != null) nowActions.runActions();
+      if (nowActions != null) nowActions.runActions();
     }
 
     public Actions addAction(Supplier<Actions> actions) {
@@ -109,12 +109,12 @@ public abstract class Actions extends ACEBase {
   }
 
   protected final <T> T addActions(Supplier<T> actions) {
-    return addActions(actions,null);
+    return addActions(actions, null);
   }
 
   @SuppressWarnings("unchecked")
-  protected final <T> T addActions(Supplier<T> actions,String groupName) {
-    return (T) actionGroup.get(groupName).addAction((Supplier<Actions>) actions) ;
+  protected final <T> T addActions(Supplier<T> actions, String groupName) {
+    return (T) actionGroup.get(groupName).addAction((Supplier<Actions>) actions);
   }
 
   protected final void runActionGroup() {

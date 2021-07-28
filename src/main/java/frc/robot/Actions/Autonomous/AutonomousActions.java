@@ -3,9 +3,9 @@ package frc.robot.Actions.Autonomous;
 import frc.robot.ACE.Actions;
 import frc.robot.Actions.Autonomous.Paths.BarrelPath;
 import frc.robot.Actions.Autonomous.Paths.BouncePath;
+import frc.robot.Actions.Autonomous.Paths.SlalomPath;
 import frc.robot.Components.DriveComponent;
 import frc.robot.Components.GyroComponent;
-import frc.robot.Components.IntakeComponent;
 import frc.robot.Events.AutonomousSelector;
 
 public class AutonomousActions extends Actions {
@@ -24,6 +24,7 @@ public class AutonomousActions extends Actions {
     selector = (AutonomousSelector) getEvents("AutonomousSelector");
     addActions(BarrelPath::new, "BarrelPath");
     addActions(BouncePath::new, "BouncePath");
+    addActions(SlalomPath::new, "SlalomPath");
   }
 
   @Override

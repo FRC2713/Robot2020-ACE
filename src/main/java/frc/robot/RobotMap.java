@@ -79,7 +79,7 @@ public final class RobotMap {
   //Autonomous
   public static final int defaultAutonomousPaths = 1; //BarrelPath
   public static final List<String> autonomousPaths = List.of(new String[]{
-    "BarrelPath","BouncePath"
+    "BarrelPath","BouncePath","SlalomPath"
   });
 
 

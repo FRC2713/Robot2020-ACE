@@ -8,8 +8,7 @@ import frc.robot.ACE.Events;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class RobotManager extends TimedRobot {
@@ -20,11 +19,112 @@ public class RobotManager extends TimedRobot {
 
   private static final Map<String, Class<? extends Events>> events_class_map = new LinkedHashMap<>();
   private static final Map<String, Class<? extends Actions>> actions_class_map = new LinkedHashMap<>();
-  private static final Map<String, Class<? extends Component>> component_class_map = new LinkedHashMap<>();
+  private static final SuperMap<String, Class<? extends Component>> component_class_map = new SuperMap<>();
 
   private final Map<String, Events> events_map = new LinkedHashMap<>();
   private final Map<String, Actions> actions_map = new LinkedHashMap<>();
   private final Map<String, Component> component_map = new LinkedHashMap<>();
+
+  private interface ForEachFunction<V> {
+    void run(V value);
+  }
+
+  private static class SuperMap<K, V> implements Map<K, V> {
+
+    private ArrayList<Map<K, V>> mapArray = new ArrayList<>();
+    private Map<K, V> foundation = new LinkedHashMap<>();
+    private int index = 0;
+
+    public SuperMap() {
+      mapArray.add(new LinkedHashMap<K, V>());
+    }
+
+    @Override
+    public int size() {
+      return foundation.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+      return foundation.isEmpty();
+    }
+
+    @Override
+    public boolean containsKey(Object key) {
+      return foundation.containsKey(key);
+    }
+
+    @Override
+    public boolean containsValue(Object value) {
+      return foundation.containsValue(value);
+    }
+
+    @Override
+    public V get(Object key) {
+      return mapArray.get(index).get(key);
+    }
+
+    @Override
+    public V put(K key, V value) {
+      V retval = mapArray.get(index).put(key, value);
+      foundation.put(key, value);
+      return retval;
+    }
+
+    @Override
+    public V remove(Object key) {
+      V retval = mapArray.get(index).remove(key);
+      foundation.remove(key);
+      return retval;
+    }
+
+    @Override
+    public void putAll(Map<? extends K, ? extends V> m) {
+
+    }
+
+    @Override
+    public void clear() {
+      for (Map<K, V> map : mapArray) {
+        map.clear();
+      }
+      mapArray.clear();
+      foundation.clear();
+      index = 0;
+    }
+
+    @Override
+    public Set<K> keySet() {
+      return foundation.keySet();
+    }
+
+    @Override
+    public Collection<V> values() {
+      Map<K, V> thisMap = mapArray.get(index);
+      index++;
+      if (index >= mapArray.size())
+        mapArray.add(new LinkedHashMap<K, V>());
+      return thisMap.values();
+    }
+
+    public void welcomeBack() {
+      index--;
+    }
+
+    public void forEach(ForEachFunction<V> function) {
+      for (V value : values()) {
+        function.run(value);
+      }
+      if (!mapArray.get(index).isEmpty()) forEach(function);
+      welcomeBack();
+    }
+
+    @Override
+    public Set<Entry<K, V>> entrySet() {
+      return foundation.entrySet();
+    }
+  }
+
 
   private static synchronized void setDefaultInstance(RobotManager robotManager) {
     defaultInstance = robotManager;
@@ -36,11 +136,11 @@ public class RobotManager extends TimedRobot {
   }
 
   public static synchronized void addPeriodicCallback(Runnable callback, double periodSeconds) {
-    defaultInstance.addPeriodic(callback,periodSeconds);
+    defaultInstance.addPeriodic(callback, periodSeconds);
   }
 
   public static synchronized void addPeriodicCallback(Runnable callback, double periodSeconds, double offsetSeconds) {
-    defaultInstance.addPeriodic(callback,periodSeconds,offsetSeconds);
+    defaultInstance.addPeriodic(callback, periodSeconds, offsetSeconds);
   }
 
   public static synchronized void addEvents(Class<? extends Events> events) {
@@ -232,10 +332,10 @@ public class RobotManager extends TimedRobot {
       actions_map.put(getClassName(actions.getClass().getName()), actions);
     }
 
-    for (Class<? extends Component> component_class : component_class_map.values()) {
+    component_class_map.forEach((Class<? extends Component> component_class) -> {
       Component component = (Component) newObject(component_class);
       component_map.put(getClassName(component.getClass().getName()), component);
-    }
+    });
 
     for (Component component : component_map.values()) {
       component.doInitialization();

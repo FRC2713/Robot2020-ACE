@@ -17,11 +17,6 @@ public class DriveComponent extends Component {
   private CANSparkMax backLeft;
   private CANSparkMax backRight;
 
-  private CANEncoder encoder1;
-  private CANEncoder encoder2;
-  private CANEncoder encoder3;
-  private CANEncoder encoder4;
-
   private DifferentialDrive roboDrive;
   private ConfigureBed configureBed;
 
@@ -30,6 +25,7 @@ public class DriveComponent extends Component {
     setIsActiveForAutonomous();
     setComponentIsPrimaryForOutput();
     addRequiredComponent(ConfigureBed.class);
+    addRequiredComponent(CompressorComponent.class);
   }
 
   @Override
@@ -44,16 +40,14 @@ public class DriveComponent extends Component {
       backLeft = new CANSparkMax(RobotMap.backLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
       backRight = new CANSparkMax(RobotMap.backRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-    }
-    else if (configureBed.getconfig() == ConfigureBed.Jumper.TWO) {
+    } else if (configureBed.getconfig() == ConfigureBed.Jumper.TWO) {
       //System.out.println("this is a test; 2");
       frontLeft = new CANSparkMax(RobotMap.frontLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
       frontRight = new CANSparkMax(RobotMap.frontRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
       backLeft = new CANSparkMax(RobotMap.backLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
       backRight = new CANSparkMax(RobotMap.backRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushed);
 
-    }
-    else {
+    } else {
       System.out.println("An error has occurred with the jumpers");
       //System.exit(-1);
       frontLeft = new CANSparkMax(RobotMap.frontLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -73,55 +67,20 @@ public class DriveComponent extends Component {
 
     roboDrive.setMaxOutput(REGULAR_SPEED);
 
-    encoder1 = frontLeft.getEncoder();
-    encoder2 = backRight.getEncoder();
-    encoder3 = frontRight.getEncoder();
-    encoder4 = frontLeft.getEncoder();
   }
 
-  private CANEncoder getEncoder(int number) {
-    if (number == 1) {
-      return encoder1;
+  public CANEncoder getEncoderFromMotor(int index) {
+    switch (index) {
+      default:
+      case 1:
+        return frontLeft.getEncoder();
+      case 2:
+        return backRight.getEncoder();
+      case 3:
+        return frontRight.getEncoder();
+      case 4:
+        return backLeft.getEncoder();
     }
-    else if (number == 2) {
-      return encoder2;
-    }
-    else if (number == 3) {
-      return encoder3;
-    }
-    else if (number == 4) {
-      return encoder4;
-    }
-    else return null;
-  }
-
-  public double encoderDistance(int encoder, double old_E_Value[]) {
-    double current_E_Value = getEncoder(encoder).getPosition();
-    double traveledUnits = (current_E_Value - old_E_Value[0]);
-    double traveledInches = toInches(traveledUnits);
-    old_E_Value[0] = current_E_Value;
-    System.out.println("Traveled: " + traveledInches + " Inches");
-    return traveledInches;
-  }
-
-  public double  accumulatedEncoderDistance(int encoder, double old_E_Value[]) {
-    double current_E_Value = getEncoder(encoder).getPosition();
-    double traveledUnits = (current_E_Value - old_E_Value[0]);
-    double traveledInches = toInches(traveledUnits);
-    System.out.println("Traveled: " + traveledInches + " Inches");
-    return traveledInches;
-  }
-
-  public void resetEncoder(int encoder, double old_E_Value[]) {
-    old_E_Value[0] = getEncoder(encoder).getPosition();
-  }
-
-  private double toInches(double encoderValue)  {
-    return (encoderValue * RobotMap.getEncoderConstant());
-  }
-
-  public double toFeet(double inches) {
-    return inches / 12;
   }
 
   public double slewLimit(double target, double current, double increment) {
@@ -129,15 +88,15 @@ public class DriveComponent extends Component {
   }
 
   public void bradfordDrive(double speed, double turn) {
-    roboDrive.arcadeDrive(speed,turn,true);
+    roboDrive.arcadeDrive(speed, turn, true);
   }
 
   public void arcadeDrive(double speed, double turn) {
-    roboDrive.arcadeDrive(speed,turn,true);
+    roboDrive.arcadeDrive(speed, turn, true);
   }
 
   public void tankDrive(double leftSpeed, double rightSpeed) {
-    roboDrive.tankDrive(leftSpeed,rightSpeed,true);
+    roboDrive.tankDrive(leftSpeed, rightSpeed, true);
   }
 
   public void stopDrive() {

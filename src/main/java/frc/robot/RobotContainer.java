@@ -12,11 +12,13 @@ public class RobotContainer {
 
   public RobotContainer() {
     RobotManager.addEvents(GyroEvents.class);
+    RobotManager.addEvents(CameraEvents.class);
     RobotManager.addEvents(AutonomousSelector.class);
     RobotManager.addEvents(ControllerEvents.class);
     RobotManager.addEvents(ArduinoEvents.class);
     RobotManager.addEvents(ConfigEvents.class);
     RobotManager.addEvents(PixyEvents.class);
+    RobotManager.addEvents(EncoderEvents.class);
     RobotManager.addActions(DriveActions.class);
     RobotManager.addActions(IntakeActions.class);
     RobotManager.addActions(ClimberActions.class);
