@@ -135,7 +135,6 @@ public class Controller {
 
   private void scan(int setPort) {
     Joystick test = new Joystick(setPort);
-
     if (names != null) {
       for (String name : names) {
         if (name.equals(test.getName())) {
@@ -151,7 +150,6 @@ public class Controller {
       }
       return;
     }
-
     if (name.equals(test.getName())) {
       has_found_name = true;
       if (!ports[setPort]) {

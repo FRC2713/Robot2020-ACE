@@ -21,7 +21,6 @@ public class Controllers extends Component {
   public void initialize() {
     driveController = new Xbox("Drive",RobotMap.ALL_XBOX_NAMES);
     auxiliaryController = new Controller(RobotMap.ATTACK_NAME);
-    update();
   }
 
   public void update() {
