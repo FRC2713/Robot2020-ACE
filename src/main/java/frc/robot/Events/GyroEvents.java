@@ -8,6 +8,7 @@ public class GyroEvents extends Events {
   private GyroComponent gyroComponent;
 
   public GyroEvents() {
+    setIsActiveForTeleOp();
     setIsActiveForAutonomous();
     addRequiredComponent(GyroComponent.class);
   }

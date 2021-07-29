@@ -8,6 +8,7 @@ public class GyroComponent extends Component {
   private ADXRS450_Gyro gyro;
 
   public GyroComponent() {
+    setIsActiveForTeleOp();
     setIsActiveForAutonomous();
   }
 

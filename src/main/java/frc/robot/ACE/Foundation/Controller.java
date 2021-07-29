@@ -97,11 +97,11 @@ public class Controller {
   }
 
   private String getControllerName(String baseName) {
-    return  "Controller(" + controller_id.toString() + "): " + baseName;
+    return "Controller(" + controller_id.toString() + "): " + baseName;
   }
 
   private String getControllerGroupName(String groupName) {
-    return  "Controller Group(" + controller_id.toString() + "): " + groupName;
+    return "Controller Group(" + controller_id.toString() + "): " + groupName;
   }
 
   private void scanReport(String report) {
@@ -178,11 +178,11 @@ public class Controller {
             scanReport("Given port does not match name in group, port: " + set_port + ".");
           }
         } else {
-          scanReport("Port is already in use, port: " + set_port + "." );
+          scanReport("Port is already in use, port: " + set_port + ".");
         }
         has_state = false;
-      } else{
-        scanReport("Initialized, on given port: " + set_port + "." );
+      } else {
+        scanReport("Initialized, on given port: " + set_port + ".");
       }
       return;
     }
@@ -192,7 +192,7 @@ public class Controller {
         if (!has_found_name) {
           scanReport("No controller with a name in group.");
         } else {
-          scanReport("No more ports are available for: " + name + "." );
+          scanReport("No more ports are available for: " + name + ".");
         }
         has_state = false;
       } else {
@@ -204,7 +204,7 @@ public class Controller {
         if (!has_found_name) {
           scanReport("No controller with that name.");
         } else {
-          scanReport("No more ports are available for: " + name + "." );
+          scanReport("No more ports are available for: " + name + ".");
         }
         has_state = false;
       } else {
