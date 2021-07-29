@@ -372,14 +372,13 @@ public class RobotManager extends TimedRobot {
     for (Component component : component_map.values()) {
       component.setMode(mode);
     }
-    //reset everything that is not robotPeriodic
     for (Events events : events_map.values()) {
       events.setMode(mode);
-      if (!IsActiveForMode(events, 4)) events.resetEvents();
+      if (!IsActiveForMode(events, mode)) events.resetEvents();
     }
     for (Actions actions : actions_map.values()) {
       actions.setMode(mode);
-      if (!IsActiveForMode(actions, 4)) actions.doInterruptActions();
+      if (!IsActiveForMode(actions, mode)) actions.doInterruptActions();
     }
   }
 
