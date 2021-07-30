@@ -48,7 +48,7 @@ For example IntakeActions responds to events from ControllerEvents:
     
 ### Dependencies
 
-Actions can be dependent on Events, Components, and ActionGroups, not other Actions, or low level classes. Actions should use Events for input, though there are cases where it may make sense for Actions to get input directly from a Component.
+Actions can be dependent on Events, Components, and other Actions(only through ActionGroups), or low level classes. Actions should use Events for input, though there are cases where it may make sense for Actions to get input directly from a Component.
 
 Actions can use the getComponent method to retrieve Components, the getEvents method to retrieve Events, and the addActions method to add Actions to ActionGroups.
 
@@ -104,7 +104,6 @@ Components can also be used to simplify the rest of the code, for example the Co
     public void initialize() {
      driveController = new Xbox("Drive",RobotMap.ALL_XBOX_NAMES);
      auxiliaryController = new Controller(RobotMap.ATTACK_NAME);
-     update();
     }
 
     public void update() {
@@ -141,19 +140,23 @@ ACE provide a "Controller" class for creation and management of Controllers. Sup
 RobotContainer 'contains' the robot. All Events and Actions are added here via the RobotManager class:
 
     public RobotContainer() {
-     RobotManager.addEvents(ControllerEvents.class);
-     RobotManager.addEvents(ConfigEvents.class);
-     RobotManager.addEvents(PixyEvents.class);
-     RobotManager.addEvents(ArduinoEvents.class);
-     RobotManager.addActions(DriveActions.class);
-     RobotManager.addActions(IntakeActions.class);
-     RobotManager.addActions(ClimberActions.class);
-     RobotManager.addActions(AutonomousActions.class);   
+      RobotManager.addEvents(GyroEvents.class);
+      RobotManager.addEvents(CameraEvents.class);
+      RobotManager.addEvents(AutonomousSelector.class);
+      RobotManager.addEvents(ControllerEvents.class);
+      RobotManager.addEvents(ArduinoEvents.class);
+      RobotManager.addEvents(ConfigEvents.class);
+      RobotManager.addEvents(PixyEvents.class);
+      RobotManager.addEvents(EncoderEvents.class);
+      RobotManager.addActions(DriveActions.class);
+      RobotManager.addActions(IntakeActions.class);
+      RobotManager.addActions(ClimberActions.class);
+      RobotManager.addActions(AutonomousActions.class);   
     }
 
 There is no longer a Robot.java file.
 
-To specify when an Events or Actions object runs use the setIsActiveForTeleOp method for teleop, or setIsActiveForAutonomous for Autonomous. These methods along with other setIsActiveFor methods and, the addRequiredComponent method for specifying required components are called in an object's constructor, and should be the only thing in an object's constructor.
+To specify when an Events or Actions object runs use the setIsActiveForTeleOp method for teleop, or setIsActiveForAutonomous for Autonomous. These methods along with other setIsActiveFor methods and, the addRequiredComponent method for specifying required components are called in an object's constructor, and should be the only thing in an object's constructor. These are required for class that extends Actions, Events or Component.
 
     public DriveActions() {
      setIsActiveForTeleOp();
