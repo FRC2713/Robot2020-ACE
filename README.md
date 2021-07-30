@@ -156,7 +156,7 @@ RobotContainer 'contains' the robot. All Events and Actions are added here via t
 
 There is no longer a Robot.java file.
 
-To specify when an Events or Actions object runs use the setIsActiveForTeleOp method for teleop, or setIsActiveForAutonomous for Autonomous. These methods along with other setIsActiveFor methods and, the addRequiredComponent method for specifying required components are called in an object's constructor, and should be the only thing in an object's constructor. These are required for class that extends Actions, Events or Component.
+To specify when an Events or Actions object runs use the setIsActiveForTeleOp method for teleop, or setIsActiveForAutonomous for Autonomous. These methods along with other setIsActiveFor methods and, the addRequiredComponent method for specifying required components are called in an object's constructor, and should be the only thing in an object's constructor. setIsActiveFor methods are required for any class that extends Actions, Events or Component.
 
     public DriveActions() {
      setIsActiveForTeleOp();
