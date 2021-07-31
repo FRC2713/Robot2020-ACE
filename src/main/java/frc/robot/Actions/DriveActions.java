@@ -91,7 +91,7 @@ public class DriveActions extends Actions {
     lastLeftStickVal = 0;
     lastRightStickVal = 0;
     //should be reset?
-    //useArcadeInsteadOfBradford = false;
+    //driveMode = 2;
     //polarityBoolean = false;
     //polarity = 1;
   }

@@ -17,9 +17,9 @@ public class AutonomousSelector extends Events {
   @Override
   public void initialize() {
     paths = new String[RobotMap.autonomousPaths.size()];
-    paths = RobotMap.autonomousPaths.toArray(paths);
+    RobotMap.autonomousPaths.toArray(paths);
     SmartDashboard.putNumber("Select Autonomous Path", path);
-    SmartDashboard.putString("Autonomous Path", paths[path-1]);
+    SmartDashboard.putString("Autonomous Path", paths[path - 1]);
   }
 
   @Override
@@ -27,10 +27,10 @@ public class AutonomousSelector extends Events {
     int newPath = (int) SmartDashboard.getNumber("Select Autonomous Path", path);
     if (newPath <= 0 || newPath > paths.length) newPath = path;
     path = newPath;
-    SmartDashboard.putString("Autonomous Path", paths[path-1]);
+    SmartDashboard.putString("Autonomous Path", paths[path - 1]);
   }
 
   public String getAutonomousPath() {
-    return paths[path-1];
+    return paths[path - 1];
   }
 }

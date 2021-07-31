@@ -48,7 +48,7 @@ public class Controller {
     this();
     this.groupName = groupName;
     this.names = new String[names.size()];
-    this.names = names.toArray(this.names);
+    names.toArray(this.names);
   }
 
   public Controller(String groupName, List<String> names, int port) {
@@ -56,7 +56,7 @@ public class Controller {
     verifySetPort(port);
     this.groupName = groupName;
     this.names = new String[names.size()];
-    this.names = names.toArray(this.names);
+    names.toArray(this.names);
   }
 
   protected void setController(GenericHID controller) {
