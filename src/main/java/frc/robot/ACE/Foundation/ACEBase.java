@@ -104,6 +104,14 @@ public abstract class ACEBase {
     return mode == 4;
   }
 
+  public void addPeriodic(Runnable callback, double periodSeconds) {
+    RobotManager.addPeriodicCallback(callback, periodSeconds);
+  }
+
+  public void addPeriodic(Runnable callback, double periodSeconds, double offsetSeconds) {
+    RobotManager.addPeriodicCallback(callback, periodSeconds, offsetSeconds);
+  }
+
   protected final Component getComponent(int type, String name) {
     return RobotManager.getComponent(type,this,name);
   }
