@@ -6,7 +6,7 @@ import frc.robot.RobotMap;
 
 public class AutonomousSelector extends Events {
 
-  private int path = RobotMap.defaultAutonomousPaths;
+  private int path = RobotMap.defaultAutonomousPath;
   private String[] paths;
 
   public AutonomousSelector() {

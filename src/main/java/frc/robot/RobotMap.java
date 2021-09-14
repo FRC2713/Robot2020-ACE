@@ -77,7 +77,7 @@ public final class RobotMap {
   public static final int winchDownButton = 2;//5 on attack
 
   //Autonomous
-  public static final int defaultAutonomousPaths = 1; //BarrelPath
+  public static final int defaultAutonomousPath = 1; //BarrelPath
   public static final List<String> autonomousPaths = List.of(new String[]{
     "BarrelPath","BouncePath","SlalomPath"
   });
