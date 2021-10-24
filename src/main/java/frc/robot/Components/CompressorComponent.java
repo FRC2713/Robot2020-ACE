@@ -5,7 +5,7 @@ import frc.robot.ACE.Component;
 
 public class CompressorComponent extends Component {
 
-  public Compressor compressor;
+  private Compressor compressor;
 
   public CompressorComponent() {
     setIsActiveForTeleOp();
